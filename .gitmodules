@@ -22,3 +22,12 @@
 [submodule "extensions/anaphora"]
 	path = extensions/anaphora
 	url = https://github.com/rolandwalker/anaphora.git
+[submodule "insert-translated-name"]
+    path = extensions/insert-translated-name
+	url = https://github.com/manateelazycat/insert-translated-name.git
+[submodule "extensions/company-english-helper"]
+	path = extensions/company-english-helper
+	url = https://github.com/manateelazycat/company-english-helper.git
+[submodule "extensions/awesome-pair"]
+	path = extensions/awesome-pair
+	url = https://github.com/manateelazycat/awesome-pair.git

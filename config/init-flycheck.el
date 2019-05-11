@@ -21,7 +21,8 @@
                ))
   (add-hook hook '(lambda () (flycheck-mode 1))))
 
-(setq flycheck-indication-mode 'right-fringe)
+;;(setq flycheck-indication-mode 'right-fringe)
+(setq flycheck-indication-mode 'left-fringe)
 (setq flycheck-emacs-lisp-load-path 'inherit)
 (setq filcheck-check-syantax-automatically '(save mode-enabled)) ;只在打开和保存时调用
 
@@ -90,5 +91,3 @@
 
 (provide 'init-flycheck)
 ;; init-flycheck.el ends here
-
-

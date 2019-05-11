@@ -13,7 +13,7 @@
 ;; 配置文件主目录
 (add-to-list 'load-path "~/.emacs.d/config")
 
-;; 统一使用after-load 
+;; 统一使用after-load
 (if (fboundp 'with-eval-after-load)
     (defalias 'after-load 'with-eval-after-load)
   (defmacro after-load (feature &rest body)
@@ -22,7 +22,7 @@
     `(eval-after-load ,feature
        '(progn ,@body))))
 
-(defconst *is-a-mac* (eq system-type 'darwin))
+(defconst *is-a-mac* (eq system-type 'darwin)) ; Mac OS 系统
 
 
 
@@ -49,24 +49,22 @@
     (require 'cache-path-from-shell)     ; 使 exec-paht-from-shell 只加载一次
     (require 'lazy-load)                 ; 延迟加载，加快启动速度
     (require 'setup-package)            ; 设定插件源和安装工具
-    ;;(require 'selected-packages)      ; 只需初始安装时加载一次
+    ;;(require 'selected-packages)      ; 只需初始安装时加载一次,extensions文件使用‘git submodule update --init --recursive’更新使用
     (require 'aweshell)                 ; 增强eshell, 自动补全等
     (require 'init-auto-save)
 
-    ;;(require 'one-key)
+    ;; (require 'one-key)
     ;; (require 'awesome-pair)
-    ;; (require 'basic-toolkit)
-    ;; (require 'redo)
+    ;; (require 'basic-edit-toolkit)
 
     (require 'init-fonts)              ; 设置字体集
     ;;(require 'init-awesome-tray)
     ;; (require 'init-awesome-tab)
-    ;; (require 'init-backup)
     (require 'init-grep)
     (require 'init-smex)
     (require 'init-editing-utils)
-    ;; (require 'init-line-number)
-    
+    (require 'init-hippie-expand)
+
     ;; (require 'init-mode)
     (require 'init-dired)
     (require 'init-isearch)
@@ -74,47 +72,28 @@
     (require 'init-ibuffer)
     (require 'init-window)
     (require 'init-session)
-    ;; (require 'init-awesome-pair)
-    ;; (require 'init-indent)
-    ;; (require 'init-one-key)
-    ;; (require 'init-iedit)
-    ;; (require 'init-visual-regexp)
-    ;; (require 'init-key)
-    ;; (require 'init-vi-navigate)
-    ;; (require 'init-performance)
-    ;; (require 'init-pyim)
-    ;; (require 'init-sdcv)
-    ;; (require 'init-insert-translated-name)
+    (require 'init-insert-translated-name) ; 用‘insert-translated-name’激活
+    (require 'company-english-helper) ; 用‘toggle-company-english-helper’激活
+    ;; (require 'init-key-bindings)   ;以后增加快捷键绑定
 
     ;; 可以延后加载的
     (run-with-idle-timer
      1 nil
      #'(lambda ()
          (require 'jakelew-org)
-         ;; (require 'pretty-lambdada)
-         ;; (require 'browse-kill-ring)
-         ;; (require 'elf-mode)
-
-         ;; (require 'init-tempbuf)
-         ;; (require 'init-eldoc)
-         ;; (require 'init-doxymacs)
          (require 'init-yasnippet)
          (require 'init-company-mode)
          ;; ;; (require 'init-lsp)
-         ;; (require 'init-package)
-         ;; (require 'init-smooth-scrolling)
-         ;; (require 'init-cursor-chg)
-         ;; (require 'init-winpoint)
-         ;; (require 'init-benchmark)
-         ;; (require 'init-info)
-         ;; (require 'init-auto-sudoedit)
-         ;; (require 'init-atomic-chrome)
-         ;; (require 'init-qt)
          (require 'init-flycheck)
-
+         ;; (require 'init-ispell)
+         (require 'init-lisp)
+         (require 'init-paredit)
          (require 'init-python)
-
-         ;; (require 'init-idle)
+         (require 'init-dash)
+         ;; (require 'init-sql)
+         ;; (require 'init-projcetile)
+         (require 'init-git)
+         (require 'init-vc)
          (require 'init-session)
          ;; Restore session at last.
          (emacs-session-restore)
@@ -134,7 +113,7 @@
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(package-selected-packages
    (quote
-    (flycheck-popup-tip hl-todo flycheck-pos-tip yasnippet-snippets ag rg wgrep-ag company-posframe paradox highlight-parentheses yaml-mode writeroom-mode whole-line-or-region whitespace-cleanup-mode wgrep vlf vc-darcs uptimes unfill textile-mode symbol-overlay switch-window sqlformat spacemacs-theme smex session scratch regex-tool rainbow-mode rainbow-delimiters pip-requirements paredit-everywhere page-break-lines osx-location origami org-pomodoro org-cliplink org-bullets ns-auto-titlebar multiple-cursors move-dup mode-line-bell mmm-mode markdown-mode macrostep list-unicode-display ledger-mode ipretty info-colors immortal-scratch ibuffer-vc ibuffer-projectile hydra highlight-quoted highlight-escape-sequences helm-swoop helm-projectile helm-flx helm-descbinds helm-ag guide-key grab-mac-link goto-line-preview gnuplot fullframe flycheck-package flycheck-ledger flycheck-color-mode-line expand-region exec-path-from-shell elisp-slime-nav dotenv-mode disable-mouse diredfl dimmer diminish diff-hl default-text-scale dash-at-point darcsum daemons company-quickhelp company-anaconda command-log-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized cmd-to-echo cl-libify cl-lib-highlight cask-mode browse-kill-ring browse-at-remote bind-key beacon avy auto-compile anzu aggressive-indent)))
+    (magit flycheck-popup-tip hl-todo flycheck-pos-tip yasnippet-snippets ag rg wgrep-ag company-posframe paradox highlight-parentheses yaml-mode writeroom-mode whole-line-or-region whitespace-cleanup-mode wgrep vlf vc-darcs uptimes unfill textile-mode symbol-overlay switch-window sqlformat spacemacs-theme smex session scratch regex-tool rainbow-mode rainbow-delimiters pip-requirements paredit-everywhere page-break-lines osx-location origami org-pomodoro org-cliplink org-bullets ns-auto-titlebar multiple-cursors move-dup mode-line-bell mmm-mode markdown-mode macrostep list-unicode-display ledger-mode ipretty info-colors immortal-scratch ibuffer-vc ibuffer-projectile hydra highlight-quoted highlight-escape-sequences helm-swoop helm-projectile helm-flx helm-descbinds helm-ag guide-key grab-mac-link goto-line-preview gnuplot fullframe flycheck-package flycheck-ledger flycheck-color-mode-line expand-region exec-path-from-shell elisp-slime-nav dotenv-mode disable-mouse diredfl dimmer diminish diff-hl default-text-scale dash-at-point darcsum daemons company-quickhelp company-anaconda command-log-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized cmd-to-echo cl-libify cl-lib-highlight cask-mode browse-kill-ring browse-at-remote bind-key beacon avy auto-compile anzu aggressive-indent)))
  '(python-shell-buffer-name "Python3")
  '(python-shell-completion-native-disabled-interpreters (quote ("pypy" "ipython" "python3" "python")))
  '(python-shell-completion-native-enable t)
