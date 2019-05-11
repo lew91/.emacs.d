@@ -1,0 +1,24 @@
+[submodule "extensions/apiwrap"]
+	path = extensions/apiwrap
+	url = https://github.com/vermiculus/apiwrap.el.git
+[submodule "extensions/aweshell"]
+	path = extensions/aweshell
+	url = https://github.com/manateelazycat/aweshell.git
+[submodule "extensions/auto-save.el"]
+	path = extensions/auto-save.el
+	url = https://github.com/manateelazycat/auto-save.git
+[submodule "extensions/cache-path-from-shell"]
+	path = extensions/cache-path-from-shell
+	url = https://github.com/manateelazycat/cache-path-from-shell.git
+[submodule "extensions/lazy-load"]
+	path = extensions/lazy-load
+	url = https://github.com/manateelazycat/lazy-load.git
+[submodule "extensions/one-key"]
+	path = extensions/one-key
+	url = https://github.com/vapniks/one-key.git
+[submodule "extensions/awesome-tray"]
+	path = extensions/awesome-tray
+	url = https://github.com/manateelazycat/awesome-tray.git
+[submodule "extensions/anaphora"]
+	path = extensions/anaphora
+	url = https://github.com/rolandwalker/anaphora.git
