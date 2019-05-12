@@ -1,7 +1,7 @@
 
 (require 'org)
 
-(when *is-a-mac*
+(when (featurep 'cocoa)
   (require 'grab-mac-link))
 
 (require 'org-cliplink)
@@ -293,7 +293,7 @@ typical word processor."
 
 
 ;; ;; Show iCal calendars in the org agenda
-;; (when (and *is-a-mac* (require 'org-mac-iCal nil t))
+;; (when (and (featurep 'cocoa) (require 'org-mac-iCal nil t))
 ;;   (setq org-agenda-include-diary t
 ;;         org-agenda-custom-commands
 ;;         '(("I" "Import diary from iCal" agenda ""
@@ -429,14 +429,6 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
                             (concat "\\(" reg-han "\\) *\n *")
                             "\\1" orig-contents))
       (ad-set-arg 1 fixed-contents))))))
-
-
-
-  ;; 解决org表格里面中英文对齐问题
-  ;;(when (configuration-layer/layer-usedp 'chinese)
-  ;;  (when (and (eq system-type 'darwin) display-graphic-p)
-  ;;    (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 13 15)))))
-
 
 
 

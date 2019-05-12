@@ -58,7 +58,7 @@
   "Find file at point with VLF."
   (interactive)
   (let ((file (ffap-file-at-point)))
-    (unless (file-exists-p file) 
+    (unless (file-exists-p file)
       (error "File does not exist: %s" file))
     (vlf file)))
 
@@ -72,9 +72,6 @@
   (move-end-of-line 1)
   (newline-and-indent))
 
-(require 'goto-line-preview)
-(global-set-key [remap goto-line] 'goto-line-preview)
-
 
 (after-load 'subword
             (diminish 'subword-mode))
@@ -83,6 +80,70 @@
 (when (fboundp 'display-line-numbers-mode)
   (setq-default display-line-numbers-width 3)
   (add-hook 'prog-mode-hook 'display-line-numbers-mode))
+
+(require 'goto-line-preview)
+(global-set-key [remap goto-line] 'goto-line-preview)
+
+(when (fboundp 'display-line-numbers-mode)
+    (defun sanityinc/with-display-line-numbers (f &rest args)
+      (let ((display-line-numbers t))
+        (apply f args)))
+    (advice-add 'goto-line-preview :around #'sanityinc/with-display-line-numbers))
+
+;; 高亮匹配和跳转,另一中方案，使用自带的highligt-symbol
+(require 'symbol-overlay)
+(dolist (hook (list
+               'prog-mode-hook
+               'html-mode-hook
+               'yaml-mode-hook
+               'conf-mode-hook))
+  (add-hook hook '(lambda ()
+                    (symbol-overlay-mode))))
+(after-load 'symbol-overlay
+  (diminish 'symbol-overlay-mode)
+  (define-key symbol-overlay-mode-map (kbd "M-i") 'symbol-overlay-put)
+  (define-key symbol-overlay-mode-map (kbd "M-n") 'symbol-overlay-jump-next)
+  (define-key symbol-overlay-mode-map (kbd "M-p") 'symbol-overlay-jump-prev)
+  (define-key symbol-overlay-mode-map (kbd "M-s r") 'symbol-overlay-rename)
+  (define-key symbol-overlay-mode-map (kbd "C-g") 'symbol-overlay-remove-all))
+
+
+
+
+
+
+
+;; (defhydra hydra-symbol (:color pink
+;;                                       :hint nil)
+;;   "
+;; ^Jump^          ^Mark^          ^Actions^           ^Quit^
+;; ^^^^^^^^----------------------------------------------------
+;; _p_: prev      _e_: echo mark    _w_: save          _q_: quit
+;; _n_: next                        _d_: definition
+;;                _t_: scope        _y_: replace
+;;                                  _r_: rename
+;; "
+
+;; ("i"  symbol-overlay-put)
+;; ("n"  symbol-overlay-jump-next)
+;; ("p"  symbol-overlay-jump-prev)
+;; ("w"  symbol-overlay-save-symbol)
+;; ("t"  symbol-overlay-toggle-in-scope)
+;; ("e"  symbol-overlay-echo-mark)
+;; ("d"  symbol-overlay-jump-to-definition)
+;; ("s"  symbol-overlay-isearch-literally)
+;; ("y"  symbol-overlay-query-replace)
+;; ("r"  symbol-overlay-rename)
+;; ("q"  symbole-overlay-remove-all))
+
+;; (global-set-key (kbd "s-i") 'hydra-symbol/body)
+
+
+
+
+
+
+
 
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
@@ -97,6 +158,27 @@
 
 (require 'image-file)
 (auto-image-file-mode 1)
+
+;;----------------------------------------------------------------------------
+;; Zap *up* to char is a handy pair for zap-to-char
+;;----------------------------------------------------------------------------
+(autoload 'zap-up-to-char "misc" "Kill up to, but not including ARGth occurrence of CHAR.")
+(global-set-key (kbd "M-Z") 'zap-up-to-char)
+
+
+
+(require 'browse-kill-ring)
+(setq browse-kill-ring-separator "\f")
+(global-set-key (kbd "M-Y") 'browse-kill-ring)
+(after-load 'browse-kill-ring
+  (define-key browse-kill-ring-mode-map (kbd "C-g") 'browse-kill-ring-quit)
+  (define-key browse-kill-ring-mode-map (kbd "M-n") 'browse-kill-ring-forward)
+  (define-key browse-kill-ring-mode-map (kbd "M-p") 'browse-kill-ring-previous))
+(after-load 'page-break-lines
+  (push 'browse-kill-ring-mode page-break-lines-modes))
+
+
+
 
 ;;----------------------------------------------------------------------------
 ;; Don't disable narrowing commands
@@ -196,7 +278,7 @@
     (cond ((elt ppss 3)
            (goto-char (elt ppss 8))
            (sanityinc/backward-up-sexp (1- arg)))
-          ((backward-up-list arg)))))  
+          ((backward-up-list arg)))))
 
 (global-set-key [remap backward-up-list] 'sanityinc/backward-up-sexp) ; C-M-u, C-M-up
 
@@ -213,10 +295,6 @@
 (defvar-local sanityinc/suspended-modes-during-cua-rect nil
   "Modes that should be re-activated when cua-rect selection is done.")
 
-;; Some local minor modes clash with CUA rectangle selection
-
-(defvar-local sanityinc/suspended-modes-during-cua-rect nil
-  "Modes that should be re-activated when cua-rect selection is done.")
 
 (after-load 'cua-rect
   (advice-add 'cua--deactivate-rectangle :after
@@ -296,7 +374,7 @@ With arg N, insert N newlines."
   (diminish 'guide-key-mode))
 
 
-(require 'bind-key)
+
 
 (defun sanityinc/disable-features-during-macro-call (orig &rest args)
   "When running a macro, disable features that might be expensive.
@@ -308,7 +386,8 @@ ORIG is the advised function, which is called with its ARGS."
 
 (advice-add 'kmacro-call-macro :around 'sanityinc/disable-features-during-macro-call)
 
+;; Misc 可选，键绑定更便捷
+(require 'bind-key)
 
 (provide 'init-editing-utils)
 ;; init-editing-utils.el ends here
-

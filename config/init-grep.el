@@ -7,7 +7,7 @@
 (setq-default grep-highlight-matches t
               grep-scroll-output t)
 
-(when *is-a-mac*
+(when (featurep 'cocoa)
   (setq-default locate-command "mdfind"))
 
 (require 'wgrep)
@@ -29,4 +29,3 @@
 
 (provide 'init-grep)
 ;;; init-grep.el ends here
-

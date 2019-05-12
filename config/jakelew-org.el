@@ -2,7 +2,7 @@
 (require 'grab-mac-link)
 (require 'org-cliplink)
 
-(global-set-key (kbd "C-c o a") 'org-agend)
+(global-set-key (kbd "C-c a") 'org-agend)
 ;;; To-do settings
 
 (setq org-todo-keywords
@@ -144,32 +144,7 @@ prepended to the element after the #+HEADER: tag."
           (when mod (insert mod) (forward-line))
           (when text (insert text)))))
 
-
-
-  (after-load 'org
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   `((R . t)
-     (ditaa . t)
-     (dot . t)
-     (emacs-lisp . t)
-     (gnuplot . t)
-     (haskell . nil)
-     (latex . t)
-     (ledger . t)
-     (ocaml . nil)
-     (octave . t)
-     (plantuml . t)
-     (python . t)
-     (ruby . t)
-     (screen . nil)
-     (,(if (locate-library "ob-sh") 'sh 'shell) . t)
-     (sql . t)
-     (sqlite . t)))
-
-
-
-  (defhydra hydra-org-template (:color blue :hint nil)
+        (defhydra hydra-org-template (:color blue :hint nil)
     "
 _c_enter  qu_o_te     _e_macs-lisp    _L_aTeX:
 _l_atex   _E_xample   p_y_thon        _i_ndex:
@@ -225,14 +200,52 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
                             ;; (concat "\\(" reg-han "\\) *\n *\\(" reg-han "\\)")
                             (concat "\\(" reg-han "\\) *\n *")
                             "\\1" orig-contents))
-      (ad-set-arg 1 fixed-contents))))))
+      (ad-set-arg 1 fixed-contents)))
+
+  )
+
+  ;;中文与英文对齐
+  (defun jakelew/set-font (english chinese english-size chinese-size)
+  (set-face-attribute 'default nil :font
+                      (format   "%s:pixelsize=%d"  english english-size))
+  (dolist (charset '(kana han symbol cjk-misc bopomofo))
+    (set-fontset-font (frame-parameter nil 'font) charset
+                      (font-spec :family chinese :size chinese-size))))
+
+  ;; 不同系统用不同字体
+  (cond ((featurep 'cocoa)
+         (jakelew/set-font "Source Code Pro" "Hiragino Sans GB" 14 16)
+         )
+        ((eq system-type 'windows-nt)
+         (jakelew/set-font "Source Code Pro" "WenQuanYi Zen Hei Mono" 14 16))
+        )
+
+  ;; org-mode 自动换行
+  (add-hook 'org-mode-hook 'toggle-truncate-lines)
+)
 
 
 
-  ;; 解决org表格里面中英文对齐问题
-  ;;(when (configuration-layer/layer-usedp 'chinese)
-  ;;  (when (and (eq system-type 'darwin) display-graphic-p)
-  ;;    (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 13 15)))))
+(after-load 'org
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   `((R . t)
+     (ditaa . t)
+     (dot . t)
+     (emacs-lisp . t)
+     (gnuplot . t)
+     (haskell . nil)
+     (latex . t)
+     (ledger . t)
+     (ocaml . nil)
+     (octave . t)
+     (plantuml . t)
+     (python . t)
+     (ruby . t)
+     (screen . nil)
+     (,(if (locate-library "ob-sh") 'sh 'shell) . t)
+     (sql . t)
+     (sqlite . t))))
 
 
 

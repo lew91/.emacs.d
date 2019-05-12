@@ -1,28 +1,17 @@
-
-;; 设置加载路径
+;; 设置加载子目录路径
 (defun add-subdirs-to-load-path (dir)
   "Recursive add directories to `load-path'."
   (let ((default-directory (file-name-as-directory dir)))
     (add-to-list 'load-path dir)
     (normal-top-level-add-subdirs-to-load-path)))
 
-;;elpa 目录
+;; melpa 目录
 (add-subdirs-to-load-path "~/.emacs.d/elpa/")
 ;; 额外插件路径
 (add-subdirs-to-load-path "~/.emacs.d/extensions/")
 ;; 配置文件主目录
 (add-to-list 'load-path "~/.emacs.d/config")
 
-;; 统一使用after-load
-(if (fboundp 'with-eval-after-load)
-    (defalias 'after-load 'with-eval-after-load)
-  (defmacro after-load (feature &rest body)
-    "After FEATURE is loaded, evaluate BODY."
-    (declare (indent defun))
-    `(eval-after-load ,feature
-       '(progn ,@body))))
-
-(defconst *is-a-mac* (eq system-type 'darwin)) ; Mac OS 系统
 
 
 
@@ -35,92 +24,78 @@
   (defvar jakelew-emacs-root-dir (file-truename "~/.emacs.d"))
   (defvar jakelew-emacs-config-dir (concat jakelew-emacs-root-dir "/config"))
   (defvar jakelew-emacs-extension-dir (concat jakelew-emacs-root-dir "/extensions"))
-  (defvar jakelew-emacs-sdcv-data-dir (concat jakelew-emacs-root-dir "/sdcv-dict"))
+
+
+  ;; 统一使用after-load
+  (if (fboundp 'with-eval-after-load)
+      (defalias 'after-load 'with-eval-after-load)
+    (defmacro after-load (feature &rest body)
+      "After FEATURE is loaded, evaluate BODY."
+      (declare (indent defun))
+      `(eval-after-load ,feature
+         '(progn ,@body))))
+
 
   (with-temp-message ""                 ;抹掉插件启动的输出
     (require 'init-benchmarking)
 
-    ;; 先设置背景，避免闪烁。
-    ;;(custom-set-faces
-    ;; '(default ((t (:background "black" :foreground "#137D11"))))
-   ;; )
 
     (require 'appearance)                ; 加载初始化基本外观
     (require 'cache-path-from-shell)     ; 使 exec-paht-from-shell 只加载一次
-    (require 'lazy-load)                 ; 延迟加载，加快启动速度
+    (require 'lazy-load)                 ; 延迟加载键绑定，加快启动速度
     (require 'setup-package)            ; 设定插件源和安装工具
-    ;;(require 'selected-packages)      ; 只需初始安装时加载一次,extensions文件使用‘git submodule update --init --recursive’更新使用
-    (require 'aweshell)                 ; 增强eshell, 自动补全等
+    ;;(require 'selected-packages)      ; 只需初始安装时加载一次,extensions文件使用 'git submodule update --init --recursive' 更新使用
     (require 'init-auto-save)
-
-    ;; (require 'one-key)
     ;; (require 'awesome-pair)
     ;; (require 'basic-edit-toolkit)
-
     (require 'init-fonts)              ; 设置字体集
-    ;;(require 'init-awesome-tray)
-    ;; (require 'init-awesome-tab)
     (require 'init-grep)
     (require 'init-smex)
     (require 'init-editing-utils)
     (require 'init-hippie-expand)
-
-    ;; (require 'init-mode)
     (require 'init-dired)
     (require 'init-isearch)
     (require 'init-uniquify)
     (require 'init-ibuffer)
     (require 'init-window)
     (require 'init-session)
-    (require 'init-insert-translated-name) ; 用‘insert-translated-name’激活
-    (require 'company-english-helper) ; 用‘toggle-company-english-helper’激活
-    ;; (require 'init-key-bindings)   ;以后增加快捷键绑定
+    ;;(require 'init-key-bindings)           ; 以后增加快捷键绑定管理
+
 
     ;; 可以延后加载的
     (run-with-idle-timer
      1 nil
      #'(lambda ()
+
+         (require 'init-theme)
+        ;; (require 'init-awesome-tray)              ; 不要mode-line,在加载主题后执行加载
+         (require 'aweshell)                       ; 增强eshell, 自动补全等
+         (require 'init-insert-translated-name)    ; 用‘insert-translated-name’激活
+         (require 'company-english-helper)         ; 用‘toggle-company-english-helper’激活
          (require 'jakelew-org)
+         (require 'org-toolkits)              ; 自定义一些很有用的函数
+         ;;(require 'init-markdown)
          (require 'init-yasnippet)
          (require 'init-company-mode)
-         ;; ;; (require 'init-lsp)
+         ;; ;; (require 'init-lsp)                ；lsp 补全模式，不打算用于全局
          (require 'init-flycheck)
-         ;; (require 'init-ispell)
+         ;; (require 'init-ispell)            ；拼写检查，字典默认
          (require 'init-lisp)
          (require 'init-paredit)
          (require 'init-python)
          (require 'init-dash)
          ;; (require 'init-sql)
          ;; (require 'init-projcetile)
-         (require 'init-git)
-         (require 'init-vc)
+         ;; (require 'init-git)              ; magit 工具设定
+         ;; (require 'init-vc)               ；版本控制
+         ;;(require 'init-whitespace)
          (require 'init-session)
-         ;; Restore session at last.
          (emacs-session-restore)
-         ))
-    ))
+
+         )))
 
 
-;; Emacs 自动生成以及自定义内容
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (spacemacs-dark)))
- '(custom-safe-themes
-   (quote
-    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
- '(package-selected-packages
-   (quote
-    (magit flycheck-popup-tip hl-todo flycheck-pos-tip yasnippet-snippets ag rg wgrep-ag company-posframe paradox highlight-parentheses yaml-mode writeroom-mode whole-line-or-region whitespace-cleanup-mode wgrep vlf vc-darcs uptimes unfill textile-mode symbol-overlay switch-window sqlformat spacemacs-theme smex session scratch regex-tool rainbow-mode rainbow-delimiters pip-requirements paredit-everywhere page-break-lines osx-location origami org-pomodoro org-cliplink org-bullets ns-auto-titlebar multiple-cursors move-dup mode-line-bell mmm-mode markdown-mode macrostep list-unicode-display ledger-mode ipretty info-colors immortal-scratch ibuffer-vc ibuffer-projectile hydra highlight-quoted highlight-escape-sequences helm-swoop helm-projectile helm-flx helm-descbinds helm-ag guide-key grab-mac-link goto-line-preview gnuplot fullframe flycheck-package flycheck-ledger flycheck-color-mode-line expand-region exec-path-from-shell elisp-slime-nav dotenv-mode disable-mouse diredfl dimmer diminish diff-hl default-text-scale dash-at-point darcsum daemons company-quickhelp company-anaconda command-log-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized cmd-to-echo cl-libify cl-lib-highlight cask-mode browse-kill-ring browse-at-remote bind-key beacon avy auto-compile anzu aggressive-indent)))
- '(python-shell-buffer-name "Python3")
- '(python-shell-completion-native-disabled-interpreters (quote ("pypy" "ipython" "python3" "python")))
- '(python-shell-completion-native-enable t)
- '(python-shell-interpreter "python3"))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+  (setq custom-file (expand-file-name "custom.el" jakelew-emacs-root-dir))
+  (load custom-file 'no-error 'no-message)
+
+)

@@ -203,7 +203,4 @@
              chinese-char chinese-char-and-punc english-word
              (+ chinese-char english-word)))))
 
-(provide 'jakelew-funcs)
-
-
-
+(provide 'org-toolkits)

@@ -88,7 +88,6 @@
 
 ;;; Require
 (require 'auto-save)
-;;(require 'basic-toolkit)
 
 ;;; Code:
 

@@ -1,3 +1,4 @@
+
 (require 'lsp-mode)
 
 ;; lsp支持特定的mode, 而不是全局
