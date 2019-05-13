@@ -23,26 +23,25 @@
 
 (setq package-pinned-packages '())
 
-;; Fire up package.el 
+;; Fire up package.el
 ;;(setq package-enable-at-startup nil)
 (package-initialize)
 
 (unless (file-exists-p (expand-file-name "elpa" user-emacs-directory))
   (package-refresh-contents))
 
-;; This functions has a macro '--each' from dash.el. 
+;; This functions has a macro '--each' from dash.el.
 ;;(defun packages-install (packages)
 ;;  (--each packages
 ;;    (when (not (package-installed-p it))
 ;;      (package-install it)))
 ;;  (delete-other-windows))
 
-;; Install the selected packages
+;; Install the user selected packages
 (defun packages-install (packages)
   "When PACKAGES in user's list are not comtented, try to install given PACKAGES."
 (dolist (pkg packages)
   (when (not (package-installed-p pkg))
-    (package-refresh-contents)
     (package-install pkg))))
 
 

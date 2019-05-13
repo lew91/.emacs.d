@@ -56,7 +56,6 @@
 
 
 
-;;(add-hook 'find-file-hook 'highlight-parentheses-mode t) ;增强的括号高亮
 
 ;; 不显示 *scratch*
 (defun remove-scratch-buffer ()
@@ -106,7 +105,8 @@
                                       regexp-search-ring
                                       extended-command-history)
       savehist-autosave-interval 60)
-(savehist-mode t)
+;;(savehist-mode t)
+(add-hook 'after-init-hook 'savehist-mode)
 
 ;;; ido
 (progn

@@ -43,10 +43,10 @@
 
 
     (require 'appearance)                ; 加载初始化基本外观
-    (require 'cache-path-from-shell)     ; 使 exec-paht-from-shell 只加载一次
+    (require 'cache-path-from-shell)     ; 使‘exec-path-from-shell.el' 只加载一次
     ;;(require 'lazy-load)                 ; TODO：延迟加载键绑定,暂时速度可以，后面再研究
     (require 'setup-package)            ; 设定插件源和安装工具
-    ;;(require 'selected-packages)      ; 只需初始安装时加载一次,extensions文件夹使用 'git submodule update --init --recursive' 更新使用
+    ;;(require 'selected-packages)      ; 只需初始安装时加载一次,extensions文件夹使用 git submodule update --init --recursive 更新使用
     (require 'init-auto-save)
     ;; (require 'awesome-pair)
     ;; (require 'basic-edit-toolkit)
@@ -63,6 +63,7 @@
     (require 'init-uniquify)
     (require 'init-ibuffer)
     (require 'init-window)
+    ;; (require 'init-desktop)               ; 加载时间需要衡量
     (require 'init-session)
     ;;(require 'init-key-bindings)           ; 以后增加快捷键绑定管理
 
@@ -74,20 +75,20 @@
 
          ;;(require 'init-ivy)
          ;;(require 'init-helm)
-         (require 'init-theme)
-        ;; (require 'init-awesome-tray)              ; 不要mode-line,在加载主题后执行加载
-         (require 'aweshell)                       ; 增强eshell, 自动补全等
+         ;;(require 'init-theme)                     ; 安装一次主题到 ‘custom-set-variables'
+        ;; (require 'init-awesome-tray)              ; 不要‘mode-line’,在加载主题后执行加载
+         (require 'aweshell)                         ; 增强‘eshell’, 自动补全等
          (require 'init-undo-tree)
-         (require 'init-insert-translated-name)    ; 用‘insert-translated-name’激活
-         (require 'company-english-helper)         ; 用‘toggle-company-english-helper’激活
+         (require 'init-insert-translated-name)      ; 用‘insert-translated-name’激活
+         (require 'company-english-helper)           ; 用‘toggle-company-english-helper’激活
          (require 'jakelew-org)
-         (require 'org-toolkits)              ; 自定义一些很有用的函数
+         (require 'org-toolkits)                     ; 自定义一些很有用的函数
          (require 'init-markdown)
          (require 'init-yasnippet)
          (require 'init-company-mode)
-         ;; ;; (require 'init-lsp)                ；lsp 补全模式，不打算用于全局
+         ;; ;; (require 'init-lsp)                   ；lsp 补全模式，不打算用于全局
          (require 'init-flycheck)
-         (require 'init-ispell)            ; 拼写检查，字典默认
+         (require 'init-ispell)                      ; 拼写检查，字典默认
          (require 'init-lisp)
          (require 'init-paredit)
          (require 'init-python)
@@ -95,8 +96,8 @@
          (require 'init-dash)
          (require 'init-sql)
          (require 'init-projectile)
-         ;;(require 'init-git)              ; magit 工具设定
-         ;;(require 'init-vc)               ; 版本控制
+         ;;(require 'init-git)                       ; magit 工具设定
+         ;;(require 'init-vc)                        ; 版本控制
          ;;(require 'init-whitespace)
          (require 'init-session)
          (emacs-session-restore)
