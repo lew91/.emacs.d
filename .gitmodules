@@ -31,3 +31,6 @@
 [submodule "extensions/awesome-pair"]
 	path = extensions/awesome-pair
 	url = https://github.com/manateelazycat/awesome-pair.git
+[submodule "extensions/grep-dired"]
+	path = extensions/grep-dired
+	url = https://github.com/manateelazycat/grep-dired.git

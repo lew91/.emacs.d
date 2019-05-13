@@ -58,6 +58,7 @@
     (require 'init-hippie-expand)
     (require 'init-visual-regexp)
     (require 'init-dired)
+    (require 'grep-dired)
     (require 'init-isearch)
     (require 'init-uniquify)
     (require 'init-ibuffer)
@@ -94,7 +95,7 @@
          (require 'init-dash)
          (require 'init-sql)
          (require 'init-projectile)
-         (require 'init-git)              ; magit 工具设定
+         ;;(require 'init-git)              ; magit 工具设定
          ;;(require 'init-vc)               ; 版本控制
          ;;(require 'init-whitespace)
          (require 'init-session)
