@@ -1,6 +1,19 @@
 
-(require 'grab-mac-link)
+
+(when (featurep 'cocoa)
+  (require 'grab-mac-link))
 (require 'org-cliplink)
+
+(require 'hl-todo)
+(dolist (hook (list
+               'prog-mode-hook
+               'org-mode-hook
+               'markdown-mode-hook
+               ))
+  (add-hook hook '(lambda ()
+                    (hl-todo-mode))))
+
+
 
 (global-set-key (kbd "C-c a") 'org-agend)
 ;;; To-do settings
@@ -111,12 +124,13 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode)))
 
+;; org-mode 自动换行
+(add-hook 'org-mode-hook 'toggle-truncate-lines)
 
 
-
-(with-eval-after-load 'org
+(after-load 'org
   (progn
-    (setq org-log-done 'time
+    (setq org-log-done 't
           org-starup-indented t
           org-ellipsis (if (char-displayable-p ?) "  " nil)
           org-pretty-entities t
@@ -220,8 +234,7 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
          (jakelew/set-font "Source Code Pro" "WenQuanYi Zen Hei Mono" 14 16))
         )
 
-  ;; org-mode 自动换行
-  (add-hook 'org-mode-hook 'toggle-truncate-lines)
+
 )
 
 

@@ -4,64 +4,8 @@
 (defun init--install-packages ()
   (packages-install
    '(
-     anzu
-     auto-compile
-     avy
-     bind-key
-     company
-     company-anaconda
-     company-quickhelp
-     dash
-     dash-at-point
-     dash-docs
-     diminish
-     diff-hl
-     elisp-slime-nav
-     exec-path-from-shell
-     expand-region
-     epl
-     f
-     flx
-     flx-ido
-     flycheck
-     flycheck-pos-tip
-     guide-key
-     gh-md
-     gnuplot
-     helm
-     helm-ag
-     helm-flx
-     helm-projectile
-     helm-swoop
-     highlight-escape-sequences
-     hydra
-     markdown-mode
-     multiple-cursors
-     org-brain
-     org-bullets
-     org-pomodoro
-     osx-location
-     osx-clipboard
-     osx-trash
-     page-break-lines
-     paredit
-     paredit-everywhere
-     popup
-     popwin
-     pos-tip
-     projectile
-     smartparens
-     pythonic
-     rainbow-delimiters
-     reveal-in-osx-finder
-     s
-     session
-     spacemacs-theme
-     switch-window
-     symbol-overlay
-     yasnippet
-     yasnippet-snippets
-     whitespace-cleanup-mode
+     undo-tree ivy-xref counsel ivy hungry-delete magit flycheck-popup-tip hl-todo flycheck-pos-tip yasnippet-snippets ag rg wgrep-ag paradox highlight-parentheses yaml-mode writeroom-mode whole-line-or-region whitespace-cleanup-mode wgrep vlf vc-darcs uptimes unfill textile-mode symbol-overlay switch-window sqlformat spacemacs-theme smex session scratch regex-tool rainbow-mode rainbow-delimiters pip-requirements paredit-everywhere page-break-lines osx-location origami org-pomodoro org-cliplink org-bullets ns-auto-titlebar multiple-cursors move-dup mode-line-bell mmm-mode markdown-mode macrostep list-unicode-display ledger-mode ipretty info-colors immortal-scratch ibuffer-vc ibuffer-projectile hydra highlight-quoted highlight-escape-sequences helm-swoop helm-projectile helm-descbinds helm-ag guide-key grab-mac-link goto-line-preview gnuplot fullframe flycheck-package flycheck-ledger flycheck-color-mode-line expand-region exec-path-from-shell elisp-slime-nav dotenv-mode disable-mouse diredfl dimmer diminish diff-hl default-text-scale dash-at-point darcsum daemons company-quickhelp company-anaconda command-log-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized cmd-to-echo cl-libify cl-lib-highlight browse-kill-ring browse-at-remote bind-key avy auto-compile anzu aggressive-indent
+
      )))
 
 (condition-case nil

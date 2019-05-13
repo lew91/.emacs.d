@@ -4,6 +4,6 @@
 (setq-default projectile-mode-line-prefix " Proj")
 
 (after-load 'projectile
-  (define-key project-mode-map (kbd "C-c p") 'projectile-command-map))
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (provide 'init-projectile)

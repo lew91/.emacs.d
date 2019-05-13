@@ -105,16 +105,13 @@
   (define-key symbol-overlay-mode-map (kbd "M-n") 'symbol-overlay-jump-next)
   (define-key symbol-overlay-mode-map (kbd "M-p") 'symbol-overlay-jump-prev)
   (define-key symbol-overlay-mode-map (kbd "M-s r") 'symbol-overlay-rename)
-  (define-key symbol-overlay-mode-map (kbd "C-g") 'symbol-overlay-remove-all))
+  (define-key symbol-overlay-mode-map (kbd "C-g") 'symbol-overlay-remove-all)
+
+)
 
 
-
-
-
-
-
-;; (defhydra hydra-symbol (:color pink
-;;                                       :hint nil)
+;; 试验性质的配置
+;; (defhydra hydra-symbol-overlay (global-map "M-i")
 ;;   "
 ;; ^Jump^          ^Mark^          ^Actions^           ^Quit^
 ;; ^^^^^^^^----------------------------------------------------
@@ -127,16 +124,11 @@
 ;; ("i"  symbol-overlay-put)
 ;; ("n"  symbol-overlay-jump-next)
 ;; ("p"  symbol-overlay-jump-prev)
-;; ("w"  symbol-overlay-save-symbol)
-;; ("t"  symbol-overlay-toggle-in-scope)
-;; ("e"  symbol-overlay-echo-mark)
-;; ("d"  symbol-overlay-jump-to-definition)
-;; ("s"  symbol-overlay-isearch-literally)
-;; ("y"  symbol-overlay-query-replace)
 ;; ("r"  symbol-overlay-rename)
 ;; ("q"  symbole-overlay-remove-all))
 
 ;; (global-set-key (kbd "s-i") 'hydra-symbol/body)
+;;(define-key symbol-overlay-mode-map (kbd "M-i") 'hydra-symbol-overlay/body)
 
 
 

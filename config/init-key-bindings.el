@@ -21,6 +21,36 @@
 ;;        )
 ;;       )
 
+; 全局按键卸载
+;;(lazy-load-unset-keys
+;; '("C-x C-f" "C-z" "C-q" "s-W" "s-z" "M-h" "C-x C-c" "C-\\" "s-c" "s-x" "s-v"))
+
+;; Dash
+(lazy-load-global-keys
+ '(
+   ("D" . dash-at-point)
+   )
+ "dash-at-point"
+ "C-c"
+ )
+
+;; symbol-overlay
+(lazy-load-set-keys
+ '(
+   ("M-i" . symbol-overlay-put)
+   ("M-n" . symbol-overlay-jump-next)
+   ("M-p" . symbol-overlay-jump-prev)
+   ("M-s r" . symbol-overlay-rename)
+   ("C-g" . symbole-overlay-remove-all)
+   )
+ symbol-overlay-mode-map
+ )
+
+(lazy-load-unset-keys
+ '([M-left] [M-right]))
+
+
+
 
 
 (provide 'init-key-bindings)

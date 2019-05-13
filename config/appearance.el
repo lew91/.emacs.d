@@ -76,6 +76,10 @@
   (add-hook hook 'sanityinc/show-trailing-whitespace))
 
 ;; Misc
+
+;;(autoload 'zap-to-char "misc"
+;;  "Kill up to, but not including ARGth occurrence of CHAR." t)
+
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
@@ -108,11 +112,14 @@
 (progn
   (unless (fboundp 'helm-mode)
     (ido-mode t)
-    (ido-everywhere)
+    (ido-everywhere nil)
     (setq ido-enable-flex-matching t)
-    (setq ido-create-new-buffer 'always)))
+    (setq ido-create-new-buffer 'always)
+    )
+  )
+
+
 
 
 
 (provide 'appearance)
-

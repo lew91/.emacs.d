@@ -1,9 +1,13 @@
 (require 'dired)
+(require 'osx-trash)
 
 (setq dired-recursive-copies t)    ;可以递归的进行拷贝
 (setq dired-recursive-deletes t)   ;可以递归的删除目录
 (setq dired-recursive-deletes 'always)  ;删除东西时不提示
 (setq dired-recursive-copies 'always) ;拷贝东西时不提示
+
+(when (featurep 'cocoa)
+  (setq delete-by-moving-to-trash t))  ; delete a file to the OS's trash fold.
 
 (setq-default dired-dwim-target t)
 

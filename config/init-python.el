@@ -7,7 +7,7 @@
                 ("SConscript\\'" . python-mode))
               auto-mode-alist))
 
-;;(require 'pip-requirements)
+(require 'pip-requirements)
 
 (require 'anaconda-mode)
 

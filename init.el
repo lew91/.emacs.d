@@ -35,24 +35,28 @@
       `(eval-after-load ,feature
          '(progn ,@body))))
 
+  ;;(require 'benchmark-init)               ;启动时间测试
+  ;;(add-hook 'after-init-hook 'benchmark-init/deactivate)  ; 启动后停止激活状态
 
   (with-temp-message ""                 ;抹掉插件启动的输出
-    (require 'init-benchmarking)
+    ;;(require 'init-benchmarking)      ;显示启动时间到 messages
 
 
     (require 'appearance)                ; 加载初始化基本外观
     (require 'cache-path-from-shell)     ; 使 exec-paht-from-shell 只加载一次
-    (require 'lazy-load)                 ; 延迟加载键绑定，加快启动速度
+    ;;(require 'lazy-load)                 ; TODO：延迟加载键绑定,暂时速度可以，后面再研究
     (require 'setup-package)            ; 设定插件源和安装工具
-    ;;(require 'selected-packages)      ; 只需初始安装时加载一次,extensions文件使用 'git submodule update --init --recursive' 更新使用
+    ;;(require 'selected-packages)      ; 只需初始安装时加载一次,extensions文件夹使用 'git submodule update --init --recursive' 更新使用
     (require 'init-auto-save)
     ;; (require 'awesome-pair)
     ;; (require 'basic-edit-toolkit)
+
     (require 'init-fonts)              ; 设置字体集
     (require 'init-grep)
     (require 'init-smex)
     (require 'init-editing-utils)
     (require 'init-hippie-expand)
+    (require 'init-visual-regexp)
     (require 'init-dired)
     (require 'init-isearch)
     (require 'init-uniquify)
@@ -67,27 +71,31 @@
      1 nil
      #'(lambda ()
 
+         ;;(require 'init-ivy)
+         ;;(require 'init-helm)
          (require 'init-theme)
         ;; (require 'init-awesome-tray)              ; 不要mode-line,在加载主题后执行加载
          (require 'aweshell)                       ; 增强eshell, 自动补全等
+         (require 'init-undo-tree)
          (require 'init-insert-translated-name)    ; 用‘insert-translated-name’激活
          (require 'company-english-helper)         ; 用‘toggle-company-english-helper’激活
          (require 'jakelew-org)
          (require 'org-toolkits)              ; 自定义一些很有用的函数
-         ;;(require 'init-markdown)
+         (require 'init-markdown)
          (require 'init-yasnippet)
          (require 'init-company-mode)
          ;; ;; (require 'init-lsp)                ；lsp 补全模式，不打算用于全局
          (require 'init-flycheck)
-         ;; (require 'init-ispell)            ；拼写检查，字典默认
+         (require 'init-ispell)            ; 拼写检查，字典默认
          (require 'init-lisp)
          (require 'init-paredit)
          (require 'init-python)
+         (require 'init-eldoc)
          (require 'init-dash)
-         ;; (require 'init-sql)
-         ;; (require 'init-projcetile)
-         ;; (require 'init-git)              ; magit 工具设定
-         ;; (require 'init-vc)               ；版本控制
+         (require 'init-sql)
+         (require 'init-projectile)
+         (require 'init-git)              ; magit 工具设定
+         ;;(require 'init-vc)               ; 版本控制
          ;;(require 'init-whitespace)
          (require 'init-session)
          (emacs-session-restore)
