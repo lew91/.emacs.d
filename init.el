@@ -26,14 +26,6 @@
   (defvar jakelew-emacs-extension-dir (concat jakelew-emacs-root-dir "/extensions"))
 
 
-  ;; 统一使用after-load
-  (if (fboundp 'with-eval-after-load)
-      (defalias 'after-load 'with-eval-after-load)
-    (defmacro after-load (feature &rest body)
-      "After FEATURE is loaded, evaluate BODY."
-      (declare (indent defun))
-      `(eval-after-load ,feature
-         '(progn ,@body))))
 
   (require 'benchmark-init)               ;启动时间测试
   (add-hook 'after-init-hook 'benchmark-init/deactivate)  ; 启动后停止激活状态
@@ -43,6 +35,7 @@
 
 
     (require 'appearance)                ; 加载初始化基本外观
+    (require 'basic-utils)               ; 基本工具集，在加载其他模块前加载
     (require 'cache-path-from-shell)     ; 使‘exec-path-from-shell.el' 只加载一次
     ;;(require 'lazy-load)                 ; TODO：延迟加载键绑定,暂时速度可以，后面再研究
     (require 'setup-package)            ; 设定插件源和安装工具
