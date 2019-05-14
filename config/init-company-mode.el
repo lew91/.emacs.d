@@ -1,4 +1,4 @@
-(require 'lazy-load)
+;;(require 'lazy-load)
 (require 'company)
 (require 'company-quickhelp)
 
@@ -39,31 +39,31 @@
 
 
 ;; Key settings.
-(lazy-load-unset-keys
- '("TAB")
- company-mode-map)                      ;unset default keys
+;; (lazy-load-unset-keys
+;;  '("TAB")
+;;  company-mode-map)                      ;unset default keys
 
-(lazy-load-unset-keys
- '("M-p" "M-n" "M-1"
-   "M-2" "M-3" "M-4"
-   "M-5" "M-6" "M-7"
-   "M-8" "M-9" "M-0"
-   "C-m")
- company-active-map)
+;; (lazy-load-unset-keys
+;;  '("M-p" "M-n" "M-1"
+;;    "M-2" "M-3" "M-4"
+;;    "M-5" "M-6" "M-7"
+;;    "M-8" "M-9" "M-0"
+;;    "C-m")
+;;  company-active-map)
 
-(lazy-load-set-keys
- '(
-   ("TAB" . company-complete-selection)
-   ("M-h" . company-complete-selection)
-   ("M-H" . company-complete-common)
-   ("M-w" . company-show-location)
-   ("M-s" . company-search-candidates)
-   ("M-S" . company-filter-candidates)
-   ("M-n" . company-select-next)
-   ("M-p" . company-select-previous)
-   ("M-i" . yas-expand)
-   )
- company-active-map)
+;; (lazy-load-set-keys
+;;  '(
+;;    ("TAB" . company-complete-selection)
+;;    ("M-h" . company-complete-selection)
+;;    ("M-H" . company-complete-common)
+;;    ("M-w" . company-show-location)
+;;    ("M-s" . company-search-candidates)
+;;    ("M-S" . company-filter-candidates)
+;;    ("M-n" . company-select-next)
+;;    ("M-p" . company-select-previous)
+;;    ("M-i" . yas-expand)
+;;    )
+;;  company-active-map)
 
 
 
