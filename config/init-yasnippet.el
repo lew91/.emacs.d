@@ -3,7 +3,6 @@
 
 ;;; Code:
 
-(yas-global-mode 1)
 
 (defun get-git-user-name ()
   (interactive)
