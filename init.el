@@ -35,8 +35,8 @@
       `(eval-after-load ,feature
          '(progn ,@body))))
 
-  ;;(require 'benchmark-init)               ;启动时间测试
-  ;;(add-hook 'after-init-hook 'benchmark-init/deactivate)  ; 启动后停止激活状态
+  (require 'benchmark-init)               ;启动时间测试
+  (add-hook 'after-init-hook 'benchmark-init/deactivate)  ; 启动后停止激活状态
 
   (with-temp-message ""                 ;抹掉插件启动的输出
     ;;(require 'init-benchmarking)      ;显示启动时间到 messages
@@ -63,7 +63,6 @@
     (require 'init-uniquify)
     (require 'init-ibuffer)
     (require 'init-window)
-    ;; (require 'init-desktop)               ; 加载时间需要衡量
     (require 'init-session)
     ;;(require 'init-key-bindings)           ; 以后增加快捷键绑定管理
 
@@ -76,7 +75,7 @@
          ;;(require 'init-ivy)
          ;;(require 'init-helm)
          ;;(require 'init-theme)                     ; 安装一次主题到 ‘custom-set-variables'
-        ;; (require 'init-awesome-tray)              ; 不要‘mode-line’,在加载主题后执行加载
+         ;; (require 'init-awesome-tray)              ; 不要‘mode-line’,在加载主题后执行加载
          (require 'aweshell)                         ; 增强‘eshell’, 自动补全等
          (require 'init-undo-tree)
          (require 'init-insert-translated-name)      ; 用‘insert-translated-name’激活
@@ -89,6 +88,7 @@
          ;; ;; (require 'init-lsp)                   ；lsp 补全模式，不打算用于全局
          (require 'init-flycheck)
          (require 'init-ispell)                      ; 拼写检查，字典默认
+         (require 'init-origami)                   ; 代码折叠设置
          (require 'init-lisp)
          (require 'init-paredit)
          (require 'init-python)
@@ -108,4 +108,4 @@
   (setq custom-file (expand-file-name "custom.el" jakelew-emacs-root-dir))
   (load custom-file 'no-error 'no-message)
 
-)
+  )
