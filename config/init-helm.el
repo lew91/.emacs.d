@@ -18,23 +18,23 @@
 
 
 
-;;-------------------------------------------------------
-;; key bindings
-;;---------------------------------------------------
-;;(global-set-key (kbd "M-x") 'helm-M-x)
-;;(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
-;; (global-set-key (kbd "C-x r b") 'helm-filtered-bookmarks)
-;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
-;; (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+  ;;-------------------------------------------------------
+  ;; key bindings
+  ;;---------------------------------------------------
+  ;;(global-set-key (kbd "M-x") 'helm-M-x)
+  ;;(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+  ;; (global-set-key (kbd "C-x r b") 'helm-filtered-bookmarks)
+  ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  ;; (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 
-;; ;; helm-mini
-;; (global-set-key (kbd "C-x b") 'helm-mini)
-;; (setq helm-buffers-fuzzy-matching t
-;;       helm-recentf-fuzzy-match    t)
+  ;; ;; helm-mini
+  ;; (global-set-key (kbd "C-x b") 'helm-mini)
+  ;; (setq helm-buffers-fuzzy-matching t
+  ;;       helm-recentf-fuzzy-match    t)
 
-;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
-;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
-;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+  ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+  ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
+  ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
   (global-set-key (kbd "C-c h") 'helm-command-prefix)
   (global-unset-key (kbd "C-x c"))
 
@@ -81,7 +81,7 @@
   (setq helm-apropos-fuzzy-match t)
   (setq helm-lisp-fuzzy-completion t)
 
-)
+  )
 
 ;;------------------------------------------------------------------
 ;; projcetile helm 或许可以用ibuffer projectile
@@ -94,6 +94,7 @@
 ;; (global-set-key (kbd "C-c h r") 'helm-swoop-back-to-last-point)
 ;; (global-set-key (kbd "C-c h m") 'helm-multi-swoop)
 ;; (global-set-key (kbd "C-c h M") 'helm-multi-swoop-all)
+
 
 ;; helm-swoop
 (after-load 'helm-swoop
@@ -109,7 +110,7 @@
   (define-key helm-command-map (kbd "r") 'helm-swoop-back-to-last-point)
   (define-key helm-command-map (kbd "m") 'helm-multi-swoop)
   (define-key helm-command-map (kbd "M") 'helm-multi-swoop-all)
-)
+  )
 
 
 

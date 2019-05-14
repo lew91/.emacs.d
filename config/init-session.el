@@ -1,9 +1,20 @@
 
 ;;; Require
 (require 'auto-save)
+;;(require 'session)
+
 
 ;;; Code:
 
+;; (setq desktop-path (list jakelew-emacs-root-dir)
+;;       desktop-auto-save-timeout 600)
+;; (desktop-save-mode 1)
+
+;; (setq session-save-file (expand-file-name ".session" jakelew-emacs-root-dir))
+;; (setq session-name-disable-regexp "\\(?:\\`'/tmp\\|\\.git/[A-Z_]+\\'\\)")
+;; (setq session-save-file-coding-system 'utf-8)
+
+;; (add-hook 'after-init-hook 'session-initialize)
 
 (setq desktop-load-locked-desktop t) ; don't popup dialog ask user, load anyway
 (setq desktop-restore-frames nil)    ; 不要保存框架和窗口配置

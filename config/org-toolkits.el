@@ -1,6 +1,16 @@
 
 (require 'cl)
 
+(defun jakelew/org-ispell()
+  "configure 'ispell-skip-region-alist' for 'org-mode'."
+  (make-local-variable 'ispell-skip-region-alist)
+  (add-to-list 'ispell-skip-region-alist '(org-property-drawer-re))
+  (add-to-list 'ispell-skip-region-alist '("~" "～"))
+  (add-to-list 'ispell-skip-region-alist '("=" "="))
+  (add-to-list 'ispell-skip-region-alist '("^#\\+BEGIN_SRC" ."^#\\+END_SRC")))
+
+(add-hook 'org-mode-hook #'jakelew/org-ispell)
+
 (defun jakelew/directory-parent(directory)
   (let ((parent (file-name-directory (directory-file-name directory))))
     (if (not (equal directory parent))

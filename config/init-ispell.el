@@ -11,6 +11,6 @@
   (setq-default ispell-program-name "aspell")
   (setq-default ispell-extra-args '("--sug-mode=ultra" "--lang=en_US" "--run-together")))
 
- 
+
 
 (provide 'init-ispell)

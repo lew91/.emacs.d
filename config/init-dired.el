@@ -1,6 +1,4 @@
 
-;;(require 'dired)
-
 
 (setq dired-recursive-copies t)    ;可以递归的进行拷贝
 (setq dired-recursive-deletes t)   ;可以递归的删除目录
@@ -24,6 +22,7 @@
   (define-key dired-mode-map [mouse-2] 'dired-find-file)
   (define-key dired-mode-map (kbd "C-c C-q") 'wdired-change-to-wdired-mode)
 )
+
 
 (require 'diff-hl)
 (after-load 'dired
