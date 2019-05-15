@@ -7,12 +7,6 @@
 (require 'flycheck-popup-tip)
 (add-hook 'flycheck-mode-hook 'flycheck-popup-tip-mode)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; OS Config ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(when (featurep 'cocoa)
-  ;; Initialize environment from user's shell to make eshell know every PATH by other shell.
-  (require 'exec-path-from-shell)
-  (setq exec-path-from-shell-variables '("PATH" "MANPATH" "GEM_PATH"))
-  (exec-path-from-shell-initialize))
 
 ;; I don't like `global-flycheck-mode', some mode, such as elisp mode don't need.
 (dolist (hook (list
