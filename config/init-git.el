@@ -22,6 +22,8 @@
   (global-set-key (kbd "C-x g") 'magit-status)
   (global-set-key (kbd "C-x M-g") 'magit-dispatch)
 
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+
 )
 
 
