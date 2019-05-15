@@ -27,22 +27,23 @@
 (setq filcheck-check-syantax-automatically '(save mode-enabled)) ;只在打开和保存时调用
 
 ;; hydra for flycheck
-(defhydra hydra-flycheck
-    (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
-          :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
-          :hint nil)
-    "Errors"
-    ("f"  flycheck-error-list-set-filter                            "Filter")
-    ("j"  flycheck-next-error                                       "Next")
-    ("k"  flycheck-previous-error                                   "Previous")
-    ("gg" flycheck-first-error                                      "First")
-    ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
-    ("w"  flycheck-copy-erros-as-kill                        "copy message")
-    ;; See 'helm-flycheck package below
-    ("h"  helm-flycheck                                       "list with helm")
-    ("q"  nil))
+;; https://github.com/abo-abo/hydra/wiki/Flycheck
+;; (defhydra hydra-flycheck
+;;     (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
+;;           :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
+;;           :hint nil)
+;;     "Errors"
+;;     ("f"  flycheck-error-list-set-filter                            "Filter")
+;;     ("j"  flycheck-next-error                                       "Next")
+;;     ("k"  flycheck-previous-error                                   "Previous")
+;;     ("gg" flycheck-first-error                                      "First")
+;;     ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
+;;     ("w"  flycheck-copy-erros-as-kill                        "copy message")
+;;     ;; See 'helm-flycheck package below
+;;     ("h"  helm-flycheck                                       "list with helm")
+;;     ("q"  nil))
 
-  (global-set-key (kbd "C-c e") 'hydra-flycheck/body)
+;;   (define-key flycheck-mode-map (kbd "C-c e") 'hydra-flycheck/body)
 
 ;; 外观更漂亮一点
 (with-eval-after-load 'flycheck
