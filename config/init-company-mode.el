@@ -10,13 +10,13 @@
 (setq company-show-numbers nil)   ; do not display numbers on the left
 (setq company-require-match nil) ; allow input string that do not match candidate words
 
-;;(define-key company-mode-map (kbd "M-/") 'company-complete)
-;;(define-key company-active-map (kbd "M-/") 'company-other-backend)
-;;(define-key company-active-map (kbd "C-n") 'company-select-next)
-;;(define-key company-active-map (kbd "C-p") 'company-select-previous)
-;;(setq-default company-dabbrev-other-buffers 'all
-;;              company-tooltip-align-annotations t)
-;;(global-set-key (kbd "M-C-/") 'company-complete)
+(define-key company-mode-map (kbd "M-/") 'company-complete)
+(define-key company-active-map (kbd "M-/") 'company-other-backend)
+(define-key company-active-map (kbd "C-n") 'company-select-next)
+(define-key company-active-map (kbd "C-p") 'company-select-previous)
+(setq-default company-dabbrev-other-buffers 'all
+             company-tooltip-align-annotations t)
+(global-set-key (kbd "M-C-/") 'company-complete)
 
 ;;(add-hook 'company-mode-hook 'company-quickhelp-mode) ;暂时不需要，占住选中窗口，十分不爽
 
