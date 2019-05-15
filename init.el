@@ -56,6 +56,7 @@
     (require 'init-uniquify)
     (require 'init-ibuffer)
     (require 'init-window)
+    (require 'aweshell)
     (require 'init-session)
     (require 'init-key-bindings)           ; 以后增加快捷键绑定管理
 
