@@ -6,9 +6,10 @@
 (setq dired-recursive-copies 'always) ;拷贝东西时不提示
 
 (when (featurep 'cocoa)
-    (require 'osx-trash)
-    (setq delete-by-moving-to-trash t)  ; delete a file to the OS's trash fold.
- )
+    (require 'osx-trash))
+
+(setq delete-by-moving-to-trash t)
+
 
 (let ((gls "/usr/local/bin/gls"))       ; 因为使用了'cache-path-from-shell.el'，全局初始化了一次'exec-path-from-shell'。这里设置成从绝对路径调用'gls'
   (if (file-exists-p gls)
