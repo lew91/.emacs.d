@@ -10,8 +10,8 @@
 
 (require 'unfill)
 
-;;(require 'diff-hl)
-;;(add-hook 'prog-mode-hook 'diff-hl-mode)
+(require 'diff-hl)
+(add-hook 'prog-mode-hook 'diff-hl-mode)
 
 ;; 括号匹配模式启动
 (when (fboundp 'electric-pair-mode)
