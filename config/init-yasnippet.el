@@ -16,7 +16,13 @@
 ;;     (concat jakelew-emacs-root-dir "/snippets")  ; custom snippets
 ;;     ))
 
-(yas-global-mode 1)
+;;(yas-global-mode 1)
+
+(dolist (hook (list
+               'prog-mode-hook
+               'org-mode-hook))
+  (add-hook hook '(lambda()
+                    (yas-minor-mode 1))))
 
 ;; Disable yasnippet mode on some mode.
 (dolist (hook (list
