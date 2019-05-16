@@ -9,6 +9,7 @@
                               (require 'slime)
                               (normal-mode))))
 
+;; common lisp 支持程式
 (after-load 'slime
   (when (executable-find "sbcl")
     (add-to-list 'slime-lisp-implementations

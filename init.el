@@ -66,7 +66,7 @@
      1 nil
      #'(lambda ()
 
-         ;;(require 'init-ivy)
+         (require 'init-ivy)
          ;;(require 'init-helm)
          ;;(require 'init-theme)                     ; 安装一次主题到 ‘custom-set-variables'
          ;; (require 'init-awesome-tray)              ; 不要‘mode-line’,在加载主题后执行加载
@@ -83,13 +83,15 @@
          (require 'init-ispell)                      ; 拼写检查，字典默认
          (require 'init-origami)                   ; 代码折叠设置
          (require 'init-lisp)
+         (require 'init-slime)
+         (require 'init-common-lisp)
          (require 'init-paredit)
          (require 'init-python)
          (require 'init-eldoc)
          (require 'init-dash)
          (require 'init-sql)
          (require 'init-projectile)
-         (require 'init-git)                       ; magit 工具设定
+         ;;(require 'init-git)                       ; magit 工具设定
          ;;(require 'init-vc)                        ; 版本控制
          ;;(require 'init-whitespace)
          (require 'init-session)
