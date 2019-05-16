@@ -73,7 +73,8 @@
          (require 'init-undo-tree)
          (require 'init-insert-translated-name)      ; 用‘insert-translated-name’激活
          (require 'company-english-helper)           ; 用‘toggle-company-english-helper’激活
-         (require 'jakelew-org)
+         (require 'init-org)                         ; 基本设定
+         (require 'org-align)                        ; 中英文对齐支持
          (require 'org-toolkits)                     ; 自定义一些很有用的函数
          (require 'init-markdown)
          (require 'init-yasnippet)

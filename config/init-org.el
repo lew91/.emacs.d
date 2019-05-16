@@ -1,37 +1,79 @@
-
-(require 'org)
+;;; init-org.el --- basic org-mode configuration -*- lexical-binding: t -*-
+;;; Commentary:
+;;;
+;;;一Some basic settings，Can adapt to most situations
+;;;
+;;; Code:
 
 (when (featurep 'cocoa)
   (require 'grab-mac-link))
 
 (require 'org-cliplink)
 
+(require 'hl-todo)
+(dolist (hook (list
+               'prog-mode-hook
+               'org-mode-hook
+               'markdown-mode-hook
+               ))
+  (add-hook hook '(lambda ()
+                    (hl-todo-mode))))
 
 
 (define-key global-map (kbd "C-c l") 'org-store-link)
 (define-key global-map (kbd "C-c a") 'org-agenda)
 
-;;(require 'deft)
-(require 'hl-todo)
-(when (fboundp 'global-hl-todo-mode)
-  (add-hook 'after-init-hook 'global-hl-todo-mode))
-
 
 ;; Various preferences
-;; (setq org-log-done t
-;;       org-edit-timestamp-down-means-later t
-;;       ;;org-hide-emphasis-markers t
-;;       org-catch-invisible-edits 'show
-;;       org-export-coding-system 'utf-8
-;;       org-fast-tag-selection-single-key 'expert
-;;       org-html-validation-link nil
-;;       org-export-kill-product-buffer-when-displayed t
-;;       org-tags-column 80
-;;       org-log-done 'time)
+(setq ;;org-log-done t                 ; 设置了后不能自动缩进？
+      org-startup-indented t
+      org-edit-timestamp-down-means-later t
+      org-hide-emphasis-markers t
+      org-catch-invisible-edits 'show
+      org-export-coding-system 'utf-8
+      org-fast-tag-selection-single-key 'expert
+      org-html-validation-link nil
+      org-export-kill-product-buffer-when-displayed t
+      org-tags-column 80)
+
+;; Lots of stuff from http://doc.norang.ca/org-mode.html
+;; TODO: fail gracefully
+(defun sanityinc/grab-ditaa (url jar-name)
+  "Download URL and extract JAR-NAME as `org-ditaa-jar-path'."
+  ;; TODO: handle errors
+  (message "Grabbing %s for org." jar-name)
+  (let ((zip-temp (make-temp-name "emacs-ditaa")))
+    (unwind-protect
+        (progn
+          (when (executable-find "unzip")
+            (url-copy-file url zip-temp)
+            (shell-command (concat "unzip -p " (shell-quote-argument zip-temp)
+                                   " " (shell-quote-argument jar-name) " > "
+                                   (shell-quote-argument org-ditaa-jar-path)))))
+      (when (file-exists-p zip-temp)
+        (delete-file zip-temp)))))
+
+(after-load 'ob-ditaa
+  (unless (and (boundp 'org-ditaa-jar-path)
+               (file-exists-p org-ditaa-jar-path))
+    (let ((jar-name "ditaa0_9.jar")
+          (url "http://jaist.dl.sourceforge.net/project/ditaa/ditaa/0.9/ditaa0_9.zip"))
+      (setq org-ditaa-jar-path (expand-file-name jar-name (file-name-directory user-init-file)))
+      (unless (file-exists-p org-ditaa-jar-path)
+        (sanityinc/grab-ditaa url jar-name)))))
+
+(after-load 'ob-plantuml
+  (let ((jar-name "plantuml.jar")
+        (url "http://jaist.dl.sourceforge.net/project/plantuml/plantuml.jar"))
+    (setq org-plantuml-jar-path (expand-file-name jar-name (file-name-directory user-init-file)))
+    (unless (file-exists-p org-plantuml-jar-path)
+      (url-copy-file url org-plantuml-jar-path))))
 
 
-
-
+;; Re-align tags when window shape changes
+(after-load 'org-agenda
+  (add-hook 'org-agenda-mode-hook
+            (lambda () (add-hook 'window-configuration-change-hook 'org-agenda-align-tags nil t))))
 
 
 
@@ -312,44 +354,7 @@ typical word processor."
 ;;                   (re-search-backward "^[0-9]+:[0-9]+-[0-9]+:[0-9]+ " nil t))
 ;;                 (insert (match-string 0))))))
 
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode)))
-
-
-
-
-(with-eval-after-load 'org
-  (progn
-    (setq
-      org-starup-indented t
-      org-ellipsis (if (char-displayable-p ?) "  " nil)
-      org-pretty-entities t
-      org-hide-emphasis-markers t)
-    ;;(require 'org-tempo) ; Require from org 9 on-wards for old template expansion
-      ;; Reset the org-template expnsion system, this is need after upgrading to org 9 for some reason
-      (setq org-structure-template-alist (eval (car (get 'org-structure-template-alist 'standard-value))))
-
-      (eval-and-compile
-        (defun hot-expand (str &optional mod header)
-        "Expand org template.
-STR is a structure template string recognized by org like <s. MOD is a
-string with additional parameters to add the begin line of the
-structure element. HEADER string includes more parameters that are
-prepended to the element after the #+HEADER: tag."
-        (let (text)
-          (when (region-active-p)
-            (setq text (buffer-substring (region-beginning) (region-end)))
-            (delete-region (region-beginning) (region-end)))
-          (when header (insert "#+HEADER: " header) (forward-line))
-          (insert str)
-          (org-try-structure-completion)
-          ;;(org-tempo-complete-tag)
-          (when mod (insert mod) (forward-line))
-          (when text (insert text)))))
-
-
-
-  (after-load 'org
+(after-load 'org
   (org-babel-do-load-languages
    'org-babel-load-languages
    `((R . t)
@@ -368,67 +373,8 @@ prepended to the element after the #+HEADER: tag."
      (screen . nil)
      (,(if (locate-library "ob-sh") 'sh 'shell) . t)
      (sql . t)
-     (sqlite . t)))
+     (sqlite . t))))
 
-
-
-  (defhydra hydra-org-template (:color blue :hint nil)
-    "
-_c_enter  qu_o_te     _e_macs-lisp    _L_aTeX:
-_l_atex   _E_xample   p_y_thon        _i_ndex:
-_a_scii   _v_erse     ip_Y_thon       _I_NCLUDE:
-_s_rc     _g_o        _r_uby          _H_TML:
-_h_tml    _S_HELL     _p_erl          _A_SCII:
-^ ^       ^ ^         _P_erl tangled  plant_u_ml
-"
-    ("s" (hot-expand "<s"))
-    ("E" (hot-expand "<e"))
-    ("o" (hot-expand "<q"))
-    ("v" (hot-expand "<v"))
-    ("c" (hot-expand "<c"))
-    ("l" (hot-expand "<l"))
-    ("h" (hot-expand "<h"))
-    ("a" (hot-expand "<a"))
-    ("L" (hot-expand "<L"))
-    ("i" (hot-expand "<i"))
-    ("e" (hot-expand "<s" "emacs-lisp"))
-    ("y" (hot-expand "<s" "python :results output"))
-    ("Y" (hot-expand "<s" "ipython :session :exports both :results raw drawer\n$0"))
-    ("g" (hot-expand "<s" "go :imports '\(\"fmt\"\)"))
-    ("p" (hot-expand "<s" "perl"))
-    ("r" (hot-expand "<s" "ruby"))
-    ("S" (hot-expand "<s" "sh"))
-    ("u" (hot-expand "<s" "plantuml :file CHANGE.png"))
-    ("P" (progn
-           (insert "#+HEADERS: :results output :exports both :shebang \"#!/usr/bin/env perl\"\n")
-           (hot-expand "<s" "perl")))
-    ("I" (hot-expand "<I"))
-    ("H" (hot-expand "<H"))
-    ("A" (hot-expand "<A"))
-    ("<" self-insert-command "ins")
-    ("q" nil "quit"))
-
-
-  (bind-key "<"
-            (lambda () (interactive)
-              (if (or (region-active-p) (looking-back "^\s*" 1))
-                  (hydra-org-template/body)
-                (self-insert-command 1)))
-            org-mode-map)
-
-  (require 'os-md nil t)
-  ;; copy from Chinese layer
-  (defadvice org-html-paragraph (before fsh-org-html-paragraph-advice
-                                        (paragraph contents info) activate)
-    "Join consecutive Chinese lines into a single long line without unwanted space when exporting 'org-mode' to html."
-    (let ((fixed-contents)
-          (orig-contents (ad-get-arg 1))
-          (reg-han "[[:multibyte:]]"))
-      (setq fixed-contents (replace-regexp-in-string
-                            ;; (concat "\\(" reg-han "\\) *\n *\\(" reg-han "\\)")
-                            (concat "\\(" reg-han "\\) *\n *")
-                            "\\1" orig-contents))
-      (ad-set-arg 1 fixed-contents))))))
 
 
 
