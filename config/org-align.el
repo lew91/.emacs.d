@@ -106,7 +106,6 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
   ;; org-mode 自动换行
   (add-hook 'org-mode-hook 'toggle-truncate-lines)
 
-
   ;;中文与英文对齐
   (defun jakelew/set-font (english chinese english-size chinese-size)
     (set-face-attribute 'default nil :font
@@ -122,8 +121,7 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
         ((eq system-type 'windows-nt)
          (jakelew/set-font "Source Code Pro" "WenQuanYi Zen Hei Mono" 14 16))
         )
-
-  )
+ )
 
 
 (provide 'org-align)
