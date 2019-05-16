@@ -90,6 +90,15 @@
 (setq-default
  recentf-max-saved-items 1000
  recentf-exclude '("/tmp/" "/ssh:"))
+;;(add-to-list 'recentf-exclude "\\.png\\'")
+
+(let ((list-partern (list
+                    '("\\.png\\'")
+                    '("\\.revive\\'")
+                    ))
+      )
+  (add-to-list  'recentf-exclude 'list-partern))
+
 
 ;; 括号匹配开启
 (show-paren-mode 1)
