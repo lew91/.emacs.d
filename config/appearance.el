@@ -85,17 +85,24 @@
 (require 'saveplace)
 (setq-default save-place t)
 
+
+
 ;; tracking recent files
 (add-hook 'after-init-hook 'recentf-mode)
 (setq-default
  recentf-max-saved-items 1000
  recentf-exclude '("/tmp/" "/ssh:"))
 ;;(add-to-list 'recentf-exclude "\\.png\\'")
-
+(setq recentf-auto-cleanup 'never
+      recentf-auto-cleanup-timer (run-with-idle-timer 600 t
+                                                      'recentf-save-file))
+(add-hook 'fine-file-hook (lambda () (unless recentf-mode
+                                   (recentf-mode)
+                                   (recentf-track-opened-file))))
 (let ((list-partern (list
-                    '("\\.png\\'")
-                    '("\\.revive\\'")
-                    ))
+                     '("\\.png\\'")
+                     '("\\.revive\\'")
+                     ))
       )
   (add-to-list  'recentf-exclude 'list-partern))
 
