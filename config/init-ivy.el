@@ -1,5 +1,4 @@
 (require 'ivy)
-(require 'flx)
 
 
 (add-hook 'after-init-hook 'ivy-mode)
