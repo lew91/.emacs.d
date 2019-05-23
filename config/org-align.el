@@ -103,8 +103,8 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
 
 
 
-  ;; org-mode 自动换行
-  (add-hook 'org-mode-hook 'toggle-truncate-lines)
+  ;; org-mode 自动换行  阅读代码时不太方便，暂时禁用
+  ;;(add-hook 'org-mode-hook 'toggle-truncate-lines)
 
   ;;中文与英文对齐
   (defun jakelew/set-font (english chinese english-size chinese-size)
