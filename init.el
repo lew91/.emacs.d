@@ -57,7 +57,7 @@
     (require 'init-ibuffer)
     (require 'init-window)
     (require 'init-smooth-scrolling)
-    (require 'aweshell)
+   ;; (require 'aweshell)
     (require 'init-session)
     (require 'init-key-bindings)           ; 以后增加快捷键绑定管理
 
@@ -80,6 +80,7 @@
          (require 'init-markdown)
          (require 'init-yasnippet)
          (require 'init-company-mode)
+         ;;(require 'init-ycmd)
          ;; ;; (require 'init-lsp)                   ；lsp 补全模式，不打算用于全局
          (require 'init-flycheck)
          (require 'init-ispell)                      ; 拼写检查，字典默认
