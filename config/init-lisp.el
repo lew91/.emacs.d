@@ -39,8 +39,8 @@
 (after-load 'lisp-mode
   (define-key emacs-lisp-mode-map (kbd "C-x C-e") 'sanityinc/eval-last-sexp-or-region))
 
-(when (maybe-require-package 'ipretty)
-  (add-hook 'after-init-hook 'ipretty-mode))
+(require 'ipretty)
+(add-hook 'after-init-hook 'ipretty-mode)
 
 (defun sanityinc/make-read-only (expression out-buffer-name)
   "Enable `view-mode' in the output buffer - if any - so it can be closed with `\"q\"."
@@ -100,9 +100,9 @@
 ;; ----------------------------------------------------------------------------
 ;; Automatic byte compilation
 ;; ----------------------------------------------------------------------------
-(when (maybe-require-package 'auto-compile)
-  (add-hook 'after-init-hook 'auto-compile-on-save-mode)
-  (add-hook 'after-init-hook 'auto-compile-on-load-mode))
+(require 'auto-compile)
+(add-hook 'after-init-hook 'auto-compile-on-save-mode)
+(add-hook 'after-init-hook 'auto-compile-on-load-mode)
 
 ;; ----------------------------------------------------------------------------
 ;; Load .el if newer than corresponding .elc
@@ -111,7 +111,7 @@
 
 
 
-(require-package 'immortal-scratch)
+(require 'immortal-scratch)
 (add-hook 'after-init-hook 'immortal-scratch-mode)
 
 
@@ -144,8 +144,8 @@
   "Hook run in all Lisp modes.")
 
 
-(when (maybe-require-package 'aggressive-indent)
-  (add-to-list 'sanityinc/lispy-modes-hook 'aggressive-indent-mode))
+(require 'aggressive-indent)
+(add-to-list 'sanityinc/lispy-modes-hook 'aggressive-indent-mode)
 
 (defun sanityinc/lisp-setup ()
   "Enable features useful in any Lisp mode."
@@ -178,7 +178,7 @@
 (add-to-list 'auto-mode-alist '("\\.emacs-project\\'" . emacs-lisp-mode))
 (add-to-list 'auto-mode-alist '("archive-contents\\'" . emacs-lisp-mode))
 
-(require-package 'cl-lib-highlight)
+(require 'cl-lib-highlight)
 (after-load 'lisp-mode
   (cl-lib-highlight-initialize))
 
@@ -216,7 +216,7 @@
 (advice-add 'magit-revert-buffers :around 'sanityinc/reverting)
 (advice-add 'vc-revert-buffer-internal :around 'sanityinc/reverting)
 
-(require-package 'macrostep)
+(require 'macrostep)
 
 (after-load 'lisp-mode
   (define-key emacs-lisp-mode-map (kbd "C-c e") 'macrostep-expand))
@@ -227,26 +227,25 @@
 (global-set-key (kbd "C-h K") 'find-function-on-key)
 
 ;; Extras for theme editing
-(when (maybe-require-package 'rainbow-mode)
-  (defun sanityinc/enable-rainbow-mode-if-theme ()
-    (when (and (buffer-file-name) (string-match-p "\\(color-theme-\\|-theme\\.el\\)" (buffer-file-name)))
-      (rainbow-mode)))
-  (add-hook 'emacs-lisp-mode-hook 'sanityinc/enable-rainbow-mode-if-theme)
-  (add-hook 'help-mode-hook 'rainbow-mode)
-  (after-load 'rainbow-mode
-    (diminish 'rainbow-mode)))
+(defun sanityinc/enable-rainbow-mode-if-theme ()
+  (when (and (buffer-file-name) (string-match-p "\\(color-theme-\\|-theme\\.el\\)" (buffer-file-name)))
+    (rainbow-mode)))
+(add-hook 'emacs-lisp-mode-hook 'sanityinc/enable-rainbow-mode-if-theme)
+(add-hook 'help-mode-hook 'rainbow-mode)
+(after-load 'rainbow-mode
+  (diminish 'rainbow-mode))
 
 
 
-(when (maybe-require-package 'highlight-quoted)
-  (add-hook 'emacs-lisp-mode-hook 'highlight-quoted-mode))
+(require 'highlight-quoted)
+(add-hook 'emacs-lisp-mode-hook 'highlight-quoted-mode)
 
 
-(when (maybe-require-package 'flycheck)
-  (require-package 'flycheck-package)
-  (after-load 'flycheck
-    (after-load 'elisp-mode
-      (flycheck-package-setup))))
+
+(require 'flycheck-package)
+(after-load 'flycheck
+  (after-load 'elisp-mode
+    (flycheck-package-setup)))
 
 
 
@@ -255,10 +254,7 @@
   (define-key ert-results-mode-map (kbd "g") 'ert-results-rerun-all-tests))
 
 
-(maybe-require-package 'cl-libify)
-
-(maybe-require-package 'cask-mode)
-
+(require 'cl-libify)
 
 
 
