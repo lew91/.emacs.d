@@ -4,6 +4,7 @@
 
 (require 'slime)
 (require 'slime-company)
+(require 'hippie-expand-slime)
 
 ;; auto-complete
 (after-load 'slime
