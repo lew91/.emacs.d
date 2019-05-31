@@ -2,7 +2,8 @@
 ;;(require 'flyspell)
 
 (when (executable-find ispell-program-name)
-  (add-hook 'prog-mode-hook 'flyspell-prog-mode))
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  (add-hook 'org-mode-hook 'flyspell-mode))
 
 (with-eval-after-load 'flyspell
   (setq flyspell-issue-message-flag nil)
