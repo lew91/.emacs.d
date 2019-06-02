@@ -1,9 +1,8 @@
 (require 'ycmd)
 
 (set-variable 'ycmd-server-command '("python3" "/users/jakelew/.vim/bundle/YouCompleteMe/third_party/ycmd/ycmd/"))
-(set-variable 'ycmd-global-config (expand-file-name "~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"))
-;;(add-hook 'C++-mode-hook 'ycmd-mode)
-;;(add-hook 'after-init-hook 'global-ycmd-mode)
+(set-variable 'ycmd-global-config (expand-file-name "~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"))  ;contained in vim directories
+
 
 (dolist (hook (list
                'c-mode-hook
@@ -14,7 +13,15 @@
                     (ycmd-mode)
                     )))
 
+(defun ycmd/manual-semantic-company-completer ()
+  "A useful function that can be bound, if users prefer to trigger company
+completion manually"
 
+  (interactive)
+  (company-cancel)
+  (let ((ycmd-force-semantic-completion (not (company-ycmd--in-include))))
+    (setq company-backend 'company-ycmd)
+    (company-manual-begin)))
 
 
 (require 'company-ycmd)

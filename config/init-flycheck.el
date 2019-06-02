@@ -12,6 +12,8 @@
 (dolist (hook (list
                'ruby-mode-hook
                'python-mode-hook
+               'c-mode-hook
+               'c++-mode-hook
                ))
   (add-hook hook '(lambda () (flycheck-mode 1))))
 

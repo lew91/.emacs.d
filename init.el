@@ -88,6 +88,7 @@
          (require 'init-slime)
          (require 'init-common-lisp)
          (require 'init-paredit)
+         (require 'init-ycmd)
          (require 'init-python)
          (require 'init-eldoc)
          (require 'init-dash)
