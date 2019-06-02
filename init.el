@@ -57,7 +57,7 @@
     (require 'init-ibuffer)
     (require 'init-window)
     (require 'init-smooth-scrolling)
-   ;; (require 'aweshell)
+    ;;(require 'aweshell)
     (require 'init-session)
     (require 'init-key-bindings)           ; 以后增加快捷键绑定管理
 
