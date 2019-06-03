@@ -5,25 +5,41 @@
 (setq dired-recursive-deletes 'always)  ;删除东西时不提示
 (setq dired-recursive-copies 'always) ;拷贝东西时不提示
 
+(setq dired-auto-revert-buffer t  ; Revert on re-visiting
+      dired-listing-switches "-alhF" ; better dired flags: '-l' is mandatory, '-a' shows all files, '-h' uses human-readable sizes, and '-F' appends file-type classifiers to file names ( for better highlighting)
+      dired-dwim-target t   ; auto-copy to other Dired split window
+      dired-ls-F-marks-symlinks t  ; -F marks links with @
+      )
+
 (when (featurep 'cocoa)
   (require 'osx-trash)
   (osx-trash-setup)
   (setq delete-by-moving-to-trash t))  ; osx delete file to trash
 
-
+(when (or (memq system-type '(gnu gnu/linux))
+          (string= (file-name-nondirectory insert-directory-program) "gls"))
+  ;; If we are on a GNU system or have GNU ls, add some more `ls' switches:
+  ;; `--group-directories-first' lists directories before files, and `-v'
+  ;; sorts numbers in file names naturally, i.e. "image1" goes before
+  ;; "image02"
+  (setq dired-listing-switches
+        (concat dired-listing-switches " --group-directories-first -v")))
 
 (let ((gls "/usr/local/bin/gls"))       ; 因为使用了'cache-path-from-shell.el'，全局初始化了一次'exec-path-from-shell'。这里设置成从绝对路径调用'gls'
   (if (file-exists-p gls)
       (setq insert-directory-program gls)))
 
-(setq-default dired-dwim-target t)
+(defun dired-jump-kill-buffer (&rest)
+  (interactive)
+  (let ((buf (current-buffer)))
+    (dired-jump)
+    (kill-buffer buf)))
 
-
-(after-load
+(after-load  'dired
   (setq dired-recursive-deletes 'top)
   (define-key dired-mode-map [mouse-2] 'dired-find-file)
   (define-key dired-mode-map (kbd "C-c C-q") 'wdired-change-to-wdired-mode)
-)
+  )
 
 
 (require 'diff-hl)
