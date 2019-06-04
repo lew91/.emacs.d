@@ -7,25 +7,15 @@
 
 (when (featurep 'cocoa)
   (require 'grab-mac-link))
-
 (require 'org-cliplink)
-
 (require 'hl-todo)
-(dolist (hook (list
-               'prog-mode-hook
-               'org-mode-hook
-               'markdown-mode-hook
-               ))
-  (add-hook hook '(lambda ()
-                    (hl-todo-mode))))
-
-
-(define-key global-map (kbd "C-c l") 'org-store-link)
-(define-key global-map (kbd "C-c a") 'org-agenda)
+(require 'writeroom-mode)
+(require 'org-pomodoro)
+(require 'org-bullets)
 
 
 ;; Various preferences
-(setq ;;org-log-done t                 ; 设置了后不能自动缩进？
+(setq org-log-done 'time                 ; record the time that a todo was archived
       org-startup-indented t
       org-edit-timestamp-down-means-later t
       org-hide-emphasis-markers t
@@ -35,6 +25,74 @@
       org-html-validation-link nil
       org-export-kill-product-buffer-when-displayed t
       org-tags-column 80)
+
+(setq org-refile-use-cache nil)
+(setq org-support-shift-select t)
+
+(setq org-capture-templates
+      `(("t" "todo" entry (file "")  ; "" => `org-default-notes-file'
+         "* NEXT %?\n%U\n" :clock-resume t)
+        ("n" "note" entry (file "")
+         "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
+        ))
+
+;;; Org clock
+
+;; Save the running clock and all clock history when exiting Emacs, load it on startup
+(after-load 'org
+  (org-clock-persistence-insinuate))
+(setq org-clock-persist t)
+(setq org-clock-in-resume t)
+
+;; Save clock data and notes in the LOGBOOK drawer
+(setq org-clock-into-drawer t)
+;; Save state changes in the LOGBOOK drawer
+(setq org-log-into-drawer t)
+;; Removes clocked tasks with 0:00 duration
+(setq org-clock-out-remove-zero-time-clocks t)
+
+;; Show clock sums as hours and minutes, not "n days" etc.
+(setq org-time-clocksum-format
+      '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+
+;;; Show the clocked-in task - if any - in the header line
+(defun sanityinc/show-org-clock-in-header-line ()
+  (setq-default header-line-format '((" " org-mode-line-string " "))))
+
+(defun sanityinc/hide-org-clock-from-header-line ()
+  (setq-default header-line-format nil))
+
+(add-hook 'org-clock-in-hook 'sanityinc/show-org-clock-in-header-line)
+(add-hook 'org-clock-out-hook 'sanityinc/hide-org-clock-from-header-line)
+(add-hook 'org-clock-cancel-hook 'sanityinc/hide-org-clock-from-header-line)
+
+(after-load 'org-clock
+  (define-key org-clock-mode-line-map [header-line mouse-2] 'org-clock-goto)
+  (define-key org-clock-mode-line-map [header-line mouse-1] 'org-clock-menu))
+
+;;; Archiving
+
+;;(setq org-archive-mark-done nil)
+;;(setq org-archive-location "%s_archive::* Archive")
+
+
+(setq org-pomodoro-keep-killed-pomodoro-time t)
+(after-load 'org-agenda
+  (define-key org-agenda-mode-map (kbd "P") 'org-pomodoro))
+
+
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode)))
+(add-hook 'org-agenda-mode-hook 'hl-line-mode)
+
+(dolist (hook (list
+               'prog-mode-hook
+               'org-mode-hook
+               'markdown-mode-hook
+               ))
+  (add-hook hook '(lambda ()
+                    (hl-todo-mode))))
+
+
 
 ;; Lots of stuff from http://doc.norang.ca/org-mode.html
 ;; TODO: fail gracefully
@@ -82,7 +140,7 @@
             (add-hook 'org-agenda-mode-hook
                       (lambda () (add-hook 'window-configuration-change-hook 'org-agenda-align-tags nil t))))
 
-(require 'writeroom-mode)
+
 
 (define-minor-mode prose-mode
   "Set up a buffer for prose editing.
@@ -124,23 +182,6 @@ typical word processor."
 ;;(add-hook 'org-mode-hook 'buffer-face-mode)
 
 
-(setq org-support-shift-select t)
-
-;;; Capturing
-
-(global-set-key (kbd "C-c c") 'org-capture)
-
-(setq org-capture-templates
-      `(("t" "todo" entry (file "")  ; "" => `org-default-notes-file'
-         "* NEXT %?\n%U\n" :clock-resume t)
-        ("n" "note" entry (file "")
-         "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
-        ))
-
-
-;;; Refiling
-
-(setq org-refile-use-cache nil)
 
 ;; Targets include this file and any file contributing to the agenda - up to 5 levels deep
 (setq org-refile-targets '((nil :maxlevel . 5) (org-agenda-files :maxlevel . 5)))
@@ -279,80 +320,87 @@ typical word processor."
             )))))
 
 
-(add-hook 'org-agenda-mode-hook 'hl-line-mode)
-
-;;; Org clock
-
-;; Save the running clock and all clock history when exiting Emacs, load it on startup
 (after-load 'org
-  (org-clock-persistence-insinuate))
-(setq org-clock-persist t)
-(setq org-clock-in-resume t)
 
-;; Save clock data and notes in the LOGBOOK drawer
-(setq org-clock-into-drawer t)
-;; Save state changes in the LOGBOOK drawer
-(setq org-log-into-drawer t)
-;; Removes clocked tasks with 0:00 duration
-(setq org-clock-out-remove-zero-time-clocks t)
+  ;;(require 'org-tempo) ; Require from org 9 on-wards for old template expansion
+  ;; Reset the org-template expnsion system, this is need after upgrading to org 9 for some reason
+  (setq org-structure-template-alist (eval (car (get 'org-structure-template-alist 'standard-value))))
 
-;; Show clock sums as hours and minutes, not "n days" etc.
-(setq org-time-clocksum-format
-      '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+  (eval-and-compile
+    (defun hot-expand (str &optional mod header)
+      "Expand org template.
+STR is a structure template string recognized by org like <s. MOD is a
+string with additional parameters to add the begin line of the
+structure element. HEADER string includes more parameters that are
+prepended to the element after the #+HEADER: tag."
+      (let (text)
+        (when (region-active-p)
+          (setq text (buffer-substring (region-beginning) (region-end)))
+          (delete-region (region-beginning) (region-end)))
+        (when header (insert "#+HEADER: " header) (forward-line))
+        (insert str)
+        (org-try-structure-completion)
+        ;;(org-tempo-complete-tag)
+        (when mod (insert mod) (forward-line))
+        (when text (insert text)))))
+
+  (defhydra hydra-org-template (:color blue :hint nil)
+    "
+_c_enter  qu_o_te     _e_macs-lisp    _L_aTeX:
+_l_atex   _E_xample   p_y_thon        _i_ndex:
+_a_scii   _v_erse     ip_Y_thon       _I_NCLUDE:
+_s_rc     _g_o        _r_uby          _H_TML:
+_h_tml    _S_HELL     _p_erl          _A_SCII:
+^ ^       ^ ^         _P_erl tangled  plant_u_ml
+"
+    ("s" (hot-expand "<s"))
+    ("E" (hot-expand "<e"))
+    ("o" (hot-expand "<q"))
+    ("v" (hot-expand "<v"))
+    ("c" (hot-expand "<c"))
+    ("l" (hot-expand "<l"))
+    ("h" (hot-expand "<h"))
+    ("a" (hot-expand "<a"))
+    ("L" (hot-expand "<L"))
+    ("i" (hot-expand "<i"))
+    ("e" (hot-expand "<s" "emacs-lisp"))
+    ("y" (hot-expand "<s" "python :results output"))
+    ("Y" (hot-expand "<s" "ipython :session :exports both :results raw drawer\n$0"))
+    ("g" (hot-expand "<s" "go :imports '\(\"fmt\"\)"))
+    ("p" (hot-expand "<s" "perl"))
+    ("r" (hot-expand "<s" "ruby"))
+    ("S" (hot-expand "<s" "sh"))
+    ("u" (hot-expand "<s" "plantuml :file CHANGE.png"))
+    ("P" (progn
+           (insert "#+HEADERS: :results output :exports both :shebang \"#!/usr/bin/env perl\"\n")
+           (hot-expand "<s" "perl")))
+    ("I" (hot-expand "<I"))
+    ("H" (hot-expand "<H"))
+    ("A" (hot-expand "<A"))
+    ("<" self-insert-command "ins")
+    ("q" nil "quit"))
 
 
-;;; Show the clocked-in task - if any - in the header line
-(defun sanityinc/show-org-clock-in-header-line ()
-  (setq-default header-line-format '((" " org-mode-line-string " "))))
+  (bind-key "<"
+            (lambda () (interactive)
+              (if (or (region-active-p) (looking-back "^\s*" 1))
+                  (hydra-org-template/body)
+                (self-insert-command 1)))
+            org-mode-map)
 
-(defun sanityinc/hide-org-clock-from-header-line ()
-  (setq-default header-line-format nil))
+  (require 'os-md nil t)
+  (defadvice org-html-paragraph (before fsh-org-html-paragraph-advice
+                                        (paragraph contents info) activate)
+    "Join consecutive Chinese lines into a single long line without unwanted space when exporting 'org-mode' to html."
+    (let ((fixed-contents)
+          (orig-contents (ad-get-arg 1))
+          (reg-han "[[:multibyte:]]"))
+      (setq fixed-contents (replace-regexp-in-string
+                            ;; (concat "\\(" reg-han "\\) *\n *\\(" reg-han "\\)")
+                            (concat "\\(" reg-han "\\) *\n *")
+                            "\\1" orig-contents))
+      (ad-set-arg 1 fixed-contents))))
 
-(add-hook 'org-clock-in-hook 'sanityinc/show-org-clock-in-header-line)
-(add-hook 'org-clock-out-hook 'sanityinc/hide-org-clock-from-header-line)
-(add-hook 'org-clock-cancel-hook 'sanityinc/hide-org-clock-from-header-line)
-
-(after-load 'org-clock
-  (define-key org-clock-mode-line-map [header-line mouse-2] 'org-clock-goto)
-  (define-key org-clock-mode-line-map [header-line mouse-1] 'org-clock-menu))
-
-;; TODO: warn about inconsistent items, e.g. TODO inside non-PROJECT
-;; TODO: nested projects!
-
-
-;;; Archiving
-
-;;(setq org-archive-mark-done nil)
-;;(setq org-archive-location "%s_archive::* Archive")
-
-
-
-
-(require 'org-pomodoro)
-(setq org-pomodoro-keep-killed-pomodoro-time t)
-(after-load 'org-agenda
-  (define-key org-agenda-mode-map (kbd "P") 'org-pomodoro))
-
-
-;; ;; Show iCal calendars in the org agenda
-;; (when (and (featurep 'cocoa) (require 'org-mac-iCal nil t))
-;;   (setq org-agenda-include-diary t
-;;         org-agenda-custom-commands
-;;         '(("I" "Import diary from iCal" agenda ""
-;;            ((org-agenda-mode-hook #'org-mac-iCal)))))
-
-;;   (add-hook 'org-agenda-cleanup-fancy-diary-hook
-;;             (lambda ()
-;;               (goto-char (point-min))
-;;               (save-excursion
-;;                 (while (re-search-forward "^[a-z]" nil t)
-;;                   (goto-char (match-beginning 0))
-;;                   (insert "0:00-24:00 ")))
-;;               (while (re-search-forward "^ [a-z]" nil t)
-;;                 (goto-char (match-beginning 0))
-;;                 (save-excursion
-;;                   (re-search-backward "^[0-9]+:[0-9]+-[0-9]+:[0-9]+ " nil t))
-;;                 (insert (match-string 0))))))
 
 (after-load 'org
   (org-babel-do-load-languages
