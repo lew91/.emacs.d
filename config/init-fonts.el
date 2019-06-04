@@ -8,6 +8,8 @@
     ;; specify font for Chinese characters
     (when (member "WenQuanYi Zen Hei" (font-family-list))
       (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Zen Hei"))
+    ;; change scale, so that Chinese characters width = 2 * English characters width
+    (setq face-font-rescale-alist '(("Source Code Pro" . 1.0) ("WenQuanYi Zen Hei" . 1.2)))
     )
 
    ((eq system-type 'windows-nt)
