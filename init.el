@@ -47,7 +47,7 @@
     (require 'init-fonts)              ; 设置字体集
     (require 'init-grep)
     (require 'init-smex)
-    (require 'init-editing-utils)
+    (require 'init-editing)
     (require 'init-hippie-expand)
     (require 'init-visual-regexp)
     (require 'init-dired)
@@ -84,7 +84,7 @@
          (require 'init-flycheck)
          (require 'init-ispell)                      ; 拼写检查，字典默认
          (require 'init-origami)                   ; 代码折叠设置
-         (require 'init-lisp)
+         (require 'init-elisp)
          (require 'init-slime)
          (require 'init-common-lisp)
          (require 'init-paredit)
