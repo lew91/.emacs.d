@@ -100,17 +100,6 @@ and `defcustom' forms reset their default values."
 
 (advice-add 'auto-compile-byte-compile :filter-return #'lew/auto-compile-load-after-compile)
 
-(defun lew/maybe-remove-elc (&rest _)
-  "If reverting from VC, delete any .elc file that will now be out of sync."
-  (when sanityinc/vc-reverting
-    (when (and (eq 'emacs-lisp-mode major-mode)
-               buffer-file-name
-               (string= "el" (file-name-extension buffer-file-name)))
-      (let ((elc (concat buffer-file-name "c")))
-        (when (file-exists-p elc)
-          (message "Removing out-of-sync elc file %s" (file-name-nondirectory elc))
-          (delete-file elc))))))
-
 ;;;###autoload
 (defun lew/pp-eval-expression (expression)
   "Same as 'pp-eval-expression' but without \"Evaluating..\" message."
@@ -118,7 +107,6 @@ and `defcustom' forms reset their default values."
    (list (read--expression "Eval: ")))
   (setq values (cons (eval expression) values))
   (pp-display-expression (car values) "*Pp Eval Output*"))
-
 
 
 ;;;###autoload

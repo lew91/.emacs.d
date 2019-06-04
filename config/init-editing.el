@@ -126,7 +126,7 @@
   (let ((ppss (syntax-ppss)))
     (cond ((elt ppss 3)
            (goto-char (elt ppss 8))
-           (sanityinc/backward-up-sexp (1- arg)))
+           (lew/backward-up-sexp (1- arg)))
           ((backward-up-list arg)))))
 
 (global-set-key [remap backward-up-list] 'lew/backward-up-sexp) ; C-M-u, C-M-up
