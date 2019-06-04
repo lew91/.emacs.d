@@ -32,7 +32,7 @@
 
 (defun sanityinc/slime-repl-setup ()
   "Mode setup function for slime REPL."
-  (sanityinc/lisp-setup)
+  (enable-paredit-mode)
   (set-up-slime-hippie-expand))
 
 (after-load 'slime-repl
