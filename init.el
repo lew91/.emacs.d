@@ -77,6 +77,7 @@
          (require 'init-org)                         ; 基本设定
          (require 'org-toolkits)                     ; 自定义一些很有用的函数
          (require 'init-markdown)
+         (require 'init-tex)
          (require 'init-yasnippet)
          (require 'init-company-mode)
          ;; ;; (require 'init-lsp)                   ；lsp 补全模式，不打算用于全局
