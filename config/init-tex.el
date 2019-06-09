@@ -28,14 +28,6 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 
-(after-load 'tex-mode
-  (font-lock-add-keywords 'latex-mode
-                          '((,(rx "\\"
-                                  symbol-start
-                                  "fx" (1+ (or syntax word) (syntax symbol))
-                                  symbol-end)
-                             . font-lock-warning-face))))
-
 
 (setq reftex-plug-into-AUCTeX t
         ;; Automatically derive labels, and prompt for confirmation
