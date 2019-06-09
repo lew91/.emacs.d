@@ -13,6 +13,8 @@
 (require 'org-pomodoro)
 (require 'org-bullets)
 (require 'cal-china-x)
+(require 'ox-md)      ; Markdown back-end
+(require 'ox-latex)
 
 
 ;; Various preferences
@@ -467,7 +469,36 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
                             "\\1" orig-contents))
       (ad-set-arg 1 fixed-contents))))
 
+;; Exporting configuration
+;; When the export process prompt there are no file such as wrapfig.sty etc. We can just install those missing files. for example:
+;; For Max OS X
+;; $ cd /Library/Tex/texbin
+;; $ sudo tlmgr update --self
+;; $ sudo tlmgr install wrapfig
+;; $ sudo tlmgr install capt-of
+(setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f" "xelatex -interaction nonstopmode %f"))
+(setq org-export-latex-listings t)
+(setq org-latex-with-hyperref nil)
+(add-to-list 'org-latex-packages-alist "\\hypersetup{setpagesize=false}" t)
+(add-to-list 'org-latex-packages-alist "\\hypersetup{colorlinks=true}" t)
+(add-to-list 'org-latex-packages-alist "\\hypersetup{linkcolor=blue}" t)
 
+(add-to-list 'org-latex-classes
+             '("ctexarticle"
+               "\\documentclass{ctexarticle}
+[NO-DEFAULT-PACKAGES]
+\\usepackage[dvipdfmx]{graphicx}
+\\usepackage[dvipdfmx]{color}
+\\usepackage[dvipdfmx]{hyperref}
+\\usepackage{pxjahyper}"
+  ("\\section{%s}" . "\\section*{%s}")
+  ("\\subsection{%s}" . "\\subsection*{%s}")
+  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+  ("\\paragraph{%s}" . "\\paragraph*{%s}")
+  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+
+;; org babel settings
 (after-load 'org
   (org-babel-do-load-languages
    'org-babel-load-languages
