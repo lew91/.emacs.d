@@ -476,26 +476,13 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
 ;; $ sudo tlmgr update --self
 ;; $ sudo tlmgr install wrapfig
 ;; $ sudo tlmgr install capt-of
-(setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f" "xelatex -interaction nonstopmode %f"))
+;;(setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f" "xelatex -interaction nonstopmode %f"))
 (setq org-export-latex-listings t)
 (setq org-latex-with-hyperref nil)
 (add-to-list 'org-latex-packages-alist "\\hypersetup{setpagesize=false}" t)
 (add-to-list 'org-latex-packages-alist "\\hypersetup{colorlinks=true}" t)
 (add-to-list 'org-latex-packages-alist "\\hypersetup{linkcolor=blue}" t)
 
-(add-to-list 'org-latex-classes
-             '("ctexarticle"
-               "\\documentclass{ctexarticle}
-[NO-DEFAULT-PACKAGES]
-\\usepackage[dvipdfmx]{graphicx}
-\\usepackage[dvipdfmx]{color}
-\\usepackage[dvipdfmx]{hyperref}
-\\usepackage{pxjahyper}"
-  ("\\section{%s}" . "\\section*{%s}")
-  ("\\subsection{%s}" . "\\subsection*{%s}")
-  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-  ("\\paragraph{%s}" . "\\paragraph*{%s}")
-  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
 
 ;; org babel settings
