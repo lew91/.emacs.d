@@ -34,3 +34,6 @@
 [submodule "extensions/grep-dired"]
 	path = extensions/grep-dired
 	url = https://github.com/manateelazycat/grep-dired.git
+[submodule "extensions/cyberpunk-theme"]
+	path = extensions/cyberpunk-theme
+	url = https://github.com/n3mo/cyberpunk-theme.el.git
