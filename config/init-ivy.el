@@ -26,7 +26,7 @@
 
     (define-key ivy-occur-mode-map (kbd "C-c C-q") #'ivy-wgrep-change-to-wgrep-mode)
 
-    (defun sanityinc/enable-ivy-flx-matching ()
+    (defun lew/enable-ivy-flx-matching ()
     "Make `ivy' matching work more like IDO."
     (interactive)
     (setq-default ivy-re-builders-alist
@@ -48,7 +48,7 @@
             ((executable-find "pt") 'counsel-pt)
             ((executable-find "ack") 'counsel-ack))))
       (when search-function
-        (defun sanityinc/counsel-search-project (initial-input &optional use-current-dir)
+        (defun lew/counsel-search-project (initial-input &optional use-current-dir)
           "Search using `counsel-rg' or similar from the project root for INITIAL-INPUT.
 If there is no project root, or if the prefix argument
 USE-CURRENT-DIR is set, then search from the current directory
@@ -65,16 +65,16 @@ instead."
     (after-load 'ivy
       (add-to-list 'ivy-height-alist (cons 'counsel-ag 20)))
 
-(global-set-key (kbd "M-?") 'sanityinc/counsel-search-project)
+(global-set-key (kbd "M-?") 'lew/counsel-search-project)
 
 (require 'swiper)
 (after-load 'ivy
-    (defun sanityinc/swiper-at-point (sym)
+    (defun lew/swiper-at-point (sym)
       "Use `swiper' to search for the symbol at point."
       (interactive (list (thing-at-point 'symbol)))
       (swiper sym))
 
-    (define-key ivy-mode-map (kbd "M-s /") 'sanityinc/swiper-at-point))
+    (define-key ivy-mode-map (kbd "M-s /") 'lew/swiper-at-point))
 
 (require 'ivy-xref)
 (setq xref-show-xrefs-function 'ivy-xref-show-xrefs)

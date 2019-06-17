@@ -59,15 +59,15 @@
       '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
 
 ;;; Show the clocked-in task - if any - in the header line
-(defun sanityinc/show-org-clock-in-header-line ()
+(defun lew/show-org-clock-in-header-line ()
   (setq-default header-line-format '((" " org-mode-line-string " "))))
 
-(defun sanityinc/hide-org-clock-from-header-line ()
+(defun lew/hide-org-clock-from-header-line ()
   (setq-default header-line-format nil))
 
-(add-hook 'org-clock-in-hook 'sanityinc/show-org-clock-in-header-line)
-(add-hook 'org-clock-out-hook 'sanityinc/hide-org-clock-from-header-line)
-(add-hook 'org-clock-cancel-hook 'sanityinc/hide-org-clock-from-header-line)
+(add-hook 'org-clock-in-hook 'lew/show-org-clock-in-header-line)
+(add-hook 'org-clock-out-hook 'lew/hide-org-clock-from-header-line)
+(add-hook 'org-clock-cancel-hook 'lew/hide-org-clock-from-header-line)
 
 (after-load 'org-clock
   (define-key org-clock-mode-line-map [header-line mouse-2] 'org-clock-goto)
@@ -99,7 +99,7 @@
 
 ;; Lots of stuff from http://doc.norang.ca/org-mode.html
 ;; TODO: fail gracefully
-(defun sanityinc/grab-ditaa (url jar-name)
+(defun lew/grab-ditaa (url jar-name)
   "Download URL and extract JAR-NAME as `org-ditaa-jar-path'."
   ;; TODO: handle errors
   (message "Grabbing %s for org." jar-name)
@@ -121,7 +121,7 @@
           (url "http://jaist.dl.sourceforge.net/project/ditaa/ditaa/0.9/ditaa0_9.zip"))
       (setq org-ditaa-jar-path (expand-file-name jar-name (file-name-directory user-init-file)))
       (unless (file-exists-p org-ditaa-jar-path)
-        (sanityinc/grab-ditaa url jar-name)))))
+        (lew/grab-ditaa url jar-name)))))
 
 (after-load 'ob-plantuml
   (let ((jar-name "plantuml.jar")
@@ -195,18 +195,18 @@ typical word processor."
 (advice-add 'org-refile :after (lambda (&rest _) (org-save-all-org-buffers)))
 
 ;; Exclude DONE state tasks from refile targets
-(defun sanityinc/verify-refile-target ()
+(defun lew/verify-refile-target ()
   "Exclude todo keywords with a done state from refile targets."
   (not (member (nth 2 (org-heading-components)) org-done-keywords)))
-(setq org-refile-target-verify-function 'sanityinc/verify-refile-target)
+(setq org-refile-target-verify-function 'lew/verify-refile-target)
 
-(defun sanityinc/org-refile-anywhere (&optional goto default-buffer rfloc msg)
+(defun lew/org-refile-anywhere (&optional goto default-buffer rfloc msg)
   "A version of `org-refile' which allows refiling to any subtree."
   (interactive "P")
   (let ((org-refile-target-verify-function))
     (org-refile goto default-buffer rfloc msg)))
 
-(defun sanityinc/org-agenda-refile-anywhere (&optional goto rfloc no-update)
+(defun lew/org-agenda-refile-anywhere (&optional goto rfloc no-update)
   "A version of `org-agenda-refile' which allows refiling to any subtree."
   (interactive "P")
   (let ((org-refile-target-verify-function))
