@@ -7,10 +7,7 @@
 
 ;;; Code:
 
-
-;;----------------------------------------------------------------------------
 ;; Navigate window layouts with "C-c <left>" and "C-c <right>"
-;;--------------------------------------------------------
 (require 'winner)
 (add-hook 'after-init-hook 'winner-mode)
 
@@ -21,9 +18,8 @@
 (global-set-key (kbd "C-x o") 'switch-window)
 
 
-;;----------------------------------------------------------------------------
+
 ;; When splitting window, show (other-buffer) in the new window
-;;----------------------------------------------------------------------------
 (defun split-window-func-with-other-buffer (split-function)
   (lambda (&optional arg)
     "Split this window and switch to the new window unless ARG is provided."
@@ -37,7 +33,8 @@
 (global-set-key (kbd "C-x 2") (split-window-func-with-other-buffer 'split-window-vertically))
 (global-set-key (kbd "C-x 3") (split-window-func-with-other-buffer 'split-window-horizontally))
 
-(defun sanityinc/toggle-delete-other-windows ()
+
+(defun lew/toggle-delete-other-windows ()
   "Delete other windows in frame if any, or restore previous window config."
   (interactive)
   (if (and winner-mode
@@ -45,11 +42,10 @@
       (winner-undo)
     (delete-other-windows)))
 
-(global-set-key (kbd "C-x 1") 'sanityinc/toggle-delete-other-windows)
+(global-set-key (kbd "C-x 1") 'lew/toggle-delete-other-windows)
 
-;;----------------------------------------------------------------------------
+
 ;; Rearrange split windows
-;;----------------------------------------------------------------------------
 (defun split-window-horizontally-instead ()
   "Kill any other windows and re-split such that the current window is on the top half of the frame."
   (interactive)
@@ -71,37 +67,31 @@
 (global-set-key (kbd "C-x |") 'split-window-horizontally-instead)
 (global-set-key (kbd "C-x _") 'split-window-vertically-instead)
 
-
-;; Borrowed from http://postmomentum.ch/blog/201304/blog-on-emacs
-(defun sanityinc/split-window()
-  "Split the window to see the most recent buffer in the other window.
-Call a second time to restore the original window configuration."
+
+;; http://www.emacswiki.org/emacs/TransposeWindows
+(defun lew/rotate-windows ()
+  "Rotate your windows"
   (interactive)
-  (if (eq last-command 'sanityinc/split-window)
-      (progn
-        (jump-to-register :sanityinc/split-window)
-        (setq this-command 'sanityinc/unsplit-window))
-    (window-configuration-to-register :sanityinc/split-window)
-    (switch-to-buffer-other-window nil)))
-
-(global-set-key (kbd "<f7>") 'sanityinc/split-window)
-
-
-
-(defun sanityinc/toggle-current-window-dedication ()
-  "Toggle whether the current window is dedicated to its current buffer."
-  (interactive)
-  (let* ((window (selected-window))
-         (was-dedicated (window-dedicated-p window)))
-    (set-window-dedicated-p window (not was-dedicated))
-    (message "Window %sdedicated to %s"
-             (if was-dedicated "no longer " "")
-             (buffer-name))))
-
-(global-set-key (kbd "C-c <down>") 'sanityinc/toggle-current-window-dedication)
+  (cond
+   ((not (> (count-windows) 1))
+    (message "You can't rotate a single window!"))
+   (t
+    (let ((i 1)
+          (num-windows (count-windows)))
+      (while  (< i num-windows)
+        (let* ((w1 (elt (window-list) i))
+               (w2 (elt (window-list) (+ (% i num-windows) 1)))
+               (b1 (window-buffer w1))
+               (b2 (window-buffer w2))
+               (s1 (window-start w1))
+               (s2 (window-start w2)))
+          (set-window-buffer w1 b2)
+          (set-window-buffer w2 b1)
+          (set-window-start w1 s2)
+          (set-window-start w2 s1)
+          (setq i (1+ i))))))))
 
 
-
 (unless (memq window-system '(nt w32))
   (windmove-default-keybindings 'control))
 
