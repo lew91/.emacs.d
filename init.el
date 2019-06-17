@@ -80,7 +80,7 @@
          (require 'init-markdown)
          (require 'init-tex)
          (require 'init-yasnippet)
-         (require 'init-company-mode)
+         (require 'init-company)
          ;; ;; (require 'init-lsp)                   ；lsp 补全模式，不打算用于全局
          (require 'init-flycheck)
          (require 'init-ispell)                      ; 拼写检查，字典默认

@@ -1,33 +1,29 @@
-;;; init-company.el --- Completion with company -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
-
-;; WAITING: haskell-mode sets tags-table-list globally, breaks tags-completion-at-point-function
-;; TODO Default sort order should place [a-z] before punctuation
-
 (require 'company)
 (require 'company-quickhelp)
 
-(setq tab-always-indent 'complete)
-(add-to-list 'completion-styles 'initials t)
 
-
-
-(add-hook 'after-init-hook 'global-company-mode)
+;; Config for company mode.
+(add-hook 'prog-mode-hook 'company-mode)
+(setq company-idle-delay 0.2)   ; set the completion menu pop-up delay
+(setq company-minimum-prefix-length 1) ; pop up a completion menu by tapping a character
+(setq company-show-numbers nil)   ; do not display numbers on the left
+(setq company-require-match nil) ; allow input string that do not match candidate words
 
 (after-load 'company
   (dolist (backend '(company-eclim company-semantic))
-    (delq backend company-backends))
-  (diminish 'company-mode)
-  ;;(define-key company-mode-map (kbd "M-/") 'company-complete)
-  ;;(define-key company-active-map (kbd "M-/") 'company-other-backend)
-  (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous)
-  (setq-default company-dabbrev-other-buffers 'all
-                company-tooltip-align-annotations t))
+    (delq backend company-backends)))
+
+(define-key company-mode-map (kbd "M-/") 'company-complete)
+(define-key company-active-map (kbd "M-/") 'company-other-backend)
+(define-key company-active-map (kbd "C-n") 'company-select-next)
+(define-key company-active-map (kbd "C-p") 'company-select-previous)
+(setq-default company-dabbrev-other-buffers 'all
+             company-tooltip-align-annotations t)
 (global-set-key (kbd "M-C-/") 'company-complete)
 
-(add-hook 'company-mode-hook 'company-quickhelp-mode)
+(with-eval-after-load 'company
+  (setq company-frontends (delq 'company-echo-metadata-frontend company-frontends))
+  (define-key company-active-map (kbd "M-h") 'company-quickhelp-manual-begin))
 
 ;; Suspend page-break-lines-mode while company menu is active
 ;; (see https://github.com/company-mode/company-mode/issues/416)
@@ -46,20 +42,18 @@
     (add-hook 'company-completion-started-hook 'sanityinc/page-break-lines-disable)
     (add-hook 'company-after-completion-hook 'sanityinc/page-break-lines-maybe-reenable)))
 
+
+
 ;; Add yasnippet support for all company backends.
-;;(after-load yasnippet
-;;(defvar company-mode/enable-yas t
-;;  "Enable yasnippet for all backends.")
+(defvar company-mode/enable-yas t
+  "Enable yasnippet for all backends.")
 
-;;(defun company-mode/backend-with-yas (backend)
-;;  (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
-;;      backend
-;;    (append (if (consp backend) backend (list backend))
-;;            '(:with company-yasnippet))))
+(defun company-mode/backend-with-yas (backend)
+  (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+      backend
+    (append (if (consp backend) backend (list backend))
+            '(:with company-yasnippet))))
 
-;;(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends)))
-
-
+(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 
 (provide 'init-company)
-;;; init-company.el ends here
