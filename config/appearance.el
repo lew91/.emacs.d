@@ -65,15 +65,6 @@
 
 
 
-;;; Whitespace
-(setq-default show-trailing-whitespace nil)
-(defun sanityinc/show-trailing-whitespace ()
-  "Enable display of trailing whitespace in this buffer."
-  (setq-local show-trailing-whitespace t))
-
-(dolist (hook '(prog-mode-hook text-mode-hook conf-mode-hook))
-  (add-hook hook 'sanityinc/show-trailing-whitespace))
-
 ;; Misc
 
 ;;(autoload 'zap-to-char "misc"
