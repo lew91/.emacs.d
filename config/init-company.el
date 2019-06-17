@@ -23,7 +23,7 @@
 
 (with-eval-after-load 'company
   (setq company-frontends (delq 'company-echo-metadata-frontend company-frontends))
-  (define-key company-active-map (kbd "M-h") 'company-quickhelp-manual-begin))
+  (define-key company-active-map (kbd "C-c M-h") 'company-quickhelp-manual-begin))
 
 ;; Suspend page-break-lines-mode while company menu is active
 ;; (see https://github.com/company-mode/company-mode/issues/416)
