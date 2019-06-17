@@ -8,7 +8,7 @@
 
 ;; auto-complete
 (after-load 'slime
-    (slime-setup '(slime-company)))
+  (slime-setup '(slime-company)))
 
 ;; package.el compiles the contrib subdir, but the compilation order
 ;; causes problems, so we remove the .elc files there. See
@@ -16,7 +16,7 @@
 ;;(mapc #'delete-file
 ;;      (file-expand-wildcards (concat user-emacs-directory "elpa/slime-2*/contrib/*.elc")))
 
-(defun sanityinc/slime-setup ()
+(defun lew/slime-setup ()
   "Mode setup function for slime lisp buffers."
   (set-up-slime-hippie-expand))
 
@@ -28,9 +28,9 @@
     (slime-setup (append '(slime-repl slime-fuzzy) extras)))
   (setq slime-complete-symbol*-fancy t)
   (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
-  (add-hook 'slime-mode-hook 'sanityinc/slime-setup))
+  (add-hook 'slime-mode-hook 'lew/slime-setup))
 
-(defun sanityinc/slime-repl-setup ()
+(defun lew/slime-repl-setup ()
   "Mode setup function for slime REPL."
   (enable-paredit-mode)
   (set-up-slime-hippie-expand))
@@ -43,7 +43,21 @@
   ;; Bind TAB to `indent-for-tab-command', as in regular Slime buffers.
   (define-key slime-repl-mode-map (kbd "TAB") 'indent-for-tab-command)
 
-  (add-hook 'slime-repl-mode-hook 'sanityinc/slime-repl-setup))
+  (add-hook 'slime-repl-mode-hook 'lew/slime-repl-setup))
+
+(defun lew/slime-eval-sexp-of-line ()
+  "Evaluate current line."
+  (interactive)
+  (move-end-of-line 1)
+  (slime-eval-last-expression))
+
+(defun lew/cl-eval-current-form ()
+  "Find and evaluate the current def* or set* command."
+  (interactive)
+  (save-excursion
+    (search-backward-regexp "(def\\|(set")
+    (forward-list)
+    (call-interactively 'slime-eval-last-expression)))
 
 
 (provide 'init-slime)
