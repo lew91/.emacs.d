@@ -17,13 +17,15 @@
 (define-key company-active-map (kbd "M-/") 'company-other-backend)
 (define-key company-active-map (kbd "C-n") 'company-select-next)
 (define-key company-active-map (kbd "C-p") 'company-select-previous)
+(define-key company-active-map (kbd "M-h") 'company-quickhelp-manual-begin)
 (setq-default company-dabbrev-other-buffers 'all
              company-tooltip-align-annotations t)
 (global-set-key (kbd "M-C-/") 'company-complete)
 
-(with-eval-after-load 'company
-  (setq company-frontends (delq 'company-echo-metadata-frontend company-frontends))
-  (define-key company-active-map (kbd "C-c M-h") 'company-quickhelp-manual-begin))
+(setq company-quickhelp-delay nil)  ;; manually popup
+(add-hook 'company-mode-hook 'company-quickhelp-mode)
+
+
 
 ;; Suspend page-break-lines-mode while company menu is active
 ;; (see https://github.com/company-mode/company-mode/issues/416)
