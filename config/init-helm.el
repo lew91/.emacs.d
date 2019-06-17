@@ -46,7 +46,7 @@
 
 
 
-  (defun jakelew//helm-hide-minibuffer-maybe ()
+  (defun lew/helm-hide-minibuffer-maybe ()
     "Hide minibuffer in Helm session if we use the header line as input field."
     (when (with-helm-buffer helm-echo-input-in-header-line)
       (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
@@ -58,14 +58,8 @@
 
 
   (add-hook 'helm-minibuffer-set-up-hook
-            'jakelew//helm-hide-minibuffer-maybe)
+            'lew/helm-hide-minibuffer-maybe)
 
-
-  (defun pl/helm-alive-p ()
-    (if (boundp 'helm-alive-p)
-        (symbol-value 'helm-alive-p)))
-
-  ;;(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
 
   ;; live grep in helm
   (when (executable-find "ack-grep")
@@ -83,17 +77,10 @@
 
   )
 
-;;------------------------------------------------------------------
+
 ;; projcetile helm 或许可以用ibuffer projectile
-;;---------------------------------------------------------------
 ;; (require 'helm-projectile)
 ;; (setq projectile-completion-system 'helm)
-
-;; Change the keybinds to whatever you like :)
-;; (global-set-key (kbd "C-c h s") 'helm-swoop)
-;; (global-set-key (kbd "C-c h r") 'helm-swoop-back-to-last-point)
-;; (global-set-key (kbd "C-c h m") 'helm-multi-swoop)
-;; (global-set-key (kbd "C-c h M") 'helm-multi-swoop-all)
 
 
 ;; helm-swoop
@@ -112,7 +99,29 @@
   (define-key helm-command-map (kbd "M") 'helm-multi-swoop-all)
   )
 
+;; taken from full-ack.el
+(defvar lew/project-root-file-patterns
+  '(".project\\'" ".xcodeproj\\'" ".sln\\'" "\\`Project.ede\\'"
+    "\\`.git\\'" "\\`.bzr\\'" "\\`_darcs\\'" "\\`.hg\\'"))
 
+(defun lew/guess-project-root ()
+  (interactive)
+  (catch 'root
+    (let ((dir (expand-file-name (if buffer-file-name
+                                     (file-name-directory buffer-file-name)
+                                   default-directory)))
+          (prev-dir nil)
+          (pattern (mapconcat 'identity lew/project-root-file-patterns "\\|")))
+      (while (not (equal dir prev-dir))
+        (when (directory-files dir nil pattern t)
+          (throw 'root dir))
+        (setq prev-dir dir
+              dir (file-name-directory (directory-file-name dir)))))))
+
+(defun lew/helm-rgrep ()
+  (interactive)
+  (let ((current-prefix-arg '(4)))
+    (call-interactively 'helm-do-grep-ag)))
 
 
 
