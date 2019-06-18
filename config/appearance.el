@@ -63,10 +63,7 @@
       (kill-buffer "*scratch*")))
 
 
-
-
 ;; Misc
-
 ;;(autoload 'zap-to-char "misc"
 ;;  "Kill up to, but not including ARGth occurrence of CHAR." t)
 
@@ -81,7 +78,7 @@
 ;; tracking recent files
 (add-hook 'after-init-hook 'recentf-mode)
 (setq-default
- recentf-max-saved-items 1000
+ recentf-max-saved-items 300
  recentf-exclude '("/tmp/" "/ssh:"))
 ;;(add-to-list 'recentf-exclude "\\.png\\'")
 (setq recentf-auto-cleanup 'never
@@ -90,12 +87,14 @@
 (add-hook 'fine-file-hook (lambda () (unless recentf-mode
                                    (recentf-mode)
                                    (recentf-track-opened-file))))
-(let ((list-partern (list
+(let ((list-pattern (list
                      '("\\.png\\'")
                      '("\\.revive\\'")
+                     '("\\recentf")
+                     '("\\ido\\.last")
                      ))
       )
-  (add-to-list  'recentf-exclude 'list-partern))
+  (add-to-list  'recentf-exclude 'list-pattern))
 
 
 ;; 括号匹配开启
