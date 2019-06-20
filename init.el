@@ -37,12 +37,10 @@
     (require 'appearance)                ; 加载初始化基本外观
     (require 'basic-utils)               ; 基本工具集，在加载其他模块前加载
     (require 'init-exec-path)
-    ;;(require 'lazy-load)                 ; TODO：延迟加载键绑定,暂时速度可以，后面再研究
     (require 'setup-package)            ; 设定插件源和安装工具
     ;;(require 'selected-packages)      ; 只需初始安装时加载一次,extensions文件夹使用 git submodule update --init --recursive 更新使用
     (require 'init-auto-save)
-    ;; (require 'awesome-pair)
-    ;; (require 'basic-edit-toolkit)
+    (require 'basic-edit-toolkit)
 
     (require 'init-fonts)              ; 设置字体集
     (require 'init-grep)
@@ -58,6 +56,7 @@
     (require 'init-window)
     (require 'init-smooth-scrolling)
     ;;(require 'aweshell)
+    (require 'init-theme)
     (require 'init-session)
     (require 'init-key-bindings)           ; 以后增加快捷键绑定管理
 
@@ -69,7 +68,6 @@
 
          (require 'init-ivy)
          ;;(require 'init-helm)
-         ;;(require 'init-theme)                     ; 安装一次主题到 ‘custom-set-variables'
          ;; (require 'init-awesome-tray)              ; 不要‘mode-line’,在加载主题后执行加载
          (require 'init-undo-tree)
          (require 'init-insert-translated-name)      ; 用‘insert-translated-name’激活
@@ -86,6 +84,7 @@
          (require 'init-ispell)                      ; 拼写检查，字典默认
          (require 'init-origami)                   ; 代码折叠设置
          (require 'init-elisp)
+
          (require 'init-slime)
          (require 'init-common-lisp)
          (require 'init-paredit)
@@ -95,9 +94,9 @@
          (require 'init-dash)
          (require 'init-sql)
          (require 'init-projectile)
-         ;;(require 'init-git)                       ; magit 工具设定
-         ;;(require 'init-vc)                        ; 版本控制
-         ;;(require 'init-whitespace)
+         (require 'init-git)                       ; magit 工具设定
+         (require 'init-vc)                        ; 版本控制
+         (require 'init-whitespace)
          (require 'init-session)
          (emacs-session-restore)
 

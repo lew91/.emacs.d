@@ -10,12 +10,6 @@
 [submodule "extensions/cache-path-from-shell"]
 	path = extensions/cache-path-from-shell
 	url = https://github.com/manateelazycat/cache-path-from-shell.git
-[submodule "extensions/lazy-load"]
-	path = extensions/lazy-load
-	url = https://github.com/manateelazycat/lazy-load.git
-[submodule "extensions/one-key"]
-	path = extensions/one-key
-	url = https://github.com/vapniks/one-key.git
 [submodule "extensions/awesome-tray"]
 	path = extensions/awesome-tray
 	url = https://github.com/manateelazycat/awesome-tray.git
@@ -28,9 +22,6 @@
 [submodule "extensions/company-english-helper"]
 	path = extensions/company-english-helper
 	url = https://github.com/manateelazycat/company-english-helper.git
-[submodule "extensions/awesome-pair"]
-	path = extensions/awesome-pair
-	url = https://github.com/manateelazycat/awesome-pair.git
 [submodule "extensions/grep-dired"]
 	path = extensions/grep-dired
 	url = https://github.com/manateelazycat/grep-dired.git
