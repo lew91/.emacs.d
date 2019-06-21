@@ -118,7 +118,6 @@
 (progn
   (unless (fboundp 'helm-mode)
     (ido-mode t)
-    (ido-everywhere nil)
     (setq ido-enable-flex-matching t)
     (setq ido-create-new-buffer 'always)
     )
