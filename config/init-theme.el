@@ -25,7 +25,7 @@
 (defun theme/light ()
   "Activate a light color theme."
   (interactive)
-  (setq custom-enabled-themes '(tsdh-light))
+  (setq custom-enabled-themes '(adwaita))
   (reapply-themes))
 
 (defun theme/dark ()
