@@ -4,13 +4,13 @@
 (custom-set-variables '(org2jekyll-blog-author "Jake Lew")
                       '(org2jekyll-source-directory (expand-file-name "~/blog/_org/"))
                       '(org2jekyll-jekyll-directory (expand-file-name "~/blog/"))
-                      '(org2jekyll-jekyll-drafts-dir "")
+                      '(org2jekyll-jekyll-drafts-dir "_drafts/")
                       '(org2jekyll-jekyll-posts-dir "_posts/")
                       '(org-publish-project-alist
                         `(("default"
                            :base-directory ,(org2jekyll-input-directory)
                            :base-extension "org"
-                           :publishing-directory ,(org2jekyll-output-directory)
+                           :publishing-directory ,(org2jekyll-output-directory org2jekyll-jekyll-drafts-dir)
                            :publishing-function org-html-publish-to-html
                            :headline-levels 4
                            :section-numbers nil
