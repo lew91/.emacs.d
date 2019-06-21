@@ -42,7 +42,7 @@
     (require 'init-auto-save)
     (require 'basic-edit-toolkit)
 
-    (require 'init-fonts)              ; 设置字体集
+    (require 'init-fonts)              ;字体集，中英文对齐
     (require 'init-grep)
     (require 'init-smex)
     (require 'init-editing)
@@ -58,7 +58,7 @@
     ;;(require 'aweshell)
     (require 'init-theme)
     (require 'init-session)
-    (require 'init-key-bindings)           ; 以后增加快捷键绑定管理
+    (require 'init-key-bindings)
 
 
     ;; 可以延后加载的
@@ -72,7 +72,7 @@
          (require 'init-undo-tree)
          (require 'init-insert-translated-name)      ; 用‘insert-translated-name’激活
          (require 'company-english-helper)           ; 用‘toggle-company-english-helper’激活
-         (require 'init-org)                         ; 基本设定
+         (require 'init-org)
          (require 'org-toolkits)                     ; 自定义一些很有用的函数
          (require 'init-org2jekyll)
          (require 'init-markdown)
@@ -81,21 +81,20 @@
          (require 'init-company)
          ;; ;; (require 'init-lsp)                   ；lsp 补全模式，不打算用于全局
          (require 'init-flycheck)
-         (require 'init-ispell)                      ; 拼写检查，字典默认
-         (require 'init-origami)                   ; 代码折叠设置
+         (require 'init-ispell)
+         (require 'init-origami)
          (require 'init-elisp)
-
          (require 'init-slime)
          (require 'init-common-lisp)
          (require 'init-paredit)
-         (require 'init-ycmd)
+         ;;(require 'init-ycmd)                        ; just for C/C++
          (require 'init-python)
          (require 'init-eldoc)
          (require 'init-dash)
          (require 'init-sql)
          (require 'init-projectile)
-         (require 'init-git)                       ; magit 工具设定
-         (require 'init-vc)                        ; 版本控制
+         (require 'init-git)
+         (require 'init-vc)
          (require 'init-whitespace)
          (require 'init-session)
          (emacs-session-restore)
