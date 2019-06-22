@@ -74,12 +74,11 @@
          (require 'company-english-helper)           ; 用‘toggle-company-english-helper’激活
          (require 'init-org)
          (require 'org-toolkits)                     ; 自定义一些很有用的函数
-         (require 'init-org2jekyll)
+         ;;(require 'init-org2jekyll)
          (require 'init-markdown)
          (require 'init-tex)
          (require 'init-yasnippet)
          (require 'init-company)
-         ;; ;; (require 'init-lsp)                   ；lsp 补全模式，不打算用于全局
          (require 'init-flycheck)
          (require 'init-ispell)
          (require 'init-origami)
