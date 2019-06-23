@@ -13,8 +13,9 @@
 (require 'org-pomodoro)
 (require 'org-bullets)
 (require 'cal-china-x)
-(require 'ox-md)      ; Markdown back-end
-(require 'ox-latex)
+(require 'ox-md)                ; Markdown back-end
+(require-package 'ox-jekyll-md) ; org files -> jekyll style markdown files
+(require-package 'ox-latex)
 
 
 ;; Various preferences
