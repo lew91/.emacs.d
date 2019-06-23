@@ -15,7 +15,7 @@
 (require 'cal-china-x)
 (require 'ox-md)                ; Markdown back-end
 (require-package 'ox-jekyll-md) ; org files -> jekyll style markdown files
-(require-package 'ox-latex)
+(require 'ox-latex)
 
 
 ;; Various preferences

@@ -24,7 +24,7 @@
 (setq package-pinned-packages '())
 
 ;; Fire up package.el
-;;(setq package-enable-at-startup nil)
+(setq package-enable-at-startup nil)
 (package-initialize)
 
 (unless (file-exists-p (expand-file-name "elpa" user-emacs-directory))
