@@ -20,4 +20,5 @@ custom.el
 games/
 projectile-bookmarks.eld
 *.bak
+*.elc
 .lsp-session-v1
