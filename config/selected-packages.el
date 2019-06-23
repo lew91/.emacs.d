@@ -4,8 +4,103 @@
 (defun init--install-packages ()
   (packages-install
    '(
-     cal-china-x flycheck-ycmd company-ycmd smooth-scrolling slime-company slime format-all visual-regexp benchmark-init osx-trash undo-tree ivy-xref counsel ivy hungry-delete magit flycheck-popup-tip hl-todo flycheck-pos-tip yasnippet-snippets ag rg wgrep-ag paradox highlight-parentheses yaml-mode writeroom-mode whole-line-or-region whitespace-cleanup-mode wgrep vlf vc-darcs uptimes unfill textile-mode symbol-overlay switch-window sqlformat spacemacs-theme smex session scratch regex-tool rainbow-mode rainbow-delimiters pip-requirements paredit-everywhere page-break-lines osx-location origami org-pomodoro org-cliplink org-bullets ns-auto-titlebar multiple-cursors move-dup mode-line-bell mmm-mode markdown-mode macrostep list-unicode-display ledger-mode ipretty info-colors immortal-scratch ibuffer-vc ibuffer-projectile hydra highlight-quoted highlight-escape-sequences helm-swoop helm-projectile helm-descbinds helm-ag guide-key grab-mac-link goto-line-preview gnuplot fullframe flycheck-package flycheck-ledger flycheck-color-mode-line expand-region exec-path-from-shell elisp-slime-nav dotenv-mode disable-mouse diredfl dimmer diminish diff-hl default-text-scale dash-at-point darcsum daemons company-quickhelp company-anaconda command-log-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized cmd-to-echo cl-libify cl-lib-highlight browse-kill-ring browse-at-remote bind-key avy auto-compile anzu aggressive-indent
-
+     yasnippet-snippets
+     yasnippet
+     yaml-mode
+     writeroom-mode
+     whole-line-or-region
+     whitespace-cleanup-mode
+     wgrep-ag
+     wgrep
+     vlf
+     visual-regexp
+     vc-darcs
+     uptimes
+     unfill
+     undo-tree
+     textile-mode
+     symbol-overlay
+     switch-window
+     sqlformat
+     smex
+     smooth-scrolling
+     slime-company
+     slime
+     session
+     scratch
+     rg
+     regex-tool
+     rainbow-mode
+     rainbow-delimiters
+     pip-requirements
+     paredit-everywhere
+     page-break-lines
+     paradox
+     osx-trash
+     osx-location
+     origami
+     org-pomodoro
+     org-cliplink
+     org-bullets
+     ns-auto-titlebar
+     multiple-cursors
+     move-dup
+     mode-line-bell
+     mmm-mode
+     markdown-mode
+     magit
+     macrostep
+     list-unicode-display
+     ledger-mode
+     ivy-xref
+     ivy
+     ipretty
+     info-colors
+     immortal-scratch
+     ibuffer-vc
+     ibuffer-projectile
+     hydra
+     hungry-delete
+     hl-todo
+     highlight-quoted
+     highlight-escape-sequences
+     helm-swoop helm-projectile
+     helm-descbinds
+     helm-ag
+     guide-key
+     grab-mac-link
+     goto-line-preview
+     gnuplot fullframe
+     format-all
+     flycheck-pos-tip
+     flycheck-package
+     flycheck-ledger
+     flycheck-color-mode-line
+     expand-region
+     exec-path-from-shell
+     elisp-slime-nav
+     diminish
+     diff-hl
+     default-text-scale
+     dash-at-point darcsum
+     daemons
+     company-quickhelp
+     company-anaconda
+     command-log-mode
+     cmd-to-echo
+     counsel
+     cl-libify
+     cl-lib-highlight
+     cal-china-x
+     browse-kill-ring
+     browse-at-remote
+     bind-key
+     benchmark-init
+     avy
+     auto-compile
+     anzu
+     aggressive-indent
+     ag
      )))
 
 (condition-case nil
