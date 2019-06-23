@@ -74,7 +74,6 @@
          (require 'company-english-helper)           ; 用‘toggle-company-english-helper’激活
          (require 'init-org)
          (require 'org-toolkits)                     ; 自定义一些很有用的函数
-         ;;(require 'init-org2jekyll)
          (require 'init-markdown)
          (require 'init-tex)
          (require 'init-yasnippet)
