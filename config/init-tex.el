@@ -1,5 +1,6 @@
-(require 'cdlatex)
+(require-package 'cdlatex)
 (require 'reftex)
+(maybe-require-package 'auctex)
 
 (load "auctex.el" nil t t)
 
