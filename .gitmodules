@@ -4,15 +4,6 @@
 [submodule "extensions/aweshell"]
 	path = extensions/aweshell
 	url = https://github.com/manateelazycat/aweshell.git
-[submodule "extensions/auto-save.el"]
-	path = extensions/auto-save.el
-	url = https://github.com/manateelazycat/auto-save.git
-[submodule "extensions/cache-path-from-shell"]
-	path = extensions/cache-path-from-shell
-	url = https://github.com/manateelazycat/cache-path-from-shell.git
-[submodule "extensions/awesome-tray"]
-	path = extensions/awesome-tray
-	url = https://github.com/manateelazycat/awesome-tray.git
 [submodule "extensions/anaphora"]
 	path = extensions/anaphora
 	url = https://github.com/rolandwalker/anaphora.git
