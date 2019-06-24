@@ -68,7 +68,6 @@
 
          (require 'init-ivy)
          ;;(require 'init-helm)
-         ;; (require 'init-awesome-tray)              ; 不要‘mode-line’,在加载主题后执行加载
          (require 'init-undo-tree)
          (require 'init-insert-translated-name)      ; 用‘insert-translated-name’激活
          (require 'company-english-helper)           ; 用‘toggle-company-english-helper’激活
