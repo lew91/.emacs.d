@@ -36,9 +36,9 @@
 
     (require 'appearance)                ; 加载初始化基本外观
     (require 'basic-utils)               ; 基本工具集，在加载其他模块前加载
-    (require 'init-exec-path)
     (require 'setup-package)            ; 设定插件源和安装工具
     ;;(require 'selected-packages)      ; 只需初始安装时加载一次,extensions文件夹使用 git submodule update --init --recursive 更新使用
+    (require 'init-exec-path)
     (require 'init-auto-save)
     (require 'basic-edit-toolkit)
 
