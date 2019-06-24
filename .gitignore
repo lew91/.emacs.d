@@ -22,3 +22,4 @@ projectile-bookmarks.eld
 *.bak
 *.elc
 .lsp-session-v1
+.backup/

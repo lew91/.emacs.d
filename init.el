@@ -1,6 +1,6 @@
 ;; 设置加载子目录路径
 (defun add-subdirs-to-load-path (dir)
-  "Recursive add directories to `load-path'."
+  "Recursive add directories DIR to `load-path'."
   (let ((default-directory (file-name-as-directory dir)))
     (add-to-list 'load-path dir)
     (normal-top-level-add-subdirs-to-load-path)))
@@ -39,7 +39,7 @@
     (require 'setup-package)            ; 设定插件源和安装工具
     ;;(require 'selected-packages)      ; 只需初始安装时加载一次,extensions文件夹使用 git submodule update --init --recursive 更新使用
     (require 'init-exec-path)
-    (require 'init-auto-save)
+    ;;(require 'init-auto-save)        
     (require 'basic-edit-toolkit)
 
     (require 'init-fonts)              ;字体集，中英文对齐
