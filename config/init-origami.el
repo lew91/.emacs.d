@@ -1,17 +1,6 @@
 (require 'origami)
 
 
-;;(add-hook 'prog-mode-hook 'origami-mode)
-
-;; (after-load 'origami
-;;   (define-key origami-mode-map (kbd "C-c o o") 'origami-open-node)
-;;   (define-key origami-mode-map (kbd "C-c o O") 'origami-open-all-nodes)
-;;   (define-key origami-mode-map (kbd "C-c o c") 'origami-close-node)
-;;   (define-key origami-mode-map (kbd "C-c o C") 'origami-close-all-nodes)
-;;   (define-key origami-mode-map (kbd "C-c o s") 'origami-show-only-node)
-;;   (define-key origami-mode-map (kbd "C-c o u") 'origami-undo)
-;;   (define-key origami-mode-map (kbd "C-c o r") 'origami-redo))
-
 (after-load 'origami
     (defhydra origami-hydra (:color blue :hint none)
       "

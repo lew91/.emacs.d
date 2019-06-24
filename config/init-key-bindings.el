@@ -85,8 +85,9 @@
   (define-key symbol-overlay-mode-map (kbd "C-g") 'symbol-overlay-remove-all))
 
 ;; org
-(define-key global-map (kbd "C-c l") 'org-store-link)
-(define-key global-map (kbd "C-c a") 'org-agenda)
+(after-load 'org
+  (define-key global-map (kbd "C-c l") 'org-store-link)
+  (define-key global-map (kbd "C-c a") 'org-agenda))
 (global-set-key (kbd "C-c c") 'org-capture)
 
 

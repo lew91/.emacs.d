@@ -141,8 +141,8 @@
 
 ;; Re-align tags when window shape changes
 (after-load 'org-agenda
-            (add-hook 'org-agenda-mode-hook
-                      (lambda () (add-hook 'window-configuration-change-hook 'org-agenda-align-tags nil t))))
+  (add-hook 'org-agenda-mode-hook
+            (lambda () (add-hook 'window-configuration-change-hook 'org-agenda-align-tags nil t))))
 
 
 
@@ -470,19 +470,20 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
                             "\\1" orig-contents))
       (ad-set-arg 1 fixed-contents))))
 
-;; Exporting configuration
-;; When the export process prompt there are no file such as wrapfig.sty etc. We can just install those missing files. for example:
-;; For Max OS X
-;; $ cd /Library/Tex/texbin
-;; $ sudo tlmgr update --self
-;; $ sudo tlmgr install wrapfig
-;; $ sudo tlmgr install capt-of
-;;(setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f" "xelatex -interaction nonstopmode %f"))
-(setq org-export-latex-listings t)
-(setq org-latex-with-hyperref nil)
-(add-to-list 'org-latex-packages-alist "\\hypersetup{setpagesize=false}" t)
-(add-to-list 'org-latex-packages-alist "\\hypersetup{colorlinks=true}" t)
-(add-to-list 'org-latex-packages-alist "\\hypersetup{linkcolor=blue}" t)
+(after-load 'ox-latex
+  ;; Exporting configuration
+  ;; When the export process prompt there are no file such as wrapfig.sty etc. We can just install those missing files. for example:
+  ;; For Max OS X
+  ;; $ cd /Library/Tex/texbin
+  ;; $ sudo tlmgr update --self
+  ;; $ sudo tlmgr install wrapfig
+  ;; $ sudo tlmgr install capt-of
+  ;;(setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f" "xelatex -interaction nonstopmode %f"))
+  (setq org-export-latex-listings t)
+  (setq org-latex-with-hyperref nil)
+  (add-to-list 'org-latex-packages-alist "\\hypersetup{setpagesize=false}" t)
+  (add-to-list 'org-latex-packages-alist "\\hypersetup{colorlinks=true}" t)
+  (add-to-list 'org-latex-packages-alist "\\hypersetup{linkcolor=blue}" t))
 
 
 

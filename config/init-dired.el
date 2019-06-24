@@ -11,9 +11,6 @@
       dired-ls-F-marks-symlinks t  ; -F marks links with @
       )
 
-;; show the details when using dired+
-(setq diredp-hide-details-propagate-flag nil)
-(setq diredp-hide-details-initially-flag nil)
 
 (when (featurep 'cocoa)
   (require 'osx-trash)
@@ -50,33 +47,38 @@
 (after-load 'dired
   (add-hook 'dired-mode-hook 'diff-hl-dired-mode))
 
-;; form https://www.emacswiki.org/emacs/DiredPlus
-(setq directory-listing-before-filename-regexp
-          (let* ((l "\\([A-Za-z]\\|[^\0-\177]\\)")
-                 (l-or-quote "\\([A-Za-z']\\|[^\0-\177]\\)")
-                 (month (concat l-or-quote l-or-quote "+\\.?"))
-                 (s " ")
-                 (yyyy "[0-9][0-9][0-9][0-9]")
-                 (dd "[ 0-3][0-9]")
-                 (HH:MM "[ 0-2][0-9][:.][0-5][0-9]")
-                 (seconds "[0-6][0-9]\\([.,][0-9]+\\)?")
-                 (zone "[-+][0-2][0-9][0-5][0-9]")
-                 (iso-mm-dd "[01][0-9]-[0-3][0-9]")
-                 (iso-time (concat HH:MM "\\(:" seconds "\\( ?" zone "\\)?\\)?"))
-                 (iso (concat "\\(\\(" yyyy "-\\)?" iso-mm-dd "[ T]" iso-time
-                              "\\|" yyyy "-" iso-mm-dd "\\)"))
-                 (western (concat "\\(" month s "+" dd "\\|" dd "\\.?" s month "\\)"
-                                  s "+"
-                                  "\\(" HH:MM "\\|" yyyy "\\)"))
-                 (western-comma (concat month s "+" dd "," s "+" yyyy))
-                 (mm "[ 0-1]?[0-9]")
-                 (east-asian
-                  (concat "\\(" mm l "?" s dd l "?" s "+"
-                          "\\|" dd s mm s "+" "\\)"
-                          "\\(" HH:MM "\\|" yyyy l "?" "\\)")))
-            (purecopy (concat ".*[0-9][BkKMGTPEZY]?" s
-                              "\\(" western "\\|" western-comma "\\|" east-asian "\\|" iso "\\)"
-                              s "+"))))
+(after-load 'dired+
+  ;; show the details when using dired+
+  (setq diredp-hide-details-propagate-flag nil)
+  (setq diredp-hide-details-initially-flag nil)
+
+  ;; form https://www.emacswiki.org/emacs/DiredPlus
+  (setq directory-listing-before-filename-regexp
+        (let* ((l "\\([A-Za-z]\\|[^\0-\177]\\)")
+               (l-or-quote "\\([A-Za-z']\\|[^\0-\177]\\)")
+               (month (concat l-or-quote l-or-quote "+\\.?"))
+               (s " ")
+               (yyyy "[0-9][0-9][0-9][0-9]")
+               (dd "[ 0-3][0-9]")
+               (HH:MM "[ 0-2][0-9][:.][0-5][0-9]")
+               (seconds "[0-6][0-9]\\([.,][0-9]+\\)?")
+               (zone "[-+][0-2][0-9][0-5][0-9]")
+               (iso-mm-dd "[01][0-9]-[0-3][0-9]")
+               (iso-time (concat HH:MM "\\(:" seconds "\\( ?" zone "\\)?\\)?"))
+               (iso (concat "\\(\\(" yyyy "-\\)?" iso-mm-dd "[ T]" iso-time
+                            "\\|" yyyy "-" iso-mm-dd "\\)"))
+               (western (concat "\\(" month s "+" dd "\\|" dd "\\.?" s month "\\)"
+                                s "+"
+                                "\\(" HH:MM "\\|" yyyy "\\)"))
+               (western-comma (concat month s "+" dd "," s "+" yyyy))
+               (mm "[ 0-1]?[0-9]")
+               (east-asian
+                (concat "\\(" mm l "?" s dd l "?" s "+"
+                        "\\|" dd s mm s "+" "\\)"
+                        "\\(" HH:MM "\\|" yyyy l "?" "\\)")))
+          (purecopy (concat ".*[0-9][BkKMGTPEZY]?" s
+                            "\\(" western "\\|" western-comma "\\|" east-asian "\\|" iso "\\)"
+                            s "+")))))
 
 
 
