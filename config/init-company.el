@@ -31,18 +31,18 @@
 ;; (see https://github.com/company-mode/company-mode/issues/416)
 (after-load 'company
   (after-load 'page-break-lines
-    (defvar-local sanityinc/page-break-lines-on-p nil)
+    (defvar-local lew/page-break-lines-on-p nil)
 
-    (defun sanityinc/page-break-lines-disable (&rest ignore)
+    (defun lew/page-break-lines-disable (&rest ignore)
       (when (setq sanityinc/page-break-lines-on-p (bound-and-true-p page-break-lines-mode))
         (page-break-lines-mode -1)))
 
-    (defun sanityinc/page-break-lines-maybe-reenable (&rest ignore)
+    (defun lew/page-break-lines-maybe-reenable (&rest ignore)
       (when sanityinc/page-break-lines-on-p
         (page-break-lines-mode 1)))
 
-    (add-hook 'company-completion-started-hook 'sanityinc/page-break-lines-disable)
-    (add-hook 'company-after-completion-hook 'sanityinc/page-break-lines-maybe-reenable)))
+    (add-hook 'company-completion-started-hook 'lew/page-break-lines-disable)
+    (add-hook 'company-after-completion-hook 'lew/page-break-lines-maybe-reenable)))
 
 
 

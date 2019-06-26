@@ -31,7 +31,6 @@
   (add-hook 'after-init-hook 'benchmark-init/deactivate)  ; 启动后停止激活状态
 
   (with-temp-message ""                 ;抹掉插件启动的输出
-    ;;(require 'init-benchmarking)      ;显示启动时间到 messages
 
 
     (require 'appearance)                ; 加载初始化基本外观
@@ -55,7 +54,6 @@
     (require 'init-ibuffer)
     (require 'init-window)
     (require 'init-smooth-scrolling)
-    ;;(require 'aweshell)
     (require 'init-theme)
     (require 'init-session)
     (require 'init-key-bindings)
@@ -89,7 +87,6 @@
          (require 'init-python)
          (require 'init-eldoc)
          (require 'init-dash)
-         (require 'init-sql)
          (require 'init-projectile)
          (require 'init-git)
          (require 'init-vc)
