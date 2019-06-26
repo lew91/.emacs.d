@@ -99,17 +99,17 @@
     (vlf file)))
 
 (global-set-key (kbd "RET") 'newline-and-indent)
-(defun lew/newline-at-end-of-line ()
+(defun jl/newline-at-end-of-line ()
   "Move to end of line, enter a newline, and reindent."
   (interactive)
   (move-end-of-line 1)
   (newline-and-indent))
 
 (when (fboundp 'display-line-numbers-mode)
-    (defun lew/with-display-line-numbers (f &rest args)
+    (defun jl/with-display-line-numbers (f &rest args)
       (let ((display-line-numbers t))
         (apply f args)))
-    (advice-add 'goto-line-preview :around #'lew/with-display-line-numbers))
+    (advice-add 'goto-line-preview :around #'jl/with-display-line-numbers))
 
 (defun kill-back-to-indentation ()
   "Kill from point back to the first non-whitespace character on the line."
@@ -120,18 +120,18 @@
 
 (global-set-key (kbd "C-M-<backspace>") 'kill-back-to-indentation)
 
-(defun lew/backward-up-sexp (arg)
+(defun jl/backward-up-sexp (arg)
   "Jump up to the start of the ARG'th enclosing sexp."
   (interactive "p")
   (let ((ppss (syntax-ppss)))
     (cond ((elt ppss 3)
            (goto-char (elt ppss 8))
-           (lew/backward-up-sexp (1- arg)))
+           (jl/backward-up-sexp (1- arg)))
           ((backward-up-list arg)))))
 
-(global-set-key [remap backward-up-list] 'lew/backward-up-sexp) ; C-M-u, C-M-up
+(global-set-key [remap backward-up-list] 'jl/backward-up-sexp) ; C-M-u, C-M-up
 
-(defun lew/open-line-with-reindent (n)
+(defun jl/open-line-with-reindent (n)
   "A version of `open-line' which reindents the start and end positions.
 If there is a fill prefix and/or a `left-margin', insert them
 on the new line if the line would have been blank.
@@ -158,7 +158,7 @@ With arg N, insert N newlines."
     (end-of-line)
     (indent-according-to-mode)))
 
-(global-set-key (kbd "C-o") 'lew/open-line-with-reindent)
+(global-set-key (kbd "C-o") 'jl/open-line-with-reindent)
 
 ;; Duplicate start of line or region with C-M-<end>.
 ;; From http://www.emacswiki.org/emacs/DuplicateStartOfLineOrRegion
@@ -191,7 +191,7 @@ With arg N, insert N newlines."
 (global-set-key (kbd "C-M-<end>") 'duplicate-start-of-line-or-region)
 
 
-(defun lew/disable-features-during-macro-call (orig &rest args)
+(defun jl/disable-features-during-macro-call (orig &rest args)
   "When running a macro, disable features that might be expensive.
 ORIG is the advised function, which is called with its ARGS."
   (let (post-command-hook
@@ -199,10 +199,10 @@ ORIG is the advised function, which is called with its ARGS."
         (tab-always-indent (or (eq 'complete tab-always-indent) tab-always-indent)))
     (apply orig args)))
 
-(advice-add 'kmacro-call-macro :around 'lew/disable-features-during-macro-call)
+(advice-add 'kmacro-call-macro :around 'jl/disable-features-during-macro-call)
 
 ;; Hack for setting a fixed wrap column in visual-line-mode.
-(defun lew/set-visual-wrap-column (new-wrap-column &optional buffer)
+(defun jl/set-visual-wrap-column (new-wrap-column &optional buffer)
   "Force visual line wrap at NEW-WRAP-COLUMN in BUFFER (defaults
     to current buffer) by setting the right-hand margin on every
     window that displays BUFFER.  A value of NIL or 0 for
@@ -222,7 +222,7 @@ ORIG is the advised function, which is called with its ARGS."
             (update-visual-wrap-column)))
         (setq windows (cdr windows))))))
 
-(defun lew/update-visual-wrap-column ()
+(defun jl/update-visual-wrap-column ()
   (if (not visual-wrap-column)
       (set-window-margins nil nil)
     (let* ((current-margins (window-margins))
@@ -245,7 +245,7 @@ ORIG is the advised function, which is called with its ARGS."
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 
-(defun lew/css-expand-statement ()
+(defun jl/css-expand-statement ()
   (interactive)
   (save-excursion
     (end-of-line)
@@ -257,7 +257,7 @@ ORIG is the advised function, which is called with its ARGS."
       (replace-regexp ";" ";\n" nil (region-beginning) (region-end))
       (indent-region beg (point)))))
 
-(defun lew/css-contract-statement ()
+(defun jl/css-contract-statement ()
   (interactive)
   (end-of-line)
   (search-backward "{")

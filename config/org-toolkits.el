@@ -1,7 +1,7 @@
 
 (require 'cl)
 
-(defun jakelew/org-ispell()
+(defun jl/org-ispell()
   "configure 'ispell-skip-region-alist' for 'org-mode'."
   (make-local-variable 'ispell-skip-region-alist)
   (add-to-list 'ispell-skip-region-alist '(org-property-drawer-re))
@@ -9,20 +9,20 @@
   (add-to-list 'ispell-skip-region-alist '("=" "="))
   (add-to-list 'ispell-skip-region-alist '("^#\\+BEGIN_SRC" ."^#\\+END_SRC")))
 
-(add-hook 'org-mode-hook #'jakelew/org-ispell)
+(add-hook 'org-mode-hook #'jl/org-ispell)
 
-(defun jakelew/directory-parent(directory)
+(defun jl/directory-parent(directory)
   (let ((parent (file-name-directory (directory-file-name directory))))
     (if (not (equal directory parent))
         parent)))
 
 ;; Screenshot
-(defun jakelew//insert-org-or-md-img-link(prefix imagename)
+(defun jl//insert-org-or-md-img-link(prefix imagename)
   (if (equal (file-name-extension (buffer-file-name)) "org")
       (insert (format "[[%s%s]]" prefix imagename))
     (insert (format "![%s](%s%s)" imagename prefix imagename))))
 
-(defun jakelew/capture-screenshot(basename)
+(defun jl/capture-screenshot(basename)
   "Take a screenshot into a time stamped unique-named file in the same directory as the org-buffer and insert a link to this file."
   (interactive "sScreenshot name:")
   (if (equal basename"")
@@ -46,13 +46,13 @@
             (progn
               (set resize-command-str (format "convert %s -resize 800x600 %s" final-image-full-path final-image-full-path))
               (shell-command-to-string resize-command-str)))
-        (jakelew//insert-org-or-md-img-link "../imgs/" relativepath))
+        (jl//insert-org-or-md-img-link "../imgs/" relativepath))
     (progn
       (call-process "screencapture" nil nil nil "-s" (concat basename ".png"))
-      (jakelew//insert-org-or-md-img-link "./" (concat basename ".png"))))
+      (jl//insert-org-or-md-img-link "./" (concat basename ".png"))))
   (insert "\n"))
 
-(defun jakelew/org-archive-cancel-tasks()
+(defun jl/org-archive-cancel-tasks()
   (interactive)
   (org-map-entries
    (lambda()
@@ -61,7 +61,7 @@
    "/CANCELLED" 'file))
 
 ;; "https://github.com/vhallac/.emacs.d/blob/master/config/customize-org-agenda.el"
-(defun jakelew/skip-non-stuck-projects()
+(defun jl/skip-non-stuck-projects()
   "Skip trees that are not stuck projects"
   (bh/list-sublevels-for-projects-indented)
   (save-restriction
@@ -112,12 +112,12 @@
     (org-update-statistics-cookies t)))
 
 
-(defun jakelew/org-summary-todo(n-done n-not-done)
+(defun jl/org-summary-todo(n-done n-not-done)
   "Switch entry to DONE when all subentries are done, to TODO otherwise."
   (let (org-log-done org-log-states)    ; turn off logging
     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 
-(defun jakelew/org-clock-sum-today-by-tags(timerange &optional tstart tend noinsert)
+(defun jl/org-clock-sum-today-by-tags(timerange &optional tstart tend noinsert)
   (interactive "P")
   (let* ((timerange-numeric-value (prefix-numeric-value timerange))
          (files (org-add-archive-files (org-agenda-files)))
@@ -155,7 +155,7 @@
     output-string))
 
 ;; http://blog.lojic.com/2009/08/06/send-growl-notifications-from-carbon-emacs-on-osx/
-(defun jakelew/growl-notification (title message &optional sticky)
+(defun jl/growl-notification (title message &optional sticky)
   "Send a Growl notification"
   (do-applescript
    (format "tell application \"GrowlHelperApp\" \n
@@ -166,7 +166,7 @@
            message
            (if sticky "yes" "no"))))
 
-(defun jakelew/word-count-for-chinese ()
+(defun jl/word-count-for-chinese ()
   "「較精確地」統計中/日/英文字數。
 - 文章中的註解不算在字數內。
 - 平假名與片假名亦包含在「中日文字數」內，每個平/片假名都算單獨一個字（但片假

@@ -12,13 +12,13 @@
 (ggtags-mode 1)
 
 
-(defun lew/cedet-hook ()
+(defun jl/cedet-hook ()
   (local-set-key "\C-c\C-j" 'semantic-ia-fast-jump)
   (local-set-key "\C-c\C-s" 'semantic-ia-show-summary))
 
-(add-hook 'c-mode-common-hook 'lew/cedet-hook)
-(add-hook 'c-mode-hook 'lew/cedet-hook)
-(add-hook 'c++-mode-hook 'lew/cedet-hook)
+(add-hook 'c-mode-common-hook 'jl/cedet-hook)
+(add-hook 'c-mode-hook 'jl/cedet-hook)
+(add-hook 'c++-mode-hook 'jl/cedet-hook)
 
 ;; Enable EDE only in C/C++
 (require 'ede)

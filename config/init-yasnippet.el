@@ -13,7 +13,7 @@
   (replace-regexp-in-string "\n$" "" (shell-command-to-string "git config --get user.email")))
 
 ;;(setq yas-snippet-dirs (append yas-snippet-dirs
-;;     (concat jakelew-emacs-root-dir "/snippets")  ; custom snippets
+;;     (concat jl-emacs-root-dir "/snippets")  ; custom snippets
 ;;     ))
 
 ;;(yas-global-mode 1)

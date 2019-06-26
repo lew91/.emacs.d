@@ -34,7 +34,7 @@
 (global-set-key (kbd "C-x 3") (split-window-func-with-other-buffer 'split-window-horizontally))
 
 
-(defun lew/toggle-delete-other-windows ()
+(defun jl/toggle-delete-other-windows ()
   "Delete other windows in frame if any, or restore previous window config."
   (interactive)
   (if (and winner-mode
@@ -42,7 +42,7 @@
       (winner-undo)
     (delete-other-windows)))
 
-(global-set-key (kbd "C-x 1") 'lew/toggle-delete-other-windows)
+(global-set-key (kbd "C-x 1") 'jl/toggle-delete-other-windows)
 
 
 ;; Rearrange split windows
@@ -69,7 +69,7 @@
 
 
 ;; http://www.emacswiki.org/emacs/TransposeWindows
-(defun lew/rotate-windows ()
+(defun jl/rotate-windows ()
   "Rotate your windows"
   (interactive)
   (cond

@@ -31,18 +31,18 @@
 ;; (see https://github.com/company-mode/company-mode/issues/416)
 (after-load 'company
   (after-load 'page-break-lines
-    (defvar-local lew/page-break-lines-on-p nil)
+    (defvar-local jl/page-break-lines-on-p nil)
 
-    (defun lew/page-break-lines-disable (&rest ignore)
-      (when (setq lew/page-break-lines-on-p (bound-and-true-p page-break-lines-mode))
+    (defun jl/page-break-lines-disable (&rest ignore)
+      (when (setq jl/page-break-lines-on-p (bound-and-true-p page-break-lines-mode))
         (page-break-lines-mode -1)))
 
-    (defun lew/page-break-lines-maybe-reenable (&rest ignore)
-      (when lew/page-break-lines-on-p
+    (defun jl/page-break-lines-maybe-reenable (&rest ignore)
+      (when jl/page-break-lines-on-p
         (page-break-lines-mode 1)))
 
-    (add-hook 'company-completion-started-hook 'lew/page-break-lines-disable)
-    (add-hook 'company-after-completion-hook 'lew/page-break-lines-maybe-reenable)))
+    (add-hook 'company-completion-started-hook 'jl/page-break-lines-disable)
+    (add-hook 'company-after-completion-hook 'jl/page-break-lines-maybe-reenable)))
 
 
 

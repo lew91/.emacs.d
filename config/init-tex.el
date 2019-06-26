@@ -82,7 +82,7 @@
     )
 
 
-(defun lew/reftex-find-ams-enviroment-cation (environment)
+(defun jl/reftex-find-ams-enviroment-cation (environment)
   "Find the caption of an AMS ENVIRONMENT."
   (let ((re (rx-to-string `(and "\\begin{" ,environment "}"))))
     ;; Go to the beginning of the label first

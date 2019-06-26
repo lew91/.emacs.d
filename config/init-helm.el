@@ -57,7 +57,7 @@
   (define-key helm-command-map (kbd "SPC")   'helm-all-mark-rings)
 
 
-  (defun lew/helm-hide-minibuffer-maybe ()
+  (defun jl/helm-hide-minibuffer-maybe ()
     "Hide minibuffer in Helm session if we use the header line as input field."
     (when (with-helm-buffer helm-echo-input-in-header-line)
       (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
@@ -69,12 +69,12 @@
 
 
   (add-hook 'helm-minibuffer-set-up-hook
-            'lew/helm-hide-minibuffer-maybe)
+            'jl/helm-hide-minibuffer-maybe)
 
   ;; Save curent position to mark ring
   (add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
   
-  (defun lew/helm-rgrep ()
+  (defun jl/helm-rgrep ()
     (interactive)
     (let ((current-prefix-arg '(4)))
       (call-interactively 'helm-do-grep-ag))))
@@ -96,18 +96,18 @@
   (define-key helm-command-map (kbd "M") 'helm-multi-swoop-all))
 
 ;; taken from full-ack.el
-(defvar lew/project-root-file-patterns
+(defvar jl/project-root-file-patterns
   '(".project\\'" ".xcodeproj\\'" ".sln\\'" "\\`Project.ede\\'"
     "\\`.git\\'" "\\`.bzr\\'" "\\`_darcs\\'" "\\`.hg\\'"))
 
-(defun lew/guess-project-root ()
+(defun jl/guess-project-root ()
   (interactive)
   (catch 'root
     (let ((dir (expand-file-name (if buffer-file-name
                                      (file-name-directory buffer-file-name)
                                    default-directory)))
           (prev-dir nil)
-          (pattern (mapconcat 'identity lew/project-root-file-patterns "\\|")))
+          (pattern (mapconcat 'identity jl/project-root-file-patterns "\\|")))
       (while (not (equal dir prev-dir))
         (when (directory-files dir nil pattern t)
           (throw 'root dir))

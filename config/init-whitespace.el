@@ -6,12 +6,12 @@
 
 ;;; Whitespace
 
-(defun lew/show-trailing-whitespace ()
+(defun jl/show-trailing-whitespace ()
   "Enable display of trailing whitespace in this buffer."
   (setq-local show-trailing-whitespace t))
 
 (dolist (hook '(prog-mode-hook text-mode-hook conf-mode-hook))
-  (add-hook hook 'lew/show-trailing-whitespace))
+  (add-hook hook 'jl/show-trailing-whitespace))
 
 
 

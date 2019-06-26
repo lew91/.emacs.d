@@ -21,7 +21,7 @@
 
 (add-hook 'emacs-lisp-mode-hook 'highlight-quoted-mode)
 
-(defun lew/insert-headerise-elisp ()
+(defun jl/insert-headerise-elisp ()
   "Add minimal header and footer to an elisp buffer in order to placate flycheck."
   (interactive)
   (let ((fname (if (buffer-file-name)
@@ -35,7 +35,7 @@
       (goto-char (point-max))
       (insert ";;; " fname " ends here\n"))))
 
-(defun lew/eval-last-sexp-or-region (prefix)
+(defun jl/eval-last-sexp-or-region (prefix)
   "Eval region from BEG to END if active, otherwise the last sexp."
   (interactive "P")
   (if (and (mark) (use-region-p))
@@ -45,26 +45,26 @@
 (global-set-key [remap eval-expression] 'pp-eval-expression)
 
 (after-load 'lisp-mode
-  (define-key emacs-lisp-mode-map (kbd "C-x C-e") 'lew/eval-last-sexp-or-region))
+  (define-key emacs-lisp-mode-map (kbd "C-x C-e") 'jl/eval-last-sexp-or-region))
 
-(defun lew/make-read-only (expression out-buffer-name)
+(defun jl/make-read-only (expression out-buffer-name)
   "Enable `view-mode' in the output buffer - if any - so it can be closed with `\"q\"."
   (when (get-buffer out-buffer-name)
     (with-current-buffer out-buffer-name
       (view-mode 1))))
-(advice-add 'pp-display-expression :after 'lew/make-read-only)
+(advice-add 'pp-display-expression :after 'jl/make-read-only)
 
 
-(defun lew/maybe-set-bundled-elisp-readonly ()
+(defun jl/maybe-set-bundled-elisp-readonly ()
   "If this elisp appears to be part of Emacs, then disallow editing."
   (when (and (buffer-file-name)
              (string-match-p "\\.el\\.gz\\'" (buffer-file-name)))
     (setq buffer-read-only t)
     (view-mode t)))
 
-(add-hook 'emacs-lisp-mode-hook 'lew/maybe-set-bundled-elisp-readonly)
+(add-hook 'emacs-lisp-mode-hook 'jl/maybe-set-bundled-elisp-readonly)
 
-(defun lew/eval-buffer (arg)
+(defun jl/eval-buffer (arg)
   "Execute the current buffer as Lisp code.
 Top-level forms are evaluated with `eval-defun' so that `defvar'
 and `defcustom' forms reset their default values."
@@ -79,7 +79,7 @@ and `defcustom' forms reset their default values."
     (eval-buffer)))
 
 ;; Support byte-compilation in a sub-process, as required by highlight-cl
-(defun lew/byte-compile-file-batch (filename)
+(defun jl/byte-compile-file-batch (filename)
   "Byte-compile FILENAME in batch mode, ie. a clean sub-process."
   (interactive "fFile to byte-compile in batch mode: ")
   (let ((emacs (car command-line-args)))
@@ -91,17 +91,17 @@ and `defcustom' forms reset their default values."
        (list "-Q" "-batch" "-f" "batch-byte-compile" filename)
        " ")))))
 
-(defun lew/auto-compile-load-after-compile (success)
+(defun jl/auto-compile-load-after-compile (success)
   "Reload the current emacs-lisp file after it's recompiled, if an older version is loaded."
   (when (eq success t)
     (let ((buffer-path (file-truename buffer-file-name)))
       (when (assoc buffer-path load-history)
         (load-file buffer-path)))))
 
-(advice-add 'auto-compile-byte-compile :filter-return #'lew/auto-compile-load-after-compile)
+(advice-add 'auto-compile-byte-compile :filter-return #'jl/auto-compile-load-after-compile)
 
 ;;;###autoload
-(defun lew/pp-eval-expression (expression)
+(defun jl/pp-eval-expression (expression)
   "Same as 'pp-eval-expression' but without \"Evaluating..\" message."
   (interactive
    (list (read--expression "Eval: ")))
@@ -110,7 +110,7 @@ and `defcustom' forms reset their default values."
 
 
 ;;;###autoload
-(defun lew/eval-dwin (arg)
+(defun jl/eval-dwin (arg)
   "Eval last sexp or region if it is active. ARG is passed to 'eval-last-sexp'."
   (interactive "P")
   (if (use-region-p)
@@ -118,7 +118,7 @@ and `defcustom' forms reset their default values."
     (eval-last-sexp arg)))
 
 ;;;###autoload
-(defun lew/pp-veal-dwin (arg)
+(defun jl/pp-veal-dwin (arg)
   "Eval last sexp or region if it is active. ARG is passed to 'pp-eval-last-sexp'."
   (interactive "P")
   (if (use-region-p)
@@ -126,7 +126,7 @@ and `defcustom' forms reset their default values."
     (pp-eval-last-sexp arg)))
 
 ;;;###autoload
-(defun lew/indent-sexp (&optional no-offset pp)
+(defun jl/indent-sexp (&optional no-offset pp)
   "Indent each line of the list starting just after point.
 If NO-OFFSET is non-nil (with \\[universal-argument]), indent
 without offset for the following lines.

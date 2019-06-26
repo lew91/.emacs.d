@@ -21,9 +21,9 @@
       ;; 清空避免加载远程文件的时候分析文件。
       (file-name-handler-alist nil))
   ;; 定义一些启动目录，方便下次迁移修改
-  (defvar jakelew-emacs-root-dir (file-truename "~/.emacs.d"))
-  (defvar jakelew-emacs-config-dir (concat jakelew-emacs-root-dir "/config"))
-  (defvar jakelew-emacs-extension-dir (concat jakelew-emacs-root-dir "/extensions"))
+  (defvar jl-emacs-root-dir (file-truename "~/.emacs.d"))
+  (defvar jl-emacs-config-dir (concat jl-emacs-root-dir "/config"))
+  (defvar jl-emacs-extension-dir (concat jl-emacs-root-dir "/extensions"))
 
 
 
@@ -97,7 +97,7 @@
          )))
 
 
-  (setq custom-file (expand-file-name "custom.el" jakelew-emacs-root-dir))
+  (setq custom-file (expand-file-name "custom.el" jl-emacs-root-dir))
   (load custom-file 'no-error 'no-message)
 
   )

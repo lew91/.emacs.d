@@ -16,9 +16,9 @@
        '(("\\.cmake\\'" . cmake-mode))
        auto-mode-alist))
 
-(defun lew/company-cmake-setup ()
+(defun jl/company-cmake-setup ()
   (add-to-list 'company-backends 'company-cmake))
-(add-hook 'cmake-mode-hook 'lew/company-cmake-setup)
+(add-hook 'cmake-mode-hook 'jl/company-cmake-setup)
 
 (defun cc-mode-compile-make ()
   (interactive)

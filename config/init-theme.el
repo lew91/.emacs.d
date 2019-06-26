@@ -2,7 +2,7 @@
 
 ;; Make the fringe color suitable for the choose themes
 ;;;###autoload
-(defun lew/toggle-fringe-color-suitable-for-theme ()
+(defun jl/toggle-fringe-color-suitable-for-theme ()
   (set-face-attribute 'fringe nil
                       :background (face-background 'default)
                       :foreground (face-background 'default)))
@@ -14,7 +14,7 @@
     (unless (custom-theme-p theme)
       (load-theme theme)))
   (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))
-  (lew/toggle-fringe-color-suitable-for-theme))
+  (jl/toggle-fringe-color-suitable-for-theme))
 
 (add-hook 'after-init-hook 'reapply-themes)
 

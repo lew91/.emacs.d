@@ -6,11 +6,11 @@
 
 ;;; Code:
 
-;; (setq desktop-path (list jakelew-emacs-root-dir)
+;; (setq desktop-path (list jl-emacs-root-dir)
 ;;       desktop-auto-save-timeout 600)
 ;; (desktop-save-mode 1)
 
-;; (setq session-save-file (expand-file-name ".session" jakelew-emacs-root-dir))
+;; (setq session-save-file (expand-file-name ".session" jl-emacs-root-dir))
 ;; (setq session-name-disable-regexp "\\(?:\\`'/tmp\\|\\.git/[A-Z_]+\\'\\)")
 ;; (setq session-save-file-coding-system 'utf-8)
 
