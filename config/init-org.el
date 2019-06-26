@@ -14,7 +14,7 @@
 (require 'org-bullets)
 (require 'cal-china-x)
 (require 'ox-md)                ; Markdown back-end
-(require-package 'ox-jekyll-md) ; org files -> jekyll style markdown files
+(require 'ox-jekyll-md) ; org files -> jekyll style markdown files
 (require 'ox-latex)
 
 
@@ -469,6 +469,7 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
                             (concat "\\(" reg-han "\\) *\n *")
                             "\\1" orig-contents))
       (ad-set-arg 1 fixed-contents))))
+
 
 (after-load 'ox-latex
   ;; Exporting configuration
