@@ -34,11 +34,11 @@
     (defvar-local lew/page-break-lines-on-p nil)
 
     (defun lew/page-break-lines-disable (&rest ignore)
-      (when (setq sanityinc/page-break-lines-on-p (bound-and-true-p page-break-lines-mode))
+      (when (setq lew/page-break-lines-on-p (bound-and-true-p page-break-lines-mode))
         (page-break-lines-mode -1)))
 
     (defun lew/page-break-lines-maybe-reenable (&rest ignore)
-      (when sanityinc/page-break-lines-on-p
+      (when lew/page-break-lines-on-p
         (page-break-lines-mode 1)))
 
     (add-hook 'company-completion-started-hook 'lew/page-break-lines-disable)
