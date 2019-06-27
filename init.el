@@ -1,18 +1,8 @@
-;; 设置加载子目录路径
 (defun add-subdirs-to-load-path (dir)
   "Recursive add directories DIR to `load-path'."
   (let ((default-directory (file-name-as-directory dir)))
     (add-to-list 'load-path dir)
     (normal-top-level-add-subdirs-to-load-path)))
-
-;; melpa 目录
-(add-subdirs-to-load-path "~/.emacs.d/elpa/")
-;; 额外插件路径
-(add-subdirs-to-load-path "~/.emacs.d/extensions/")
-;; 配置文件主目录
-(add-to-list 'load-path "~/.emacs.d/config")
-
-
 
 
 (let (
@@ -24,6 +14,10 @@
   (defvar jl-emacs-root-dir (file-truename "~/.emacs.d"))
   (defvar jl-emacs-config-dir (concat jl-emacs-root-dir "/config"))
   (defvar jl-emacs-extension-dir (concat jl-emacs-root-dir "/extensions"))
+
+  (add-subdirs-to-load-path (expand-file-name "elpa" jl-emacs-root-dir))
+  (add-subdirs-to-load-path jl-emacs-extension-dir)
+  (add-to-list 'load-path jl-emacs-config-dir)
 
 
 

@@ -1,6 +1,6 @@
 (require 'package)
 
-(setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
+(setq package-user-dir (expand-file-name "elpa" jl-emacs-root-dir))
 
 (setq package-archives
       '(;;("gnu" . "https://elpa.gnu.org/packages/")
