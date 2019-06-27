@@ -27,7 +27,7 @@
 )
 
 
-(defun jake/magit-submodule-add+ (url)
+(defun jl/magit-submodule-add+ (url)
   (interactive "sURL: ")
   (let ((parent-dir (cadr (split-string (file-name-as-directory jl-emacs-extension-dir) (expand-file-name (cdr (project-current)))))))
     (magit-submodule-add
@@ -35,16 +35,16 @@
      (concat parent-dir (file-name-base url))
      (file-name-base url))))
 
-(defun jake/magit-submodule-remove+ ()
+(defun jl/magit-submodule-remove+ ()
   (interactive)
   (magit-submodule-remove (list (magit-read-module-path "Remove module")) "--force" nil))
 
-(defun jake/magit-status+ ()
+(defun jl/magit-status+ ()
   (interactive)
   (magit-status)
   (other-window 1))
 
-(defun jake/magit-blame+ ()
+(defun jl/magit-blame+ ()
   (interactive)
   (setq magit-blame--style
         '(margin
@@ -54,7 +54,7 @@
           (margin-body-face magit-blame-dimmed)))
   (magit-blame))
 
-(defun jake/magit-delete-remote-branch ()
+(defun jl/magit-delete-remote-branch ()
   (interactive)
   (when (y-or-n-p (format "Delete remote branch (%s): " (magit-get-current-branch)))
     (magit-run-git-async "push" "origin" (format ":%s" (magit-get-current-branch)))))
