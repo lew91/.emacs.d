@@ -27,7 +27,7 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
-(unless (file-exists-p (expand-file-name "elpa" user-emacs-directory))
+(unless (file-exists-p (expand-file-name "elpa" jl-emacs-root-dir))
   (package-refresh-contents))
 
 ;; This functions has a macro '--each' from dash.el.
