@@ -1,4 +1,5 @@
-(setq-default custom-enabled-themes '(wombat))
+
+(setq-default custom-enabled-themes '(deeper-blue))
 
 ;; Make the fringe color suitable for the choose themes
 ;;;###autoload
@@ -25,13 +26,13 @@
 (defun theme/light ()
   "Activate a light color theme."
   (interactive)
-  (setq custom-enabled-themes '(adwaita))
+  (setq custom-enabled-themes '(dichromacy))
   (reapply-themes))
 
 (defun theme/dark ()
   "Activate a dark color theme."
   (interactive)
-  (setq custom-enabled-themes '(wombat))
+  (setq custom-enabled-themes '(deeper-blue))
   (reapply-themes))
 
 
