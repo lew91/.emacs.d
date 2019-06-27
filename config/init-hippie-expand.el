@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'hippie-exp)
+;;(require 'hippie-exp)
 
 (global-set-key (kbd "M-/") 'hippie-expand)
 
