@@ -42,7 +42,6 @@
      org-pomodoro
      org-cliplink
      org-bullets
-     ns-auto-titlebar
      multiple-cursors
      move-dup
      mode-line-bell
@@ -64,13 +63,15 @@
      hl-todo
      highlight-quoted
      highlight-escape-sequences
-     helm-swoop helm-projectile
+     helm-swoop
+     helm-projectile
      helm-descbinds
      helm-ag
      guide-key
      grab-mac-link
      goto-line-preview
-     gnuplot fullframe
+     gnuplot
+     fullframe
      format-all
      flycheck-pos-tip
      flycheck-package
@@ -82,7 +83,8 @@
      diminish
      diff-hl
      default-text-scale
-     dash-at-point darcsum
+     dash-at-point
+     darcsum
      daemons
      company-quickhelp
      company-anaconda
