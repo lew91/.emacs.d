@@ -20,6 +20,7 @@
      undo-tree
      textile-mode
      symbol-overlay
+     swiper
      switch-window
      sqlformat
      smex
@@ -32,10 +33,17 @@
      regex-tool
      rainbow-mode
      rainbow-delimiters
+     pythonic
+     projectile
+     pos-tip
+     popwin
+     popup
      pip-requirements
      paredit-everywhere
      page-break-lines
+     paredit
      paradox
+     ox-jekyll-md
      osx-trash
      osx-location
      origami
@@ -49,6 +57,8 @@
      markdown-mode
      magit
      macrostep
+     lsp-ui
+     lsp-mode
      list-unicode-display
      ledger-mode
      ivy-xref
@@ -74,6 +84,7 @@
      fullframe
      format-all
      flycheck-pos-tip
+     flycheck-popup-tip
      flycheck-package
      flycheck-ledger
      flycheck-color-mode-line
@@ -84,9 +95,11 @@
      diff-hl
      default-text-scale
      dash-at-point
+     dash
      darcsum
      daemons
      company-quickhelp
+     company-lsp
      company-anaconda
      command-log-mode
      cmd-to-echo
@@ -100,6 +113,7 @@
      benchmark-init
      avy
      auto-compile
+     anaconda-mode
      anzu
      aggressive-indent
      ag
