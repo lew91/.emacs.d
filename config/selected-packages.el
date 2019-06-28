@@ -115,7 +115,6 @@
      auto-compile
      anaconda-mode
      anzu
-     aggressive-indent
      ag
      )))
 

@@ -12,7 +12,6 @@
 (require 'symbol-overlay)
 (require 'multiple-cursors)
 (require 'expand-region)
-(require 'aggressive-indent)
 (require 'rainbow-delimiters)
 (require 'move-dup)
 (require 'whole-line-or-region)
@@ -50,7 +49,6 @@
 (add-hook 'after-init-hook 'global-hungry-delete-mode)
 (add-hook 'after-init-hook 'show-paren-mode)
 (add-hook 'after-init-hook 'hes-mode)
-(add-hook 'prog-mode-hook 'aggressive-indent-mode)
 
 (when (fboundp 'display-line-numbers-mode)
   (setq-default display-line-numbers-width 3)
