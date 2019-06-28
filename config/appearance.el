@@ -128,7 +128,12 @@
   (setq backup-directory-alist `((".*" . ,(locate-user-emacs-file ".backup"))))
   (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t))))
 
-
+;; Allow access from emacsclient
+(add-hook 'after-init-hook
+          (lambda ()
+            (require 'server)
+            (unless (server-running-p)
+              (server-start))))
 
 
 (provide 'appearance)
