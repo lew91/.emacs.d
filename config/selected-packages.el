@@ -23,6 +23,7 @@
      swiper
      switch-window
      sqlformat
+     solarized-theme
      smex
      smooth-scrolling
      slime-company
@@ -104,6 +105,7 @@
      command-log-mode
      cmd-to-echo
      counsel
+     color-theme-sanityinc-tomorrow
      cl-libify
      cl-lib-highlight
      cal-china-x
