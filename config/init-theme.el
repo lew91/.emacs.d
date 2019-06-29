@@ -1,5 +1,5 @@
 
-(setq-default custom-enabled-themes '(deeper-blue))
+(setq-default custom-enabled-themes '(sanityinc-tomorrow-night))
 
 ;; Make the fringe color suitable for the choose themes
 ;;;###autoload
@@ -21,6 +21,7 @@
 
 
 
+
 ;; Toggle between light and dark
 
 (defun theme/light ()
@@ -32,7 +33,7 @@
 (defun theme/dark ()
   "Activate a dark color theme."
   (interactive)
-  (setq custom-enabled-themes '(deeper-blue))
+  (setq custom-enabled-themes '(sanityinc-tomorrow-night))
   (reapply-themes))
 
 
