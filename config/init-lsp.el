@@ -4,7 +4,7 @@
 (require 'lsp-ui)
 (require 'company-lsp)
 
-(setq ;;lsp-auto-guess-root t             ; Detect project root
+(setq lsp-auto-guess-root nil             ; default is nil, wanna auto indicator? set it t
       lsp-prefer-flymake nil              ; Use lsp-ui and flycheck
       flymake-fringe-indicator-position 'right-fringe)
 
@@ -29,6 +29,7 @@
                'go-mode-hook
                'c-mode-hook
                'c++-mode-hook
+               'python-mode-hook
                ))
   (add-hook hook '(lambda ()
                     (lsp)

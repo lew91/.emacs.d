@@ -78,7 +78,7 @@
          (require 'init-common-lisp)
          (require 'init-paredit)
          ;;(require 'init-ycmd)                        ; just for C/C++
-         (require 'init-python)
+         ;;(require 'init-python)
          (require 'init-eldoc)
          (require 'init-dash)
          (require 'init-projectile)
