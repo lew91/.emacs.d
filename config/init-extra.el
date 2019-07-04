@@ -7,6 +7,7 @@
 
 ;;; Code:
 
+;;(require 'auto-save)
 (require 'grep-dired)              ; Usage: M-x 'grep-dired', find file in dired-mode
 (require 'company-english-helper)  ; Usage: M-x 'toggle-company-english-helper'
 (require 'insert-translated-name)  ; Usage: M-x  'insert-translated-name'
@@ -20,6 +21,15 @@
   (add-hook hook '(lambda ()
                     (insert-translated-name-use-original-translation))
             ))
+
+
+;; (auto-save-enable)
+;; (setq auto-save-silent t)
+;; (setq auto-save-delete-trailing-whitespace t)
+
+;; ;; no backup files
+;; (setq make-backup-files nil)
+;; (setq auto-save-default nil)
 
 (provide 'init-extra)
 ;;; init-extra.el ends here

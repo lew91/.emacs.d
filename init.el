@@ -30,7 +30,6 @@
     ;;(require 'selected-packages)      ; Only need once when build this configuration, submodules usage (the extensions folder): 'git submodule update --init --recursive'
 
     (require 'init-exec-path)
-    ;;(require 'init-auto-save)
     (require 'basic-edit-toolkit)
     (require 'init-fonts)              ; Set of fonts, especially Chinese and English fonts aligned
     (require 'init-grep)
