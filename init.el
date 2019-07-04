@@ -6,11 +6,9 @@
 
 
 (let (
-      ;; 加载的时候临时增大`gc-cons-threshold'以加速启动速度。
       (gc-cons-threshold most-positive-fixnum)
-      ;; 清空避免加载远程文件的时候分析文件。
       (file-name-handler-alist nil))
-  ;; 定义一些启动目录，方便下次迁移修改
+  ;; Comparative more migratable
   (defvar jl-emacs-root-dir (file-truename "~/.emacs.d"))
   (defvar jl-emacs-config-dir (concat jl-emacs-root-dir "/config"))
   (defvar jl-emacs-extension-dir (concat jl-emacs-root-dir "/extensions"))
@@ -21,27 +19,26 @@
 
 
 
-  (require 'benchmark-init)               ;启动时间测试
-  (add-hook 'after-init-hook 'benchmark-init/deactivate)  ; 启动后停止激活状态
+  (require 'benchmark-init)               ; Test the Emacs startup time
+  (add-hook 'after-init-hook 'benchmark-init/deactivate)  ; Deactivate after it loaded
 
-  (with-temp-message ""                 ;抹掉插件启动的输出
+  (with-temp-message ""                 ; No messages when those modules started
 
     (require 'appearance)
-    (require 'basic-utils)               ; 基本工具集，在加载其他模块前加载
-    (require 'setup-package)            ; 设定插件源和安装工具
-    ;;(require 'selected-packages)      ; 只需初始安装时加载一次,extensions文件夹使用 git submodule update --init --recursive 更新使用
+    (require 'basic-utils)               ; Basic utils, must come before setup packages
+    (require 'setup-package)            ; package-archives
+    ;;(require 'selected-packages)      ; Only need once when build this configuration, submodules usage (the extensions folder): 'git submodule update --init --recursive'
 
     (require 'init-exec-path)
     ;;(require 'init-auto-save)
     (require 'basic-edit-toolkit)
-    (require 'init-fonts)              ;字体集，中英文对齐
+    (require 'init-fonts)              ; Set of fonts, especially Chinese and English fonts aligned
     (require 'init-grep)
     (require 'init-smex)
     (require 'init-editing)
     (require 'init-hippie-expand)
     (require 'init-visual-regexp)
     (require 'init-dired)
-    (require 'grep-dired)
     (require 'init-isearch)
     (require 'init-uniquify)
     (require 'init-ibuffer)
@@ -52,7 +49,7 @@
     (require 'init-key-bindings)
 
 
-    ;; 可以延后加载的
+    ;; Those could be defer loaded
     (run-with-idle-timer
      1 nil
      #'(lambda ()
@@ -61,10 +58,8 @@
          (require 'init-ivy)
          ;;(require 'init-helm)
          (require 'init-undo-tree)
-         (require 'init-insert-translated-name)      ; 用‘insert-translated-name’激活
-         (require 'company-english-helper)           ; 用‘toggle-company-english-helper’激活
          (require 'init-org)
-         (require 'org-toolkits)                     ; 自定义一些很有用的函数
+         (require 'org-toolkits)                     ; Customize useful functions
          (require 'init-markdown)
          (require 'init-tex)
          (require 'init-yasnippet)
@@ -77,7 +72,7 @@
          (require 'init-slime)
          (require 'init-common-lisp)
          (require 'init-paredit)
-         ;;(require 'init-ycmd)                        ; just for C/C++
+         ;;(require 'init-ycmd)                        ; Just for C/C++, obsolete now
          ;;(require 'init-python)
          (require 'init-eldoc)
          (require 'init-dash)
@@ -85,6 +80,7 @@
          (require 'init-git)
          (require 'init-vc)
          (require 'init-whitespace)
+         (require 'init-extra nil t)                ; Extra extensions that use git submodule added, or user's additionally customize
          (require 'init-session)
          (emacs-session-restore)
 
