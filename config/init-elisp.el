@@ -2,7 +2,7 @@
 
 (require 'pp)
 (require 'elisp-slime-nav)
-(require 'auto-compile)
+;;(require 'auto-compile)
 (require 'cl-lib-highlight)
 (require 'highlight-quoted)
 
@@ -11,8 +11,8 @@
 (add-hook 'emacs-lisp-mode-hook (lambda () (setq mode-name "ELisp")))
 
 ;; Automatic byte compilation
-(add-hook 'after-init-hook 'auto-compile-on-save-mode)
-(add-hook 'after-init-hook 'auto-compile-on-load-mode)
+;;(add-hook 'after-init-hook 'auto-compile-on-save-mode)
+;;(add-hook 'after-init-hook 'auto-compile-on-load-mode)
 
 (setq load-prefer-newer t) ; load .el if newer than corresponding .elc
 
@@ -91,14 +91,14 @@ and `defcustom' forms reset their default values."
        (list "-Q" "-batch" "-f" "batch-byte-compile" filename)
        " ")))))
 
-(defun jl/auto-compile-load-after-compile (success)
-  "Reload the current emacs-lisp file after it's recompiled, if an older version is loaded."
-  (when (eq success t)
-    (let ((buffer-path (file-truename buffer-file-name)))
-      (when (assoc buffer-path load-history)
-        (load-file buffer-path)))))
+;; (defun jl/auto-compile-load-after-compile (success)
+;;   "Reload the current emacs-lisp file after it's recompiled, if an older version is loaded."
+;;   (when (eq success t)
+;;     (let ((buffer-path (file-truename buffer-file-name)))
+;;       (when (assoc buffer-path load-history)
+;;         (load-file buffer-path)))))
 
-(advice-add 'auto-compile-byte-compile :filter-return #'jl/auto-compile-load-after-compile)
+;; (advice-add 'auto-compile-byte-compile :filter-return #'jl/auto-compile-load-after-compile)
 
 ;;;###autoload
 (defun jl/pp-eval-expression (expression)
