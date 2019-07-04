@@ -24,8 +24,8 @@
 
   (with-temp-message ""                 ; No messages when those modules started
 
-    (require 'appearance)
-    (require 'basic-utils)               ; Basic utils, must come before setup packages
+    (require 'init-appearance)
+    (require 'init-utils)               ; Basic utils, must come before setup packages
     (require 'init-package)            ; package-archives
     (require 'init-exec-path)
     (require 'init-fonts)              ; Set of fonts, especially Chinese and English fonts aligned
@@ -55,7 +55,7 @@
          ;;(require 'init-helm)
          (require 'init-undo-tree)
          (require 'init-org)
-         (require 'org-toolkits)                     ; Customize useful functions
+         (require 'init-org-toolkits)                     ; Customize useful functions
          (require 'init-markdown)
          (require 'init-tex)
          (require 'init-yasnippet)
