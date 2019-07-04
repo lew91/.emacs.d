@@ -69,7 +69,7 @@
          (require 'init-tex)
          (require 'init-yasnippet)
          (require 'init-company)
-         (require 'init-flycheck)
+         ;;(require 'init-flycheck)
          (require 'init-ispell)
          (require 'init-origami)
          (require 'init-lsp)

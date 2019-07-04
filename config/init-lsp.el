@@ -5,8 +5,8 @@
 (require 'company-lsp)
 
 (setq lsp-auto-guess-root nil             ; default is nil, wanna auto indicator? set it t
-      lsp-prefer-flymake nil              ; Use lsp-ui and flycheck
-      flymake-fringe-indicator-position 'right-fringe)
+      lsp-prefer-flymake t              ; Use flycheck set it t, otherwise nil for flymake
+      flymake-fringe-indicator-position 'left-fringe)
 
 ;; clangd
 (when (equal system-type 'darwin)
