@@ -26,11 +26,8 @@
 
     (require 'appearance)
     (require 'basic-utils)               ; Basic utils, must come before setup packages
-    (require 'setup-package)            ; package-archives
-    ;;(require 'selected-packages)      ; Only need once when build this configuration, submodules usage (the extensions folder): 'git submodule update --init --recursive'
-
+    (require 'init-package)            ; package-archives
     (require 'init-exec-path)
-    (require 'basic-edit-toolkit)
     (require 'init-fonts)              ; Set of fonts, especially Chinese and English fonts aligned
     (require 'init-grep)
     (require 'init-smex)
