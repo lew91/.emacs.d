@@ -125,30 +125,25 @@ locate PACKAGE."
      org-bullets
      multiple-cursors
      move-dup
-     mode-line-bell
      mmm-mode
      markdown-mode
      magit
      macrostep
      lsp-ui
      lsp-mode
-     list-unicode-display
      ledger-mode
      ivy-xref
      ivy
-     ipretty
-     info-colors
-     immortal-scratch
      ibuffer-vc
      ibuffer-projectile
      hydra
      hungry-delete
+     htmlize
      hl-todo
      highlight-quoted
      highlight-escape-sequences
      helm-swoop
      helm-projectile
-     helm-descbinds
      helm-ag
      guide-key
      grab-mac-link
@@ -174,7 +169,6 @@ locate PACKAGE."
      company-lsp
      company-anaconda
      command-log-mode
-     cmd-to-echo
      counsel
      color-theme-sanityinc-tomorrow
      cl-libify
@@ -185,7 +179,6 @@ locate PACKAGE."
      bind-key
      benchmark-init
      avy
-     auto-compile
      anaconda-mode
      anzu
      ag
