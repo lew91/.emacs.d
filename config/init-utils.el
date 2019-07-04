@@ -59,4 +59,4 @@ A `spec' can be a `read-kbd-macro'-readable string or a vector."
 
 
 
-(provide 'basic-utils)
+(provide 'init-utils)
