@@ -169,7 +169,6 @@ locate PACKAGE."
      default-text-scale
      dash-at-point
      dash
-     darcsum
      daemons
      company-quickhelp
      company-lsp
