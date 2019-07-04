@@ -136,4 +136,4 @@
               (server-start))))
 
 
-(provide 'appearance)
+(provide 'init-appearance)
