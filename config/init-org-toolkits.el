@@ -213,4 +213,4 @@
              chinese-char chinese-char-and-punc english-word
              (+ chinese-char english-word)))))
 
-(provide 'org-toolkits)
+(provide 'init-org-toolkits)
