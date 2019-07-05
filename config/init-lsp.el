@@ -1,8 +1,11 @@
-
+(require 'eglot)
 (require 'lsp-mode)
 (require 'lsp-clients)
 (require 'lsp-ui)
 (require 'company-lsp)
+
+(add-hook 'python-mode-hook 'eglot-ensure)
+
 
 (setq lsp-auto-guess-root nil             ; default is nil, wanna auto indicator? set it t
       lsp-prefer-flymake t              ; Use flycheck set it nil, otherwise t for flymake
@@ -18,8 +21,8 @@
       lsp-ui-doc-delay 1.0
       lsp-ui-doc-postition 'at-point)
 
-(after-load 'lsp-mode
-  (after-load 'company
+(with-eval-after-load 'lsp-mode
+  (with-eval-after-load 'company
     (push 'company-lsp company-backends)))
 
 ;; lsp支持特定的mode, 而不是全局
@@ -29,7 +32,7 @@
                'go-mode-hook
                'c-mode-hook
                'c++-mode-hook
-               'python-mode-hook
+               ;;'python-mode-hook
                ))
   (add-hook hook '(lambda ()
                     (lsp)
@@ -37,7 +40,7 @@
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
 
-(after-load 'lsp-ui
+(with-eval-after-load 'lsp-ui
   ;;(define-key lsp-mode-map (kbd "C-c C-d") 'lsp-describe-thing-at-point)
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
