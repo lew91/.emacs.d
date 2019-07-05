@@ -146,7 +146,6 @@ locate PACKAGE."
      helm-ag
      grab-mac-link
      goto-line-preview
-     gnuplot
      fullframe
      format-all
      flycheck-pos-tip
@@ -170,7 +169,6 @@ locate PACKAGE."
      counsel
      color-theme-sanityinc-tomorrow
      cl-libify
-     cl-lib-highlight
      cal-china-x
      browse-kill-ring
      browse-at-remote
