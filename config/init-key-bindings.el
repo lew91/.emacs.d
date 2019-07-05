@@ -21,11 +21,9 @@
        )
       )
 
-(require 'guide-key)
-(setq guide-key/guide-key-sequence t)
-(add-hook 'after-init-hook 'guide-key-mode)
-(after-load 'guide-key
-  (diminish 'guide-key-mode))
+(require 'which-key)
+(which-key-mode)
+(diminish 'which-key-mode)
 
 ;; Misc 可选，键绑定更便捷
 (require 'bind-key)

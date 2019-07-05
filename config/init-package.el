@@ -82,6 +82,7 @@ locate PACKAGE."
      writeroom-mode
      whole-line-or-region
      whitespace-cleanup-mode
+     which-key
      wgrep-ag
      wgrep
      vlf
@@ -143,7 +144,6 @@ locate PACKAGE."
      helm-swoop
      helm-projectile
      helm-ag
-     guide-key
      grab-mac-link
      goto-line-preview
      gnuplot
