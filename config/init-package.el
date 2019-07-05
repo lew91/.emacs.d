@@ -116,8 +116,6 @@ locate PACKAGE."
      paredit
      paradox
      ox-jekyll-md
-     osx-trash
-     osx-location
      origami
      org-pomodoro
      org-cliplink

@@ -11,11 +11,14 @@
       dired-ls-F-marks-symlinks t  ; -F marks links with @
       )
 
+(setq delete-by-moving-to-trash t)
 
-(when (featurep 'cocoa)
-  (require 'osx-trash)
-  (osx-trash-setup)
-  (setq delete-by-moving-to-trash t))  ; osx delete file to trash
+(defun system-move-file-to-trash (file)
+  "Use \"trash\" to move FILE to the system trash.
+When using Homebrew, install it using \"brew install trash\"."
+  (call-process (executable-find "trash")
+		nil 0 nil
+		file))
 
 (when (or (memq system-type '(gnu gnu/linux))
           (string= (file-name-nondirectory insert-directory-program) "gls"))
