@@ -10,4 +10,6 @@
                       (setq eldoc-idle-delay 0)
                       (turn-on-eldoc-mode)))))
 
+(diminish 'eldoc-mode)
+
 (provide 'init-eldoc)
