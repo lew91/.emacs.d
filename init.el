@@ -25,7 +25,6 @@
   (with-temp-message ""                 ; No messages when those modules started
 
     (require 'init-appearance)
-    (require 'init-utils)               ; Basic utils, must come before setup packages
     (require 'init-package)            ; package-archives
     (require 'init-exec-path)
     (require 'init-fonts)              ; Set of fonts, especially Chinese and English fonts aligned
