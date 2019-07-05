@@ -4,7 +4,6 @@
 
 (require 'slime)
 (require 'slime-company)
-(require 'hippie-expand-slime)
 
 ;; auto-complete
 (after-load 'slime
@@ -16,9 +15,6 @@
 ;;(mapc #'delete-file
 ;;      (file-expand-wildcards (concat user-emacs-directory "elpa/slime-2*/contrib/*.elc")))
 
-(defun jl/slime-setup ()
-  "Mode setup function for slime lisp buffers."
-  (set-up-slime-hippie-expand))
 
 (after-load 'slime
   (setq slime-protocol-version 'ignore)
@@ -27,23 +23,19 @@
                   '(slime-company))))
     (slime-setup (append '(slime-repl slime-fuzzy) extras)))
   (setq slime-complete-symbol*-fancy t)
-  (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
-  (add-hook 'slime-mode-hook 'jl/slime-setup))
+  (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol))
 
-(defun jl/slime-repl-setup ()
-  "Mode setup function for slime REPL."
-  (enable-paredit-mode)
-  (set-up-slime-hippie-expand))
+
 
 (after-load 'slime-repl
+  (enable-paredit-mode)
   ;; Stop SLIME's REPL from grabbing DEL, which is annoying when backspacing over a '('
   (after-load 'paredit
     (define-key slime-repl-mode-map (read-kbd-macro paredit-backward-delete-key) nil))
 
   ;; Bind TAB to `indent-for-tab-command', as in regular Slime buffers.
-  (define-key slime-repl-mode-map (kbd "TAB") 'indent-for-tab-command)
+  (define-key slime-repl-mode-map (kbd "TAB") 'indent-for-tab-command))
 
-  (add-hook 'slime-repl-mode-hook 'jl/slime-repl-setup))
 
 (defun jl/slime-eval-sexp-of-line ()
   "Evaluate current line."
