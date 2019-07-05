@@ -2,10 +2,8 @@
 (require 'anzu)
 (require 'browse-kill-ring)
 (require 'expand-region)
-(require 'unfill)
 (require 'diff-hl)
 (require 'hungry-delete)
-(require 'highlight-escape-sequences)
 (require 'image-file)
 (require 'vlf)
 (require 'goto-line-preview)
@@ -48,7 +46,6 @@
 (add-hook 'after-init-hook 'transient-mark-mode)
 (add-hook 'after-init-hook 'global-hungry-delete-mode)
 (add-hook 'after-init-hook 'show-paren-mode)
-(add-hook 'after-init-hook 'hes-mode)
 
 (when (fboundp 'display-line-numbers-mode)
   (setq-default display-line-numbers-width 3)
