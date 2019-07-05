@@ -87,15 +87,10 @@ locate PACKAGE."
      wgrep
      vlf
      visual-regexp
-     vc-darcs
-     uptimes
-     unfill
      undo-tree
-     textile-mode
      symbol-overlay
      swiper
      switch-window
-     sqlformat
      solarized-theme
      smex
      smooth-scrolling
@@ -137,13 +132,11 @@ locate PACKAGE."
      hungry-delete
      htmlize
      hl-todo
-     highlight-escape-sequences
      helm-swoop
      helm-projectile
      helm-ag
      grab-mac-link
      goto-line-preview
-     fullframe
      format-all
      flycheck-pos-tip
      flycheck-popup-tip
@@ -152,7 +145,6 @@ locate PACKAGE."
      flycheck-color-mode-line
      expand-region
      exec-path-from-shell
-     elisp-slime-nav
      diminish
      diff-hl
      default-text-scale
@@ -162,7 +154,6 @@ locate PACKAGE."
      company-quickhelp
      company-lsp
      company-anaconda
-     command-log-mode
      counsel
      color-theme-sanityinc-tomorrow
      cl-libify
