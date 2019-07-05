@@ -1,5 +1,5 @@
 (require 'company)
-(require 'company-quickhelp)
+;;(require 'company-quickhelp)
 
 
 ;; Config for company mode.
@@ -18,13 +18,13 @@
 (define-key company-active-map (kbd "M-/") 'company-other-backend)
 (define-key company-active-map (kbd "C-n") 'company-select-next)
 (define-key company-active-map (kbd "C-p") 'company-select-previous)
-(define-key company-active-map (kbd "M-h") 'company-quickhelp-manual-begin)
+;;(define-key company-active-map (kbd "M-h") 'company-quickhelp-manual-begin)
 (setq-default company-dabbrev-other-buffers 'all
              company-tooltip-align-annotations t)
 (global-set-key (kbd "M-C-/") 'company-complete)
 
-(setq company-quickhelp-delay nil)  ;; manually popup
-(add-hook 'company-mode-hook 'company-quickhelp-mode)
+;;(setq company-quickhelp-delay nil)  ;; manually popup
+;;(add-hook 'company-mode-hook 'company-quickhelp-mode)
 
 
 

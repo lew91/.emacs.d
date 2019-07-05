@@ -102,7 +102,7 @@ locate PACKAGE."
      rainbow-delimiters
      pythonic
      projectile
-     pos-tip
+     ;;pos-tip
      popup
      pip-requirements
      paredit-everywhere
@@ -149,7 +149,7 @@ locate PACKAGE."
      dash-at-point
      dash
      daemons
-     company-quickhelp
+     ;;company-quickhelp
      company-lsp
      company-anaconda
      counsel
