@@ -109,7 +109,6 @@ locate PACKAGE."
      pythonic
      projectile
      pos-tip
-     popwin
      popup
      pip-requirements
      paredit-everywhere
