@@ -496,7 +496,6 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
      (ditaa . t)
      (dot . t)
      (emacs-lisp . t)
-     (gnuplot . t)
      (haskell . nil)
      (latex . t)
      (ledger . t)
