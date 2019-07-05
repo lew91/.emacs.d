@@ -4,7 +4,7 @@
 
 ;; See http://bc.tech.coop/blog/070927.html
 ;;(add-auto-mode 'lisp-mode "\\.cl\\'")
-(add-to-list 'auto-mode-alist ("\\.cl\\'" . lisp-mode))
+(add-to-list 'auto-mode-alist '("\\.cl\\'" . lisp-mode))
 (add-hook 'lisp-mode-hook (lambda ()
                             (unless (featurep 'slime)
                               (require 'slime)
