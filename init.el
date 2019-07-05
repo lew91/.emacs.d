@@ -39,7 +39,6 @@
     (require 'init-uniquify)
     (require 'init-ibuffer)
     (require 'init-window)
-    (require 'init-smooth-scrolling)
     (require 'init-theme)
     (require 'init-key-bindings)
 
