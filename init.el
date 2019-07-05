@@ -41,7 +41,6 @@
     (require 'init-window)
     (require 'init-smooth-scrolling)
     (require 'init-theme)
-    (require 'init-session)
     (require 'init-key-bindings)
 
 
@@ -77,8 +76,6 @@
          (require 'init-vc)
          (require 'init-whitespace)
          (require 'init-extra nil t)                ; Extra extensions that use git submodule added, or user's additionally customize
-         (require 'init-session)
-         (emacs-session-restore)
 
          )))
 

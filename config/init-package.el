@@ -100,7 +100,6 @@ locate PACKAGE."
      smooth-scrolling
      slime-company
      slime
-     session
      scratch
      rg
      regex-tool
@@ -140,7 +139,6 @@ locate PACKAGE."
      hungry-delete
      htmlize
      hl-todo
-     highlight-quoted
      highlight-escape-sequences
      helm-swoop
      helm-projectile
