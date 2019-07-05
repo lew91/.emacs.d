@@ -1,7 +1,3 @@
-(require 'fullframe)
-(after-load 'ibuffer
-  (fullframe ibuffer ibuffer-quit))
-
 (require 'ibuffer-vc)
 
 (defun ibuffer-set-up-preferred-filters ()
