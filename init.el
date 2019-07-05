@@ -58,7 +58,6 @@
          (require 'init-tex)
          (require 'init-yasnippet)
          (require 'init-company)
-         ;;(require 'init-flycheck)
          (require 'init-ispell)
          (require 'init-origami)
          (require 'init-lsp)
@@ -66,7 +65,6 @@
          (require 'init-slime)
          (require 'init-common-lisp)
          (require 'init-paredit)
-         ;;(require 'init-ycmd)                        ; Just for C/C++, obsolete now
          ;;(require 'init-python)
          (require 'init-eldoc)
          (require 'init-dash)

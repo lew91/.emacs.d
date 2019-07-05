@@ -93,7 +93,6 @@ locate PACKAGE."
      switch-window
      solarized-theme
      smex
-     smooth-scrolling
      slime-company
      slime
      scratch
@@ -123,7 +122,6 @@ locate PACKAGE."
      macrostep
      lsp-ui
      lsp-mode
-     ledger-mode
      ivy-xref
      ivy
      ibuffer-vc
@@ -138,11 +136,11 @@ locate PACKAGE."
      grab-mac-link
      goto-line-preview
      format-all
-     flycheck-pos-tip
-     flycheck-popup-tip
-     flycheck-package
-     flycheck-ledger
-     flycheck-color-mode-line
+     ;;flycheck-pos-tip
+     ;;flycheck-popup-tip
+     ;;flycheck-package
+     ;;flycheck-color-mode-line
+     ;;flycheck
      expand-region
      exec-path-from-shell
      diminish
