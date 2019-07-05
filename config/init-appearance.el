@@ -67,8 +67,13 @@
 ;;(autoload 'zap-to-char "misc"
 ;;  "Kill up to, but not including ARGth occurrence of CHAR." t)
 
+;; Nicer naming of buffers for files with identical names
 (require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
+;;(setq uniquify-buffer-name-style 'forward)
+(setq uniquify-buffer-name-style 'reverse)
+(setq uniquify-separator " • ")
+(setq uniquify-after-kill-buffer-p t)
+(setq uniquify-ignore-buffers-re "^\\*")
 
 (require 'saveplace)
 (setq-default save-place t)

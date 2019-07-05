@@ -35,7 +35,6 @@
     (require 'init-visual-regexp)
     (require 'init-dired)
     (require 'init-isearch)
-    (require 'init-uniquify)
     (require 'init-ibuffer)
     (require 'init-window)
     (require 'init-theme)
