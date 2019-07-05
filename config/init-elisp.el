@@ -2,7 +2,6 @@
 
 (require 'pp)
 (require 'elisp-slime-nav)
-(require 'cl-lib-highlight)
 
 (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
   (add-hook hook 'turn-on-elisp-slime-nav-mode))
@@ -10,9 +9,6 @@
 
 
 (setq load-prefer-newer t) ; load .el if newer than corresponding .elc
-
-(after-load 'lisp-mode
-  (cl-lib-highlight-initialize))
 
 
 (defun jl/insert-headerise-elisp ()
