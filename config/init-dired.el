@@ -39,7 +39,7 @@ When using Homebrew, install it using \"brew install trash\"."
     (dired-jump)
     (kill-buffer buf)))
 
-(after-load  'dired
+(with-eval-after-load  'dired
   (setq dired-recursive-deletes 'top)
   (define-key dired-mode-map [mouse-2] 'dired-find-file)
   (define-key dired-mode-map (kbd "C-c C-q") 'wdired-change-to-wdired-mode)
@@ -47,10 +47,10 @@ When using Homebrew, install it using \"brew install trash\"."
 
 
 (require 'diff-hl)
-(after-load 'dired
+(with-eval-after-load 'dired
   (add-hook 'dired-mode-hook 'diff-hl-dired-mode))
 
-;; (after-load 'dired+
+;; (with-eval-after-load 'dired+
 ;;   ;; show the details when using dired+
 ;;   (setq diredp-hide-details-propagate-flag nil)
 ;;   (setq diredp-hide-details-initially-flag nil)

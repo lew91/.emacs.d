@@ -31,7 +31,7 @@
 
 (global-set-key [remap eval-expression] 'pp-eval-expression)
 
-(after-load 'lisp-mode
+(with-eval-after-load 'lisp-mode
   (define-key emacs-lisp-mode-map (kbd "C-x C-e") 'jl/eval-last-sexp-or-region))
 
 (defun jl/make-read-only (expression out-buffer-name)

@@ -1,6 +1,6 @@
 (require 'magit)
 
-(after-load 'magit
+(with-eval-after-load 'magit
   ;; Magit configuration.
   (setq magit-commit-ask-to-stage nil)    ;don't ask stage question
   (setq magit-display-buffer-noselect t) ;don't select magit buffer default

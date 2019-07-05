@@ -3,7 +3,7 @@
 
 (add-hook 'after-init-hook 'ivy-mode)
 
-(after-load 'ivy
+(with-eval-after-load 'ivy
   (diminish 'ivy-mode)
 
   (setq-default ivy-use-virtual-buffers t
@@ -35,7 +35,7 @@
 
 (require 'counsel)
 (setq-default counsel-mode-override-describe-bindings t)
-(after-load 'counsel
+(with-eval-after-load 'counsel
   (diminish 'counsel))
 (add-hook 'after-init-hook 'counsel-mode)
 
@@ -62,13 +62,13 @@ instead."
                            (projectile-project-root)
                          (error default-directory)))))
             (funcall search-function initial-input dir)))))
-    (after-load 'ivy
+    (with-eval-after-load 'ivy
       (add-to-list 'ivy-height-alist (cons 'counsel-ag 20)))
 
 (global-set-key (kbd "M-?") 'jl/counsel-search-project)
 
 (require 'swiper)
-(after-load 'ivy
+(with-eval-after-load 'ivy
     (defun jl/swiper-at-point (sym)
       "Use `swiper' to search for the symbol at point."
       (interactive (list (thing-at-point 'symbol)))

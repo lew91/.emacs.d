@@ -58,21 +58,21 @@
 
 
 (global-set-key [remap goto-line] 'goto-line-preview)
-(after-load 'page-break-lines
+(with-eval-after-load 'page-break-lines
   (push 'browse-kill-ring-mode page-break-lines-modes))
 
 
 
 (diminish 'anzu-mode)
 (diminish 'hungry-delete-mode)
-(after-load 'autorevert
+(with-eval-after-load 'autorevert
   (diminish 'auto-revert-mode))
-(after-load 'subword
+(with-eval-after-load 'subword
   (diminish 'subword-mode))
 (diminish 'symbol-overlay-mode)
-(after-load 'page-break-lines
+(with-eval-after-load 'page-break-lines
   (diminish 'page-break-lines-mode))
-(after-load 'whole-line-or-region
+(with-eval-after-load 'whole-line-or-region
   (diminish 'whole-line-or-region-local-mode))
 
 

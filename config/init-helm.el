@@ -35,7 +35,7 @@
 
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
 
-(after-load 'helm
+(with-eval-after-load 'helm
   ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
   ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
   ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
@@ -89,7 +89,7 @@
       helm-swoop-use-line-number-face t
       helm-swoop-use-fuzzy-match t)
 
-(after-load 'helm-swoop
+(with-eval-after-load 'helm-swoop
   (define-key helm-command-map (kbd "s") 'helm-swoop)
   (define-key helm-command-map (kbd "r") 'helm-swoop-back-to-last-point)
   (define-key helm-command-map (kbd "m") 'helm-multi-swoop)

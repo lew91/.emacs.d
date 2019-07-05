@@ -10,16 +10,16 @@
                 ("SConscript\\'" . python-mode))
               auto-mode-alist))
 
-(after-load 'python
+(with-eval-after-load 'python
     (add-hook 'python-mode-hook 'anaconda-mode)
     (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
 
-(after-load 'anaconda-mode
+(with-eval-after-load 'anaconda-mode
     (define-key anaconda-mode-map (kbd "M-?") nil))
 
 
-(after-load 'company
-      (after-load 'python
+(with-eval-after-load 'company
+      (with-eval-after-load 'python
         (push 'company-anaconda company-backends)))
 
 

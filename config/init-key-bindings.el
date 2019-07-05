@@ -46,7 +46,7 @@
 
 
 (global-set-key (kbd "M-Y") 'browse-kill-ring)
-(after-load 'browse-kill-ring
+(with-eval-after-load 'browse-kill-ring
   (define-key browse-kill-ring-mode-map (kbd "C-g") 'browse-kill-ring-quit)
   (define-key browse-kill-ring-mode-map (kbd "M-n") 'browse-kill-ring-forward)
   (define-key browse-kill-ring-mode-map (kbd "M-p") 'browse-kill-ring-previous))
@@ -75,7 +75,7 @@
 (global-set-key (kbd "C-c m a") 'mc/edit-beginnings-of-lines)
 
 
-(after-load 'symbol-overlay
+(with-eval-after-load 'symbol-overlay
   (define-key symbol-overlay-mode-map (kbd "M-i") 'symbol-overlay-put)
   (define-key symbol-overlay-mode-map (kbd "M-n") 'symbol-overlay-jump-next)
   (define-key symbol-overlay-mode-map (kbd "M-p") 'symbol-overlay-jump-prev)
@@ -83,7 +83,7 @@
   (define-key symbol-overlay-mode-map (kbd "C-g") 'symbol-overlay-remove-all))
 
 ;; org
-(after-load 'org
+(with-eval-after-load 'org
   (define-key global-map (kbd "C-c l") 'org-store-link)
   (define-key global-map (kbd "C-c a") 'org-agenda))
 (global-set-key (kbd "C-c c") 'org-capture)

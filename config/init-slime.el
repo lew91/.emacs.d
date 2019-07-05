@@ -6,7 +6,7 @@
 (require 'slime-company)
 
 ;; auto-complete
-(after-load 'slime
+(with-eval-after-load 'slime
   (slime-setup '(slime-company)))
 
 ;; package.el compiles the contrib subdir, but the compilation order
@@ -16,7 +16,7 @@
 ;;      (file-expand-wildcards (concat user-emacs-directory "elpa/slime-2*/contrib/*.elc")))
 
 
-(after-load 'slime
+(with-eval-after-load 'slime
   (setq slime-protocol-version 'ignore)
   (setq slime-net-coding-system 'utf-8-unix)
   (let ((extras (when (require 'slime-company nil t)
@@ -27,10 +27,10 @@
 
 
 
-(after-load 'slime-repl
+(with-eval-after-load 'slime-repl
   (enable-paredit-mode)
   ;; Stop SLIME's REPL from grabbing DEL, which is annoying when backspacing over a '('
-  (after-load 'paredit
+  (with-eval-after-load 'paredit
     (define-key slime-repl-mode-map (read-kbd-macro paredit-backward-delete-key) nil))
 
   ;; Bind TAB to `indent-for-tab-command', as in regular Slime buffers.

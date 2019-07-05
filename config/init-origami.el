@@ -1,7 +1,7 @@
 (require 'origami)
 
 
-(after-load 'origami
+(with-eval-after-load 'origami
     (defhydra origami-hydra (:color blue :hint none)
       "
       _:_: recursively toggle node       _a_: toggle all nodes    _t_: toggle node

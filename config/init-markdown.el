@@ -26,7 +26,7 @@
   (setq imenu-create-index-function 'markdown-imenu-index))
 (add-hook 'markdown-mode-hook 'markdown-mode-hook-setup)
 
-(after-load 'markdown-mode
+(with-eval-after-load 'markdown-mode
      ;; `pandoc' is better than obsolete `markdown'
      ;; Temporarily not installed，Maybe need an absolute path to verify the pandoc if exited.
      (when (executable-find "pandoc")

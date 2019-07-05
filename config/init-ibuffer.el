@@ -10,7 +10,7 @@
 (setq-default ibuffer-show-empty-filter-groups nil)
 
 
-(after-load 'ibuffer
+(with-eval-after-load 'ibuffer
   ;; Use human readable Size column instead of original one
   (define-ibuffer-column size-h
     (:name "Size" :inline t)

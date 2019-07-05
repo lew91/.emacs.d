@@ -7,7 +7,7 @@
 (global-set-key [remap query-replace] 'anzu-query-replace)
 
 ;; Activate occur easily inside isearch
-(after-load 'isearch
+(with-eval-after-load 'isearch
   ;; DEL during isearch should edit the search string, not jump back to the previous result
   (define-key isearch-mode-map [remap isearch-delete-char] 'isearch-del-char)
 
