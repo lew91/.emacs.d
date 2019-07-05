@@ -4,6 +4,7 @@
 
 ;; Config for company mode.
 (add-hook 'prog-mode-hook 'company-mode)
+(diminish 'company-mode)
 (setq company-idle-delay 0.2)   ; set the completion menu pop-up delay
 (setq company-minimum-prefix-length 1) ; pop up a completion menu by tapping a character
 (setq company-show-numbers nil)   ; do not display numbers on the left
