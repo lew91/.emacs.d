@@ -20,9 +20,24 @@
 (blink-cursor-mode -1)
 (setq ring-bell-function 'ignore)
 (setq inhibit-startup-screen t)         ;inhibit start screen
-(setq initial-scratch-message "Happly hacking!\n")
+;;(setq initial-scratch-message (concat ";; Happly hacking! " user-login-name "- Emacs ♥ you!\n\n"))
 (setq inhibit-compacting-font-caches t)
 
+(setq initial-scratch-message (concat "
+;;                _.-^^---....,,--
+;;            _--                  --_
+;;           <          SONIC         >)
+;;           |       BOOOOOOOOM!       |
+;;            \\._                   _./
+;;               ```--. . , ; .--'''
+;;                     | |   |
+;;                  .-=||  | |=-.
+;;                  `-=#$%&%$#=-'
+;;                     | ;  :|
+;;            _____.,-#%&$@%#&#~,._____
+;;                Happly hacking !!!
+;;              " user-login-name
+                    " - Emacs ♥ you!\n\n"))
 
 (setq use-dialog-box nil)               ;never pop dialog
 (setq use-file-dialog nil)
