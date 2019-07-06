@@ -4,13 +4,13 @@
 ;;; Code:
 
 
-(defun get-git-user-name ()
-  (interactive)
-  (replace-regexp-in-string "\n$" "" (shell-command-to-string "git config --get user.name")))
+;; (defun get-git-user-name ()
+;;   (interactive)
+;;   (replace-regexp-in-string "\n$" "" (shell-command-to-string "git config --get user.name")))
 
-(defun get-git-user-email ()
-  (interactive)
-  (replace-regexp-in-string "\n$" "" (shell-command-to-string "git config --get user.email")))
+;; (defun get-git-user-email ()
+;;   (interactive)
+;;   (replace-regexp-in-string "\n$" "" (shell-command-to-string "git config --get user.email")))
 
 ;;(setq yas-snippet-dirs (append yas-snippet-dirs
 ;;     (concat jl-emacs-root-dir "/snippets")  ; custom snippets
