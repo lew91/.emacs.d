@@ -1,6 +1,5 @@
-(require-package 'cdlatex)
+(require 'cdlatex)
 (require 'reftex)
-(maybe-require-package 'auctex)
 
 (load "auctex.el" nil t t)
 
@@ -18,7 +17,7 @@
       TeX-source-correlate-method 'synctex)
 
 (setq-default TeX-master nil       ; Ask for the mater file
-              TeX-engine 'luatex   ; Use a Modern engine
+               TeX-engine 'luatex   ; Use a Modern engine
               ;; redundant in 11.88, but keep for older AUCtex
               TeX-PDF-mode t)
 

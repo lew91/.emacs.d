@@ -471,22 +471,6 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
       (ad-set-arg 1 fixed-contents))))
 
 
-(with-eval-after-load 'ox-latex
-  ;; Exporting configuration
-  ;; When the export process prompt there are no file such as wrapfig.sty etc. We can just install those missing files. for example:
-  ;; For Max OS X
-  ;; $ cd /Library/Tex/texbin
-  ;; $ sudo tlmgr update --self
-  ;; $ sudo tlmgr install wrapfig
-  ;; $ sudo tlmgr install capt-of
-  ;;(setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f" "xelatex -interaction nonstopmode %f"))
-  (setq org-export-latex-listings t)
-  (setq org-latex-with-hyperref nil)
-  (add-to-list 'org-latex-packages-alist "\\hypersetup{setpagesize=false}" t)
-  (add-to-list 'org-latex-packages-alist "\\hypersetup{colorlinks=true}" t)
-  (add-to-list 'org-latex-packages-alist "\\hypersetup{linkcolor=blue}" t))
-
-
 
 ;; org babel settings
 (with-eval-after-load 'org
