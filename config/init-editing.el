@@ -35,7 +35,10 @@
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-
+(with-eval-after-load 'diff-hl
+  (define-key diff-hl-mode-map
+    (kbd "<left-fringe> <mouse-1>")
+    'diff-hl-diff-goto-hunk))
 
 
 (add-hook 'prog-mode-hook 'diff-hl-mode)

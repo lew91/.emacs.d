@@ -68,7 +68,6 @@
          (require 'init-dash)
          (require 'init-projectile)
          (require 'init-git)
-         (require 'init-vc)
          (require 'init-whitespace)
          (require 'init-extra nil t)                ; Extra extensions that use git submodule added, or user's additionally customize
 
