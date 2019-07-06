@@ -1,9 +1,10 @@
-;;(require 'dired+)
+(require 'dired-x)
+(require 'dash)
 
-(setq dired-recursive-copies t)    ;可以递归的进行拷贝
-(setq dired-recursive-deletes t)   ;可以递归的删除目录
-(setq dired-recursive-deletes 'always)  ;删除东西时不提示
-(setq dired-recursive-copies 'always) ;拷贝东西时不提示
+(setq dired-recursive-copies t)
+(setq dired-recursive-deletes t)
+(setq dired-recursive-deletes 'always)
+(setq dired-recursive-copies 'always)
 
 (setq dired-auto-revert-buffer t  ; Revert on re-visiting
       dired-listing-switches "-alhF" ; better dired flags: '-l' is mandatory, '-a' shows all files, '-h' uses human-readable sizes, and '-F' appends file-type classifiers to file names ( for better highlighting)
@@ -20,6 +21,7 @@ When using Homebrew, install it using \"brew install trash\"."
 		nil 0 nil
 		file))
 
+
 (when (or (memq system-type '(gnu gnu/linux))
           (string= (file-name-nondirectory insert-directory-program) "gls"))
   ;; If we are on a GNU system or have GNU ls, add some more `ls' switches:
@@ -29,15 +31,22 @@ When using Homebrew, install it using \"brew install trash\"."
   (setq dired-listing-switches
         (concat dired-listing-switches " --group-directories-first -v")))
 
-(let ((gls "/usr/local/bin/gls"))       ; 因为使用了'cache-path-from-shell.el'，全局初始化了一次'exec-path-from-shell'。这里设置成从绝对路径调用'gls'
-  (if (file-exists-p gls)
-      (setq insert-directory-program gls)))
+
+;; (let ((gls "/usr/local/bin/gls"))     
+;;   (if (file-exists-p gls)
+;;       (setq insert-directory-program gls)))
+
+(when (executable-find "gls")
+  ;; Use GNU ls as 'gls' from 'coreutils' if available.
+  (setq insert-directory-program "gls"))
+
 
 (defun dired-jump-kill-buffer (&rest)
   (interactive)
   (let ((buf (current-buffer)))
     (dired-jump)
     (kill-buffer buf)))
+
 
 (with-eval-after-load  'dired
   (setq dired-recursive-deletes 'top)
@@ -46,43 +55,33 @@ When using Homebrew, install it using \"brew install trash\"."
   )
 
 
-(require 'diff-hl)
 (with-eval-after-load 'dired
   (add-hook 'dired-mode-hook 'diff-hl-dired-mode))
 
-;; (with-eval-after-load 'dired+
-;;   ;; show the details when using dired+
-;;   (setq diredp-hide-details-propagate-flag nil)
-;;   (setq diredp-hide-details-initially-flag nil)
 
-;;   ;; form https://www.emacswiki.org/emacs/DiredPlus
-;;   (setq directory-listing-before-filename-regexp
-;;         (let* ((l "\\([A-Za-z]\\|[^\0-\177]\\)")
-;;                (l-or-quote "\\([A-Za-z']\\|[^\0-\177]\\)")
-;;                (month (concat l-or-quote l-or-quote "+\\.?"))
-;;                (s " ")
-;;                (yyyy "[0-9][0-9][0-9][0-9]")
-;;                (dd "[ 0-3][0-9]")
-;;                (HH:MM "[ 0-2][0-9][:.][0-5][0-9]")
-;;                (seconds "[0-6][0-9]\\([.,][0-9]+\\)?")
-;;                (zone "[-+][0-2][0-9][0-5][0-9]")
-;;                (iso-mm-dd "[01][0-9]-[0-3][0-9]")
-;;                (iso-time (concat HH:MM "\\(:" seconds "\\( ?" zone "\\)?\\)?"))
-;;                (iso (concat "\\(\\(" yyyy "-\\)?" iso-mm-dd "[ T]" iso-time
-;;                             "\\|" yyyy "-" iso-mm-dd "\\)"))
-;;                (western (concat "\\(" month s "+" dd "\\|" dd "\\.?" s month "\\)"
-;;                                 s "+"
-;;                                 "\\(" HH:MM "\\|" yyyy "\\)"))
-;;                (western-comma (concat month s "+" dd "," s "+" yyyy))
-;;                (mm "[ 0-1]?[0-9]")
-;;                (east-asian
-;;                 (concat "\\(" mm l "?" s dd l "?" s "+"
-;;                         "\\|" dd s mm s "+" "\\)"
-;;                         "\\(" HH:MM "\\|" yyyy l "?" "\\)")))
-;;           (purecopy (concat ".*[0-9][BkKMGTPEZY]?" s
-;;                             "\\(" western "\\|" western-comma "\\|" east-asian "\\|" iso "\\)"
-;;                             s "+")))))
+;; Reload dired after making changes
+(--each '(dired-do-rename
+          dired-do-copy
+          dired-create-directory
+          dired-abort-changes
+          (eval `(defadvice ,it (after revert-buffer activate)
+                   (revert-buffer)))))
 
+
+;; Hook up dired-x global bindings without loading it up-front
+(define-key ctl-x-map "\C-j" 'dired-jump)
+(define-key ctl-x-4-map "\C-j" 'dired-jump-other-window)
+
+
+;; In Mac, use finder open file
+(defun finder ()
+  "Opens file directory in Finder."
+  (interactive)
+  (let ((file (buffer-file-name)))
+    (if file
+        (shell-command
+         (format "%s %s" (executable-find "open") (file-name-directory file)))
+      (error "Buffer is not attached to any file."))))
 
 
 (provide 'init-dired)
