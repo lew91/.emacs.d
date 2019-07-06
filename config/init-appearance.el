@@ -1,4 +1,5 @@
-;; 去掉工具栏，滚动栏。Mac OS 保留菜单栏
+;; Get rid of tool bar, menu bar and scroll bars.
+;; On Mac OS X we preserve the menu bar.
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
 (when (and (not (eq system-type 'darwin)) (fboundp 'menu-bar-mode))
@@ -7,30 +8,44 @@
   (scroll-bar-mode -1))
 
 ;; Restore emacs session.
-(setq initial-buffer-choice t)
-(run-with-timer 1 nil #'(lambda () (bury-buffer)))
+;;(setq initial-buffer-choice t)
+;;(run-with-timer 1 nil #'(lambda () (bury-buffer)))
 
-(fset 'yes-or-no-p 'y-or-n-p)           ;以 y/n代表 yes/no
-(blink-cursor-mode -1)                  ;指针不闪动
-(transient-mark-mode 1)                 ;标记高亮
-(global-hl-line-mode 1)                 ;高亮当前行
-(setq use-dialog-box nil)               ;never pop dialog
-(setq use-file-dialog nil)              ;文件操作不需要
+;; Opt out from the startup message in the echo area by simply
+;; disabling this ridiculously bizarre thing entirely
+(fset 'display-startup-echo-area-message #'ignore)
+
+
+(fset 'yes-or-no-p 'y-or-n-p)
+(blink-cursor-mode -1)
+(setq ring-bell-function 'ignore)
 (setq inhibit-startup-screen t)         ;inhibit start screen
-(setq initial-scratch-message "")       ;关闭启动空白buffer, 这个buffer会干扰session恢复
-(setq-default comment-style 'indent)    ;设定自动缩进的注释风格
-(setq ring-bell-function 'ignore)       ;关闭烦人的出错时的提示声
-(setq default-major-mode 'text-mode)    ;设置默认地主模式为TEXT模式
-(setq mouse-yank-at-point t)            ;粘贴于光标处,而不是鼠标指针处
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))  ;一次滚动一行
+(setq initial-scratch-message "Happly hacking!\n")
+(setq inhibit-compacting-font-caches t)
+
+
+(setq use-dialog-box nil)               ;never pop dialog
+(setq use-file-dialog nil)
+
+
+(transient-mark-mode 1)
+(global-hl-line-mode 1)
+(setq-default comment-style 'indent)
+;;(setq default-major-mode 'text-mode)
+
+
+(setq mouse-yank-at-point t)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
 (setq mouse-wheel-progressive-speed nil)
 (setq scroll-step 1
       scroll-margin 0
       scroll-conservatively 100000)
-(setq x-select-enable-clipboard t)      ;支持emacs和外部程序的粘贴
-(setq split-width-threshold nil)        ;分屏的时候使用上下分屏
-(setq inhibit-compacting-font-caches t) ;使用字体缓存，避免卡顿
-(setq profiler-report-cpu-line-format ;让 profiler-report 第一列宽一点
+(setq select-enable-clipboard t)
+(setq split-width-threshold nil)
+
+
+
+(setq profiler-report-cpu-line-format
       '((100 left)
         (24 right ((19 right)
                    (5 right)))))
@@ -39,33 +54,28 @@
         (19 right ((14 right profiler-format-number)
                    (5 right)))))
 
+
+
 (when (boundp 'ns-pop-up-frames)      ; Don't open a file in a new frame
   (setq ns-pop-up-frames nil))
-;;设置标题拦格式
+
+;;Title format
 (setq frame-title-format
       '((:eval (if (buffer-file-name)
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))))
-;; mac os 使用原生全屏
-(when (eq system-type 'darwin)
-  (setq ns-use-native-fullscreen nil))
-;; 标题栏透明
+
+
+;; Title bar transparent on Mac
 (when (eq system-type 'darwin)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 
 
+;; Use the original fullscreen on Mac OS X
+(when (eq system-type 'darwin)
+  (setq ns-use-native-fullscreen nil))
 
-
-;; 不显示 *scratch*
-(defun remove-scratch-buffer ()
-  (if (get-buffer "*scratch*")
-      (kill-buffer "*scratch*")))
-
-
-;; Misc
-;;(autoload 'zap-to-char "misc"
-;;  "Kill up to, but not including ARGth occurrence of CHAR." t)
 
 ;; Nicer naming of buffers for files with identical names
 (require 'uniquify)
@@ -102,7 +112,7 @@
   (add-to-list  'recentf-exclude 'list-pattern))
 
 
-;; 括号匹配开启
+
 (show-paren-mode 1)
 (setq-default indent-tabs-mode nil)
 
