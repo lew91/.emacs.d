@@ -1,9 +1,10 @@
 (require 'company)
 ;;(require 'company-quickhelp)
+(require 'company-math)
 
 
 ;; Config for company mode.
-(add-hook 'prog-mode-hook 'company-mode)
+(global-company-mode)
 (diminish 'company-mode)
 (setq company-idle-delay 0.2)   ; set the completion menu pop-up delay
 (setq company-minimum-prefix-length 1) ; pop up a completion menu by tapping a character
@@ -56,7 +57,12 @@
       backend
     (append (if (consp backend) backend (list backend))
             '(:with company-yasnippet))))
-
 (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+
+
+;; Company math
+(add-to-list 'company-backends 'company-math-symbols-unicode)
+(add-to-list 'company-backends 'company-math-symbols-latex)
+
 
 (provide 'init-company)
