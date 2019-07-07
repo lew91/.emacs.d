@@ -40,6 +40,15 @@
          "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
         ))
 
+;;; LaTex
+;; Compiling latex documents with unicode symbols
+;; #+latex_compiler: xelatex
+;; #+latex_header: \usepackage{libertine}
+;; #+latex_header: \usepackage{unicode-math}
+(setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
+(setq org-latex-default-packages-alist (cons '("mathletters" "ucs" nil) org-latex-default-packages-alist))
+
+
 ;;; Org clock
 
 ;; Save the running clock and all clock history when exiting Emacs, load it on startup
