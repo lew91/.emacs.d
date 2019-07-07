@@ -150,6 +150,7 @@ locate PACKAGE."
      dash
      daemons
      ;;company-quickhelp
+     company-math
      company-lsp
      company-anaconda
      counsel
