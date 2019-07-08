@@ -1,47 +1,51 @@
 (require 'ivy)
+(require 'ivy-xref)
+(require 'swiper)
+(require 'counsel)
+(require 'projectile)
 
 
 (add-hook 'after-init-hook 'ivy-mode)
+(add-hook 'after-init-hook 'counsel-mode)
+
 
 (with-eval-after-load 'ivy
   (diminish 'ivy-mode)
 
   (setq-default ivy-use-virtual-buffers t
-                  ivy-virtual-abbreviate 'fullpath
-                  ivy-count-format ""
-                  projectile-completion-system 'ivy
-                  ivy-magic-tilde nil
-                  ivy-dynamic-exhibit-delay-ms 150
-                  ivy-use-selectable-prompt t
-                  ivy-initial-inputs-alist
-                  '((Man-completion-table . "^")
-                    (woman . "^")))
+                ivy-virtual-abbreviate 'fullpath
+                ivy-count-format ""
+                projectile-completion-system 'ivy
+                ivy-magic-tilde nil
+                ivy-dynamic-exhibit-delay-ms 150
+                ivy-use-selectable-prompt t
+                ivy-initial-inputs-alist
+                '((Man-completion-table . "^")
+                  (woman . "^")))
 
-    ;; IDO-style directory navigation
-    (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
-    (dolist (k '("C-j" "C-RET"))
-      (define-key ivy-minibuffer-map (kbd k) #'ivy-immediate-done))
+  (setq xref-show-xrefs-function 'ivy-xref-show-xrefs)
 
-    (define-key ivy-minibuffer-map (kbd "<up>") #'ivy-previous-line-or-history)
+  ;; IDO-style directory navigation
+  (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
+  (dolist (k '("C-j" "C-RET"))
+    (define-key ivy-minibuffer-map (kbd k) #'ivy-immediate-done))
 
-    (define-key ivy-occur-mode-map (kbd "C-c C-q") #'ivy-wgrep-change-to-wgrep-mode)
+  (define-key ivy-minibuffer-map (kbd "<up>") #'ivy-previous-line-or-history)
 
-    (defun jl/enable-ivy-flx-matching ()
-    "Make `ivy' matching work more like IDO."
-    (interactive)
-    (setq-default ivy-re-builders-alist
-                  '((t . ivy--regex-fuzzy))))
-    )
+  (define-key ivy-occur-mode-map (kbd "C-c C-q") #'ivy-wgrep-change-to-wgrep-mode)
+  )
 
-(require 'counsel)
-(setq-default counsel-mode-override-describe-bindings t)
+
+(with-eval-after-load 'swiper
+  (define-key ivy-mode-map (kbd "M-s /") 'swiper-thing-at-point))
+
+
 (with-eval-after-load 'counsel
-  (diminish 'counsel))
-(add-hook 'after-init-hook 'counsel-mode)
+  (setq-default counsel-mode-override-describe-bindings t)
+  (diminish 'counsel-mode)
 
-(require 'projectile)
-
-(let ((search-function
+  (with-eval-after-load 'projectile
+    (let ((search-function
            (cond
             ((executable-find "rg") 'counsel-rg)
             ((executable-find "ag") 'counsel-ag)
@@ -65,19 +69,7 @@ instead."
     (with-eval-after-load 'ivy
       (add-to-list 'ivy-height-alist (cons 'counsel-ag 20)))
 
-(global-set-key (kbd "M-?") 'jl/counsel-search-project)
-
-(require 'swiper)
-(with-eval-after-load 'ivy
-    (defun jl/swiper-at-point (sym)
-      "Use `swiper' to search for the symbol at point."
-      (interactive (list (thing-at-point 'symbol)))
-      (swiper sym))
-
-    (define-key ivy-mode-map (kbd "M-s /") 'jl/swiper-at-point))
-
-(require 'ivy-xref)
-(setq xref-show-xrefs-function 'ivy-xref-show-xrefs)
+    (global-set-key (kbd "M-?") 'jl/counsel-search-project)))
 
 
 (provide 'init-ivy)
