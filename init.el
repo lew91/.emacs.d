@@ -26,7 +26,7 @@
 
     (require 'init-appearance)
     (require 'init-package)            ; package-archives
-    (require 'init-exec-path)
+    (require 'init-shell)
     (require 'init-fonts)              ; Set of fonts, especially Chinese and English fonts aligned
     (require 'init-grep)
     (require 'init-smex)

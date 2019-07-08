@@ -11,5 +11,9 @@
             (daemonp)))
   (exec-path-from-shell-initialize))
 
-(provide 'init-exec-path)
-;;; init-exec-path.el ends here
+(setq python-shell-interpreter "python3")
+;;(setq python-shell-interpreter-args "-m IPython --simple-prompt -i")
+;;(setq flycheck-python-pycompile-executable "python3")          ; if use flycheck 
+
+(provide 'init-shell)
+;;; init-shell.el ends here
