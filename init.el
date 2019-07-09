@@ -13,7 +13,7 @@
   (defvar jl-emacs-config-dir (concat jl-emacs-root-dir "/config"))
   (defvar jl-emacs-extension-dir (concat jl-emacs-root-dir "/extensions"))
 
-  (add-subdirs-to-load-path (expand-file-name "elpa" jl-emacs-root-dir))
+  (add-subdirs-to-load-path (expand-file-name "elpa" user-emacs-directory))
   (add-subdirs-to-load-path jl-emacs-extension-dir)
   (add-to-list 'load-path jl-emacs-config-dir)
 

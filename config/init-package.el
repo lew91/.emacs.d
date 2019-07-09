@@ -1,6 +1,6 @@
 (require 'package)
 
-(setq package-user-dir (expand-file-name "elpa" jl-emacs-root-dir))
+(setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
 
 (setq package-archives
       '(;;("gnu" . "https://elpa.gnu.org/packages/")
@@ -27,7 +27,7 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
-(unless (file-exists-p (expand-file-name "elpa" jl-emacs-root-dir))
+(unless (file-exists-p (expand-file-name "elpa" user-emacs-directory))
   (package-refresh-contents))
 
 ;; This functions has a macro '--each' from dash.el.
