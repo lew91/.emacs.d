@@ -159,7 +159,7 @@ locate PACKAGE."
      cal-china-x
      browse-kill-ring
      browse-at-remote
-     bind-key
+     ;;bind-key
      benchmark-init
      avy
      anaconda-mode
