@@ -459,12 +459,10 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
     ("q" nil "quit"))
 
 
-  (bind-key "<"
-            (lambda () (interactive)
-              (if (or (region-active-p) (looking-back "^\s*" 1))
-                  (hydra-org-template/body)
-                (self-insert-command 1)))
-            org-mode-map)
+   (define-key org-mode-map (kbd "<") '(lambda () (interactive)
+                                       (if (or (region-active-p) ( looking-back "^\s*" 1))
+                                           (hydra-org-template/body)
+                                         (self-insert-command 1))))
 
   (require 'os-md nil t)
   (defadvice org-html-paragraph (before fsh-org-html-paragraph-advice

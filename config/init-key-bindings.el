@@ -25,8 +25,8 @@
 (which-key-mode)
 (diminish 'which-key-mode)
 
-;; Misc 可选，键绑定更便捷
-(require 'bind-key)
+;; Misc 
+;;(require 'bind-key)
 
 ;; handy key bindings
 (global-set-key (kbd "C-.") 'set-mark-command)
