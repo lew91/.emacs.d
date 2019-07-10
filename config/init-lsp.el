@@ -40,8 +40,11 @@
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
 
+(with-eval-after-load 'eglot
+  (define-key eglot-mode-map (kbd "C-h D")  'eglot-help-at-point)) 
+
 (with-eval-after-load 'lsp-ui
-  ;;(define-key lsp-mode-map (kbd "C-c C-d") 'lsp-describe-thing-at-point)
+  (define-key lsp-mode-map (kbd "C-h D") 'lsp-describe-thing-at-point)
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
 
