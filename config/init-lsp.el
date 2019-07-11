@@ -23,9 +23,11 @@
 
 (with-eval-after-load 'lsp-mode
   (with-eval-after-load 'company
-    (push 'company-lsp company-backends)))
+    (push 'company-lsp company-backends)
+    (setq company-lsp-enable-snippet t)
+    (setq company-lsp-cache-candidates t)))
 
-;; lsp支持特定的mode, 而不是全局
+;; Use lsp-mode only in some special major mode
 (dolist (hook (list
                'js-mode-hook
                'ruby-mode-hook
