@@ -57,7 +57,6 @@
          (require 'init-yasnippet)
          (require 'init-company)
          (require 'init-ispell)
-         (require 'init-origami)
          (require 'init-lsp)
          (require 'init-elisp)
          (require 'init-slime)
