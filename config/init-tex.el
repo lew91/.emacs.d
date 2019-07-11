@@ -28,38 +28,10 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 
-
-(setq reftex-plug-into-AUCTeX t
-        ;; Automatically derive labels, and prompt for confirmation
-        reftex-insert-label-flags '(t t)
-        reftex-label-alist
-        '(
-          ;; Additional label definitions for RefTeX.
-          ("definition" ?d "def:" "~\\ref{%s}"
-           lunaryorn-reftex-find-ams-environment-caption
-           ("definition" "def.") -3)
-          ("theorem" ?h "thm:" "~\\ref{%s}"
-           lunaryorn-reftex-find-ams-environment-caption
-           ("theorem" "th.") -3)
-          ("example" ?x "ex:" "~\\ref{%s}"
-           lunaryorn-reftex-find-ams-environment-caption
-           ("example" "ex") -3)
-          ;; Algorithms package
-          ("algorithm" ?a "alg:" "~\\ref{%s}"
-           "\\\\caption[[{]" ("algorithm" "alg") -3)))
-
-;;Provide basic RefTeX support for biblatex
-(unless (assq 'biblatex reftex-cite-format-builtin)
-  (add-to-list 'reftex-cite-format-builtin
-                 '(biblatex "The biblatex package"
-                            ((?\C-m . "\\cite[]{%l}")
-                             (?t . "\\textcite{%l}")
-                             (?a . "\\autocite[]{%l}")
-                             (?p . "\\parencite{%l}")
-                             (?f . "\\footcite[][]{%l}")
-                             (?F . "\\fullcite[]{%l}")
-                             (?x . "[]{%l}")
-                             (?X . "{%l}")))))
+;; Filling
+(add-hook 'LaTeX-mode-hook 'turn-off-auto-fill)
+(add-hook 'LaTeX-mode-hook (lambda ()
+                             (TeX-fold-mode t)))
 
 
 (defun latex-help-get-cmd-alist () ;corrected version:
