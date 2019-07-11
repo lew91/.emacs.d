@@ -110,7 +110,7 @@ locate PACKAGE."
      paredit
      paradox
      ox-jekyll-md
-     origami
+     ;;origami
      org-pomodoro
      org-cliplink
      org-bullets
