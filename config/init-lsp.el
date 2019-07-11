@@ -21,11 +21,12 @@
       lsp-ui-doc-delay 1.0
       lsp-ui-doc-postition 'at-point)
 
+;; TODO: disable client-side cache, the LSP server does a better job
 (with-eval-after-load 'lsp-mode
   (with-eval-after-load 'company
     (push 'company-lsp company-backends)
-    (setq company-lsp-enable-snippet t)
-    (setq company-lsp-cache-candidates t)))
+    (setq company-lsp-async t)))
+
 
 ;; Use lsp-mode only in some special major mode
 (dolist (hook (list
