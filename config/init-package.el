@@ -24,8 +24,11 @@
 (setq package-pinned-packages '())
 
 ;; Fire up package.el
-(setq package-enable-at-startup nil)
-(package-initialize)
+;; Use emacs 27 now, in version 27 package initialize occurs  automatically, before 'user-init-file'
+;; is loaded, but after 'early-init-file'.
+(when (version<= emacs-version "26.2")
+  (setq package-enable-at-startup nil)
+  (package-initialize))
 
 (unless (file-exists-p (expand-file-name "elpa" user-emacs-directory))
   (package-refresh-contents))
