@@ -1,11 +1,12 @@
 ;; Get rid of tool bar, menu bar and scroll bars.
 ;; On Mac OS X we preserve the menu bar.
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-(when (and (not (eq system-type 'darwin)) (fboundp 'menu-bar-mode))
-  (menu-bar-mode -1))
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
+(when (version< emacs-version "27")     ; move this to 'early-init.el' in version 27
+  (when (fboundp 'tool-bar-mode)
+    (tool-bar-mode -1))
+  (when (and (not (eq system-type 'darwin)) (fboundp 'menu-bar-mode))
+    (menu-bar-mode -1))
+  (when (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode -1)))
 
 ;; Restore emacs session.
 ;;(setq initial-buffer-choice t)
@@ -37,7 +38,7 @@
 ;;            _____.,-#%&$@%#&#~,._____
 ;;                Happly hacking !!!
 ;;              " user-login-name
-                    " - Emacs ♥ you!\n\n"))
+                  " - Emacs ♥ you!\n\n"))
 
 (setq use-dialog-box nil)               ;never pop dialog
 (setq use-file-dialog nil)
@@ -115,8 +116,8 @@
       recentf-auto-cleanup-timer (run-with-idle-timer 600 t
                                                       'recentf-save-file))
 (add-hook 'fine-file-hook (lambda () (unless recentf-mode
-                                   (recentf-mode)
-                                   (recentf-track-opened-file))))
+                                       (recentf-mode)
+                                       (recentf-track-opened-file))))
 (let ((list-pattern (list
                      '("\\.png\\'")
                      '("\\.revive\\'")
