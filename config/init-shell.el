@@ -1,10 +1,13 @@
-
-(setenv "PATH"
-        (concat
-         "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/Library/TeX/texbin:"
-         (getenv "PATH")))
-(setenv "EMACS" "/Applications/Emacs.app/Contents/MacOS/Emacs")
-(getenv "EMACS")
+(when (featurep 'cocoa)
+  (setenv "PATH"
+          (concat
+           "/usr/local/bin:/usr/local/sbin:"
+           "/Library/TeX/texbin:"
+           (getenv "PATH")))
+  (setenv "EMACS" "/Applications/Emacs.app/Contents/MacOS/Emacs")
+  (getenv "EMACS")
+  (setq exec-path (split-string (getenv "PATH") ":"))  ; keep in sync automatically
+  )
 
 
 ;; When use zsh, the startup time is too long.
