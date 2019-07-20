@@ -43,6 +43,16 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 
+;; HACK: kill minibuffer when changing buffer by mouseclick
+(defun stop-using-minibuffer ()
+  "Abort recursive edit in the minibuffer."
+  (when (and (>= (recursion-depth) 1)
+             (active-minibuffer-window))
+    (abort-recursive-edit)))
+
+(add-hook 'mouse-leave-buffer-hook 'stop-using-minibuffer)
+
+
 
 (provide 'init-ibuffer)
 ;;; init-ibuffer.el ends here
