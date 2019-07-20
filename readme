@@ -1,0 +1,27 @@
+Emacs configuaration
+=======================
+This is my personal .emacs.d directory. Feel free to copy anything you like and adapt it to your liking.
+I'm just play Emacs for fun, and also do some rigorous work，like data mining, write copy, etc.
+
+Install
+-----------
+O makeup your own Emacs config files, when in shell like this: mv ~/.emacs.d ~/.emacs.d.bak
+O git clone this repo: git clone https://github.com/makejoyforX/.emacs.d.git
+
+Purpose of subdirectories
+-----------
+O config : code that gets run on initialization of Emacs 
+O extensions : third-party package that not on ELPA and MELPA, you can use git catch those, git submodule update --init --recursive
+
+Highlight features
+-----------
+O Goog OSX support, including a font setup that suitable for Chinese font and English font scale, math and Symbols
+O Comprehensive LaTeX setup with AUCTeX
+O Language server protocol (LSP) supported, also has YouCompleteMe config
+O Lisp, C, C++, Python programming enviorment are well configed.
+O Very powerful Org-mode configuaration, like org-pomodoro, org-ditta, org-agenda, org-mode to jekyll blog, chinse calender, chinses language special support etc.
+O More sensiable language translate by google translate (cn hosts) in coding and writing
+
+License
+---------------
+GPL-v3
