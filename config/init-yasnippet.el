@@ -19,7 +19,7 @@
 ;;(yas-global-mode 1)
 
 (eval-after-load "yasnippet"
-  '(diminish 'yas-minor-mode "Y"))
+  '(diminish 'yas-minor-mode " Y"))
 
 (dolist (hook (list
                'prog-mode-hook
