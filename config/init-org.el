@@ -48,6 +48,8 @@
 (setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
 (setq org-latex-default-packages-alist (cons '("mathletters" "ucs" nil) org-latex-default-packages-alist))
 
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+
 
 ;;; Org clock
 
