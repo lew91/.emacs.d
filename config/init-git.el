@@ -41,6 +41,38 @@
   (define-key vc-prefix-map (kbd "l") 'jl/magit-or-vc-log-file))
 
 
+;; String utilities missing from core emacs
+(defun jl/string-all-matches (regex str &optional group)
+  "Find all matches for 'REGEX' within 'STR', retturing the full match string or group 'GROUP'."
+  (let ((result nil)
+        (pos 0)
+        (group (or group 0)))
+    (while (string-match regex str pos)
+      (push (match-string group str) result)
+      (setq pos (match-end group)))
+    result))
+
+
+(defvar git-svn--available-commands nil "Cached list of git svn subcommands")
+(defun git-svn--available-commands ()
+  (or git-svn--available-commands
+      (setq git-svn--available-commands
+            (jl/string-all-matches
+             "^  \\([a-z\\-]+\\) +"
+             (shell-command-to-string "git svn help") 1))))
+
+(autoload 'vc-git-root "vc-git")
+
+(defun git-svn (dir command)
+  "Run a git svn subcommand in DIR."
+  (interactive (list (read-directory-name "Directory: ")
+                     (completing-read "git-svn command: " (git-svn--available-commands) nil t nil nil (git-svn--available-commands))))
+  (let* ((default-directory (vc-git-root dir))
+         (compilation-buffer-name-function (lambda (major-mode-name) "*git-svn*")))
+    (compile (concat "git svn " command))))
+
+
+
 (defun jl/magit-submodule-add+ (url)
   (interactive "sURL: ")
   (let ((parent-dir (cadr (split-string (file-name-as-directory jl-emacs-extension-dir) (expand-file-name (cdr (project-current)))))))
