@@ -1,5 +1,6 @@
 (require 'magit)
 
+
 (with-eval-after-load 'magit
   ;; Magit configuration.
   (setq magit-commit-ask-to-stage nil)    ;don't ask stage question
@@ -23,8 +24,21 @@
   (global-set-key (kbd "C-x M-g") 'magit-dispatch)
 
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-
+  (add-hook 'git-commit-mode-hook 'goto-address-mode)
 )
+
+
+(defun jl/magit-or-vc-log-file (&optional prompt)
+  (interactive "P")
+  (if (and (buffer-file-name)
+           (eq 'Git (vc-backend (buffer-file-name))))
+      (if prompt
+          (magit-log-buffer-file-popup)
+        (magit-log-buffer-file t))
+    (vc-print-log)))
+
+(with-eval-after-load 'vc
+  (define-key vc-prefix-map (kbd "l") 'jl/magit-or-vc-log-file))
 
 
 (defun jl/magit-submodule-add+ (url)
@@ -35,14 +49,17 @@
      (concat parent-dir (file-name-base url))
      (file-name-base url))))
 
+
 (defun jl/magit-submodule-remove+ ()
   (interactive)
   (magit-submodule-remove (list (magit-read-module-path "Remove module")) "--force" nil))
+
 
 (defun jl/magit-status+ ()
   (interactive)
   (magit-status)
   (other-window 1))
+
 
 (defun jl/magit-blame+ ()
   (interactive)
@@ -53,6 +70,7 @@
           (margin-face . magit-blame-margin)
           (margin-body-face magit-blame-dimmed)))
   (magit-blame))
+
 
 (defun jl/magit-delete-remote-branch ()
   (interactive)
