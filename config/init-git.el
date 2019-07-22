@@ -38,7 +38,8 @@
     (vc-print-log)))
 
 (with-eval-after-load 'vc
-  (define-key vc-prefix-map (kbd "l") 'jl/magit-or-vc-log-file))
+  (define-key vc-prefix-map (kbd "l") 'jl/magit-or-vc-log-file)
+  (define-key vc-prefix-map (kbd "f") 'vc-git-grep))
 
 
 ;; String utilities missing from core emacs
