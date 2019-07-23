@@ -3,20 +3,13 @@
 (require 'lsp-clients)
 (require 'lsp-ui)
 (require 'company-lsp)
-
-(add-hook 'python-mode-hook 'eglot-ensure)
-;;(add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
-;;(add-hook 'c-mode-hook 'eglot-ensure)
-;;(add-hook 'c++-mode-hook 'eglot-ensure)
+(require 'lsp-python-ms)
 
 
 (setq lsp-auto-guess-root nil             ; default is nil, wanna auto indicator? set it t
       lsp-prefer-flymake t              ; Use flycheck set it nil, otherwise t for flymake
       flymake-fringe-indicator-position 'left-fringe)
 
-;; clangd
-(when (equal system-type 'darwin)
-  (setq lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd"))
 
 (setq lsp-ui-doc-header t
       lsp-ui-doc-include-signature t
@@ -38,7 +31,7 @@
                'go-mode-hook
                'c-mode-hook
                'c++-mode-hook
-               ;;'python-mode-hook
+               'python-mode-hook
                ))
   (add-hook hook '(lambda ()
                     (lsp)
@@ -47,12 +40,34 @@
 (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
 
 (with-eval-after-load 'eglot
-  (define-key eglot-mode-map (kbd "C-h D")  'eglot-help-at-point)) 
+  (define-key eglot-mode-map (kbd "C-h D")  'eglot-help-at-point))
 
 (with-eval-after-load 'lsp-ui
   (define-key lsp-mode-map (kbd "C-h D") 'lsp-describe-thing-at-point)
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
+
+
+
+;;; Languages
+
+;; Python3, Microsoft language Server
+;; Manual build executable server references from https://github.com/emacs-lsp/lsp-python-ms
+(setq lsp-python-executable-cmd "python3")
+(setq lsp-python-ms-executable "~/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
+
+;; clangd
+(when (equal system-type 'darwin)
+  (setq lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd"))
+
+
+
+;; eglot 
+;;(add-hook 'python-mode-hook 'eglot-ensure)
+;;(add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+;;(add-hook 'c-mode-hook 'eglot-ensure)
+;;(add-hook 'c++-mode-hook 'eglot-ensure)
+
 
 
 
