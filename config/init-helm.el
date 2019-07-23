@@ -35,6 +35,32 @@
 
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
 
+
+
+(defun jl/helm-hide-minibuffer-maybe ()
+  "Hide minibuffer in Helm session if we use the header line as input field."
+  (when (with-helm-buffer helm-echo-input-in-header-line)
+    (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
+      (overlay-put ov 'window (selected-window))
+      (overlay-put ov 'face
+                   (let ((bg-color (face-background 'default nil)))
+                     `(:background ,bg-color :foreground ,bg-color)))
+      (setq-local cursor-type nil))))
+
+
+(add-hook 'helm-minibuffer-set-up-hook
+          'jl/helm-hide-minibuffer-maybe)
+
+;; Save curent position to mark ring
+(add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
+
+
+(defun jl/helm-rgrep ()
+  (interactive)
+  (let ((current-prefix-arg '(4)))
+    (call-interactively 'helm-do-grep-ag)))
+
+
 (with-eval-after-load 'helm
   ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
   ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
@@ -54,30 +80,9 @@
   (define-key helm-command-map (kbd "o")     'helm-occur)
   (define-key helm-command-map (kbd "g")     'helm-do-grep)
   (define-key helm-command-map (kbd "C-c w") 'helm-wikipedia-suggest)
-  (define-key helm-command-map (kbd "SPC")   'helm-all-mark-rings)
+  (define-key helm-command-map (kbd "SPC")   'helm-all-mark-rings))
 
 
-  (defun jl/helm-hide-minibuffer-maybe ()
-    "Hide minibuffer in Helm session if we use the header line as input field."
-    (when (with-helm-buffer helm-echo-input-in-header-line)
-      (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
-        (overlay-put ov 'window (selected-window))
-        (overlay-put ov 'face
-                     (let ((bg-color (face-background 'default nil)))
-                       `(:background ,bg-color :foreground ,bg-color)))
-        (setq-local cursor-type nil))))
-
-
-  (add-hook 'helm-minibuffer-set-up-hook
-            'jl/helm-hide-minibuffer-maybe)
-
-  ;; Save curent position to mark ring
-  (add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
-  
-  (defun jl/helm-rgrep ()
-    (interactive)
-    (let ((current-prefix-arg '(4)))
-      (call-interactively 'helm-do-grep-ag))))
 
 
 ;; helm-swoop
@@ -89,11 +94,13 @@
       helm-swoop-use-line-number-face t
       helm-swoop-use-fuzzy-match t)
 
+
 (with-eval-after-load 'helm-swoop
   (define-key helm-command-map (kbd "s") 'helm-swoop)
   (define-key helm-command-map (kbd "r") 'helm-swoop-back-to-last-point)
   (define-key helm-command-map (kbd "m") 'helm-multi-swoop)
   (define-key helm-command-map (kbd "M") 'helm-multi-swoop-all))
+
 
 ;; taken from full-ack.el
 (defvar jl/project-root-file-patterns
