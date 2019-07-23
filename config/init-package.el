@@ -123,6 +123,7 @@ locate PACKAGE."
      markdown-mode
      magit
      macrostep
+     lsp-python-ms
      lsp-ui
      lsp-mode
      ivy-xref
@@ -146,6 +147,7 @@ locate PACKAGE."
      ;;flycheck
      expand-region
      exec-path-from-shell
+     eglot
      diminish
      diff-hl
      default-text-scale
