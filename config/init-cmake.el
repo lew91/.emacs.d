@@ -33,7 +33,7 @@
 (defun cc-mode-compile-clean ()
   (interactive)
   (setq compile-command "cd ../ && make clean")
-  (call-interactively 'coompile))
+  (call-interactively 'compile))
 
 (defun cc-mode-compile ()
   (local-set-key (kbd "C-x C m") 'cc-mode-compile-make)
