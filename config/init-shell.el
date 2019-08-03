@@ -3,6 +3,7 @@
           (concat
            "/usr/local/bin:/usr/local/sbin:"
            "/Library/TeX/texbin:"
+           "/usr/local/mysql/bin:"
            (getenv "PATH")))
   (setenv "EMACS" "/Applications/Emacs.app/Contents/MacOS/Emacs")
   (getenv "EMACS")
