@@ -466,19 +466,19 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
                                            (hydra-org-template/body)
                                          (self-insert-command 1))))
 
-  (require 'os-md nil t)
-  (defadvice org-html-paragraph (before fsh-org-html-paragraph-advice
-                                        (paragraph contents info) activate)
-    "Join consecutive Chinese lines into a single long line without unwanted space when exporting 'org-mode' to html."
-    (let ((fixed-contents)
-          (orig-contents (ad-get-arg 1))
-          (reg-han "[[:multibyte:]]"))
-      (setq fixed-contents (replace-regexp-in-string
-                            ;; (concat "\\(" reg-han "\\) *\n *\\(" reg-han "\\)")
-                            (concat "\\(" reg-han "\\) *\n *")
-                            "\\1" orig-contents))
-      (ad-set-arg 1 fixed-contents))))
-
+  ;; (require 'os-md nil t)
+  ;; (defadvice org-html-paragraph (before fsh-org-html-paragraph-advice
+  ;;                                       (paragraph contents info) activate)
+  ;;   "Join consecutive Chinese lines into a single long line without unwanted space when exporting 'org-mode' to html."
+  ;;   (let ((fixed-contents)
+  ;;         (orig-contents (ad-get-arg 1))
+  ;;         (reg-han "[[:multibyte:]]"))
+  ;;     (setq fixed-contents (replace-regexp-in-string
+  ;;                           ;; (concat "\\(" reg-han "\\) *\n *\\(" reg-han "\\)")
+  ;;                           (concat "\\(" reg-han "\\) *\n *")
+  ;;                           "\\1" orig-contents))
+  ;;     (ad-set-arg 1 fixed-contents))))
+)
 
 
 ;; org babel settings
