@@ -8,7 +8,8 @@
   (add-to-list 'ispell-skip-region-alist '("~" "～"))
   (add-to-list 'ispell-skip-region-alist '("=" "="))
   (add-to-list 'ispell-skip-region-alist '("^#\\+BEGIN_SRC" . "^#\\+END_SRC"))
-  (add-to-list 'ispell-skip-region-alist '("$$" "$$")))
+  (add-to-list 'ispell-skip-region-alist '("$$" "$$"))
+  (add-to-list 'ipsell-skip-region-alist '("$" "$")))
 
 (add-hook 'org-mode-hook #'jl/org-ispell)
 
