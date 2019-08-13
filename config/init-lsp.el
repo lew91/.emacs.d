@@ -21,7 +21,8 @@
 (with-eval-after-load 'lsp-mode
   (with-eval-after-load 'company
     (push 'company-lsp company-backends)
-    (setq company-lsp-async t)))
+    (setq company-lsp-async t)
+    (setq company-lsp-cache-candidates 'auto)))
 
 
 ;; Use lsp-mode only in some special major mode
