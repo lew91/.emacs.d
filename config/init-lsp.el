@@ -1,3 +1,10 @@
+;; NOTE: For satisfy Python develop environment under LSP
+;; should install those models
+;; pip3 install python-language-server
+;; pip3 install pyflakes pylint mccabe pydocstyle yapf rope
+
+
+
 (require 'eglot)
 (require 'lsp-mode)
 (require 'lsp-clients)
@@ -32,7 +39,7 @@
                'go-mode-hook
                'c-mode-hook
                'c++-mode-hook
-               'python-mode-hook
+               ;;'python-mode-hook
                ))
   (add-hook hook '(lambda ()
                     (lsp)
@@ -64,11 +71,10 @@
 
 
 ;; eglot 
-;;(add-hook 'python-mode-hook 'eglot-ensure)
+(add-hook 'python-mode-hook 'eglot-ensure)
 ;;(add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
 ;;(add-hook 'c-mode-hook 'eglot-ensure)
 ;;(add-hook 'c++-mode-hook 'eglot-ensure)
-
 
 
 
