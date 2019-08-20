@@ -19,7 +19,7 @@
 (require 'lsp-clients)
 (require 'lsp-ui)
 (require 'company-lsp)
-(require 'lsp-python-ms)
+;;(require 'lsp-python-ms)
 
 
 (setq lsp-auto-guess-root nil             ; default is nil, wanna auto indicator? set it t
@@ -48,7 +48,7 @@
                'go-mode-hook
                'c-mode-hook
                'c++-mode-hook
-               'python-mode-hook
+               ;;'python-mode-hook
                ))
   (add-hook hook '(lambda ()
                     (lsp)
@@ -70,8 +70,8 @@
 
 ;; Python3, Microsoft language Server
 ;; Manual build executable server references from https://github.com/emacs-lsp/lsp-python-ms
-(setq lsp-python-executable-cmd "python3")
-(setq lsp-python-ms-executable "~/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
+;;(setq lsp-python-executable-cmd "python3")
+;;(setq lsp-python-ms-executable "~/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
 
 ;; clangd
 (when (equal system-type 'darwin)
