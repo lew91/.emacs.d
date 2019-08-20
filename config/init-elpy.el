@@ -1,5 +1,5 @@
 (require 'elpy)
-(require 'yapf)
+(require 'yapfify)
 
 (elpy-enable)
 (setq elpy-rpc-python-command "python3")

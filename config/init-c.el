@@ -3,7 +3,7 @@
                'c++-mode-hook
                'c-mode-common-hook
                ))
-  (add-hook)
+  (add-hook
   hook
   '(lambda ()
      (require 'cc-mode)
@@ -11,7 +11,7 @@
      (c-set-style "stroustrup")
      (setq tab-width 4)
      (setq c-basic-offset 4)
-     ))
+     )))
 
 
 ;; hs-minor-mode for folding source code
