@@ -82,6 +82,7 @@ locate PACKAGE."
      yasnippet-snippets
      yasnippet
      yaml-mode
+     yapfify
      writeroom-mode
      whole-line-or-region
      whitespace-cleanup-mode
@@ -103,7 +104,6 @@ locate PACKAGE."
      regex-tool
      rainbow-mode
      rainbow-delimiters
-     pythonic
      projectile
      ;;pos-tip
      popup
@@ -147,6 +147,7 @@ locate PACKAGE."
      ;;flycheck
      expand-region
      exec-path-from-shell
+     elpy
      eglot
      diminish
      diff-hl
@@ -157,17 +158,16 @@ locate PACKAGE."
      ;;company-quickhelp
      company-math
      company-lsp
-     company-anaconda
      counsel
      color-theme-sanityinc-tomorrow
      cl-libify
+     c-eldoc
      cal-china-x
      browse-kill-ring
      browse-at-remote
      ;;bind-key
      benchmark-init
      avy
-     anaconda-mode
      anzu
      ag
      )))
