@@ -1,6 +1,7 @@
 (require 'company)
 ;;(require 'company-quickhelp)
 (require 'company-math)
+(require 'company-tabnine)
 
 
 ;; Config for company mode.
@@ -46,6 +47,9 @@
     (add-hook 'company-completion-started-hook 'jl/page-break-lines-disable)
     (add-hook 'company-after-completion-hook 'jl/page-break-lines-maybe-reenable)))
 
+
+;;TabNine
+(add-to-list 'company-backends 'company-tabnine)
 
 
 ;; Add yasnippet support for all company backends.
