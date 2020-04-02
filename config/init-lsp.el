@@ -48,7 +48,7 @@
                'go-mode-hook
                'c-mode-hook
                'c++-mode-hook
-               ;;'python-mode-hook
+               'python-mode-hook
                ))
   (add-hook hook '(lambda ()
                     (lsp)

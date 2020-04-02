@@ -64,7 +64,6 @@
          (require 'init-slime)
          (require 'init-common-lisp)
          (require 'init-c)
-         (require 'init-elpy)
 
          (require 'init-eldoc)
          (require 'init-dash)
