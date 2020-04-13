@@ -3,7 +3,8 @@
                'emacs-lisp-mode-hook
                'lisp-interaction-mode-hook
                'message-mode-hook
-               'org-mode-hook))
+               'org-mode-hook
+               'python-mode-hook))
   (add-hook hook '(lambda ()
                     (progn
                       (require 'eldoc)
