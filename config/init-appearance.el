@@ -45,7 +45,7 @@
 
 
 (transient-mark-mode 1)
-(global-hl-line-mode 1)
+;;(global-hl-line-mode 1) ;; It is maybe annoying in terminal sometimes
 (setq-default comment-style 'indent)
 ;;(setq default-major-mode 'text-mode)
 
