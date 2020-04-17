@@ -48,7 +48,7 @@
                'go-mode-hook
                'c-mode-hook
                'c++-mode-hook
-               'python-mode-hook
+               ;;'python-mode-hook
                ))
   (add-hook hook '(lambda ()
                     (lsp)
@@ -75,15 +75,16 @@
 
 ;; clangd
 (when (equal system-type 'darwin)
-  (setq lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd"))
+  ;;(setq lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd"))
+  (setq lsp-clients-clangd-executable "clangd"))
 
 
 
 ;; eglot 
-;;(add-hook 'python-mode-hook 'eglot-ensure)
-;;(add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
-;;(add-hook 'c-mode-hook 'eglot-ensure)
-;;(add-hook 'c++-mode-hook 'eglot-ensure)
+(add-hook 'python-mode-hook 'eglot-ensure)
+(add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+(add-hook 'c-mode-hook 'eglot-ensure)
+(add-hook 'c++-mode-hook 'eglot-ensure)
 
 
 
