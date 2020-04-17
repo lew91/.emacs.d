@@ -25,8 +25,10 @@
              company-tooltip-align-annotations t)
 (global-set-key (kbd "M-C-/") 'company-complete)
 
-;;(setq company-quickhelp-delay nil)  ;; manually popup
-;;(add-hook 'company-mode-hook 'company-quickhelp-mode)
+(setq company-quickhelp-delay nil)  ;; manually popup
+(add-hook 'company-mode-hook 'company-quickhelp-mode)
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "C-c h") 'company-quickhelp-manual-begin))
 
 
 
