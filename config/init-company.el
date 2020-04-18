@@ -11,6 +11,7 @@
 (setq company-minimum-prefix-length 1) ; pop up a completion menu by tapping a character
 (setq company-show-numbers nil)   ; do not display numbers on the left
 (setq company-require-match nil) ; allow input string that do not match candidate words
+(setq company-show-numbers t) ; use M-1, M-2 etc to select completions 
 
 (with-eval-after-load 'company
   (dolist (backend '(company-eclim company-semantic))
@@ -20,7 +21,6 @@
 (define-key company-active-map (kbd "M-/") 'company-other-backend)
 (define-key company-active-map (kbd "C-n") 'company-select-next)
 (define-key company-active-map (kbd "C-p") 'company-select-previous)
-;;(define-key company-active-map (kbd "M-h") 'company-quickhelp-manual-begin)
 (setq-default company-dabbrev-other-buffers 'all
              company-tooltip-align-annotations t)
 (global-set-key (kbd "M-C-/") 'company-complete)
@@ -51,8 +51,33 @@
 
 
 ;;TabNine
-(add-to-list 'company-backends 'company-tabnine)
+;; push the TabNine to be the first company backend 
+(with-eval-after-load 'company
+  (push #'company-tabnine company-backends))
 
+;; workaround for company-transformers
+(setq company-tabnine--disable-next-transform nil)
+(defun jl-company--transform-candidates (func &rest args)
+  (if (not company-tabnine--disable-next-transform)
+      (apply func args)
+    (setq company-tabnine--disable-next-transform nil)
+    (car args)))
+
+(defun jl-company-tabnine (func &rest args)
+  (when (eq (car args) 'candidates)
+    (setq company-tabnine--disable-next-transform t))
+  (apply func args))
+
+(advice-add #'company--transform-candidates :around #'jl-company--transform-candidates)
+(advice-add #'company-tabnine :around #'jl-company-tabnine)
+
+;;Do not always prompted me to purchase a paid version
+(defadvice company-echo-show (around disable-tabnine-upgrade-message activate)
+  (let ((company-message-func(ad-get-arg 0)))
+    (when (and company-message-func
+               (stringp (funcall company-message-func)))
+      (unless (string-match "The free version of TabNine only indexes up to" (funcall company-message-func))
+        ad-do-it))))
 
 ;; Add yasnippet support for all company backends.
 (defvar company-mode/enable-yas t
