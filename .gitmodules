@@ -7,3 +7,6 @@
 [submodule "extensions/grep-dired"]
 	path = extensions/grep-dired
 	url = https://github.com/manateelazycat/grep-dired.git
+[submodule "tron-legacy-emacs-theme"]
+	path = tron-legacy-emacs-theme
+	url = https://github.com/ianpan870102/tron-legacy-emacs-theme.git

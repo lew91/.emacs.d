@@ -37,7 +37,6 @@
     (require 'init-isearch)
     (require 'init-ibuffer)
     (require 'init-window)
-    (require 'init-theme)
     (require 'init-key-bindings)
 
 
@@ -48,7 +47,6 @@
 
          (require 'init-ivy)
          ;;(require 'init-helm)
-         
          (require 'init-undo-tree)
          (require 'init-org)
          (require 'init-org-toolkits)                     ; Customize useful functions
@@ -58,8 +56,6 @@
          (require 'init-company)
          (require 'init-ispell)
          (require 'init-yasnippet)
-         
-         (require 'init-lsp)
          (require 'init-elisp)
          (require 'init-slime)
          (require 'init-common-lisp)
@@ -70,13 +66,11 @@
 
          (require 'init-projectile)
          (require 'init-git)
-         
          (require 'init-paredit)
          (require 'init-mmm)
 
          (require 'init-whitespace)
 
-         
          (require 'init-extra nil t)                ; Extra extensions that use git submodule added, or user's additionally customize
 
          )))
