@@ -30,10 +30,10 @@
      ;; `pandoc' is better than obsolete `markdown'
      ;; Temporarily not installed，Maybe need an absolute path to verify the pandoc if exited.
      (when (executable-find "pandoc")
-       (setq markdown-command "pandoc -f markdown")))
+       (setq markdown-command "pandoc -f markdown -t html -s --mathjax")))
 
 ;; taken from https://emacs.stackexchange.com/questions/5465/how-to-migrate-markdown-files-to-emacs-org-mode-format
-(defun markdown-convert-buffer-to-org ()
+(defun jl-markdown-convert-buffer-to-org ()
     "Convert the current buffer's content from markdown to orgmode format
 and save it with the current buffer's file name but with .org extension."
     (interactive)
