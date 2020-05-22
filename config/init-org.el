@@ -466,10 +466,10 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
     ("q" nil "quit"))
 
 
-   (define-key org-mode-map (kbd "<") '(lambda () (interactive)
-                                       (if (or (region-active-p) ( looking-back "^\s*" 1))
-                                           (hydra-org-template/body)
-                                         (self-insert-command 1))))
+  (define-key org-mode-map (kbd "<") '(lambda () (interactive)
+                                        (if (or (region-active-p) ( looking-back "^\s*" 1))
+                                            (hydra-org-template/body)
+                                          (self-insert-command 1))))
 
   ;; (require 'os-md nil t)
   ;; (defadvice org-html-paragraph (before fsh-org-html-paragraph-advice
@@ -483,7 +483,7 @@ _h_tml    _S_HELL     _p_erl          _A_SCII:
   ;;                           (concat "\\(" reg-han "\\) *\n *")
   ;;                           "\\1" orig-contents))
   ;;     (ad-set-arg 1 fixed-contents))))
-)
+  )
 
 
 ;; org babel settings
