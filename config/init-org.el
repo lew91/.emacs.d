@@ -16,6 +16,7 @@
 (require 'ox-md)                ; Markdown back-end
 (require 'ox-jekyll-md) ; org files -> jekyll style markdown files
 (require 'ox-latex)
+(require 'org2ctex)
 
 
 ;; Various preferences
@@ -45,10 +46,14 @@
 ;; #+latex_compiler: xelatex
 ;; #+latex_header: \usepackage{libertine}
 ;; #+latex_header: \usepackage{unicode-math}
-(setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
-(setq org-latex-default-packages-alist (cons '("mathletters" "ucs" nil) org-latex-default-packages-alist))
+;;(setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
+;;(setq org-latex-default-packages-alist (cons '("mathletters" "ucs" nil) org-latex-default-packages-alist))
+(org2ctex-toggle t)
+;;(setq org2ctex-latex-fonts nil)
 
-(setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+(setq org-latex-create-formula-image-program 'imagemagick)
+
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
 
 
 ;;; Org clock
