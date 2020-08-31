@@ -156,9 +156,9 @@
   )
 
 ;; Auto save and store all backup files in one folder, the backup files are useful sometimes.
-(when (not (fboundp 'auto-save))
-  (setq backup-directory-alist `((".*" . ,(locate-user-emacs-file ".backup"))))
-  (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t))))
+;;(when (not (fboundp 'auto-save))
+;;  (setq backup-directory-alist `((".*" . ,(locate-user-emacs-file ".backup"))))
+;;  (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t))))
 
 ;; Allow access from emacsclient
 (add-hook 'after-init-hook
