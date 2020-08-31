@@ -11,7 +11,7 @@
 (require 'hl-todo)
 (require 'writeroom-mode)
 (require 'org-pomodoro)
-;;(require 'org-bullets)
+(require 'org-bullets)
 (require 'cal-china-x)
 (require 'ox-md)                ; Markdown back-end
 (require 'ox-jekyll-md) ; org files -> jekyll style markdown files
@@ -99,7 +99,7 @@
   (define-key org-agenda-mode-map (kbd "P") 'org-pomodoro))
 
 
-;;(add-hook 'org-mode-hook (lambda () (org-bullets-mode)))
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode)))
 (add-hook 'org-agenda-mode-hook 'hl-line-mode)
 
 (dolist (hook (list
