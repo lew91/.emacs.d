@@ -1,5 +1,5 @@
 
-(setq-default custom-enabled-themes '(sanityinc-tomorrow-night))
+(setq-default custom-enabled-themes '(solarized-gruvbox-dark))
 
 ;; Make the fringe color suitable for the choose themes
 ;;;###autoload

@@ -29,6 +29,7 @@
     (require 'init-shell)
     (require 'auto-save)
     ;;(require 'init-fonts)              ; Set of fonts, especially Chinese and English fonts aligned
+    (require 'init-theme)
     (require 'init-grep)
     (require 'init-smex)
     (require 'init-editing)
