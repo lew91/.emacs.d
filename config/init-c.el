@@ -40,5 +40,7 @@
 ;; “java”: The default style for java-mode (see below)
 ;; “user”: When you want to define your own style
 
+;; cuda-mode
+(add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode)
 
 (provide 'init-c)
