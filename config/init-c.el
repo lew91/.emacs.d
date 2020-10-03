@@ -41,6 +41,6 @@
 ;; “user”: When you want to define your own style
 
 ;; cuda-mode
-(add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode)
+(add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))
 
 (provide 'init-c)
