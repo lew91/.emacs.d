@@ -1,8 +1,8 @@
-(let ((emacs-font-size 13)
+(let ((emacs-font-size 12)
       emacs-font-name)
   (cond
    ((featurep 'cocoa)
-    (setq emacs-font-name "Monaco"))
+    (setq emacs-font-name "Hack"))
    ((string-equal system-type "gnu/linux")
     (setq emacs-font-name "WenQuanYi Micro Hei Mono")))
   (when (display-grayscale-p)
@@ -13,7 +13,7 @@
   (defun org-buffer-face-mode-variable()
     (interactive)
     (make-face 'width-font-face)
-    (set-face-attribute 'width-font-face nil :font "Sarasa Mono SC 14")
+    (set-face-attribute 'width-font-face nil :font "Sarasa Mono SC 12")
     (setq buffer-face-mode-face 'width-font-face)
     (buffer-face-mode))
 
