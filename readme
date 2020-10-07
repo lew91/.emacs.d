@@ -6,7 +6,7 @@ I'm just play Emacs for fun, and also do some rigorous works，like data mining,
 Install
 -----------
 O makeup your own Emacs config files, when in shell like this: mv ~/.emacs.d ~/.emacs.d.bak
-O git clone this repo: git clone https://github.com/makejoyforX/.emacs.d.git
+O git clone this repo: git clone https://github.com/lew91/.emacs.d.git
 
 Purpose of subdirectories
 -----------
