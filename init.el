@@ -19,8 +19,8 @@
 
 
 
-  (require 'benchmark-init)               ; Test the Emacs startup time
-  (add-hook 'after-init-hook 'benchmark-init/deactivate)  ; Deactivate after it loaded
+  ;;(require 'benchmark-init)               ; Test the Emacs startup time
+  ;;(add-hook 'after-init-hook 'benchmark-init/deactivate)  ; Deactivate after it loaded
 
   (with-temp-message ""                 ; No messages when those modules started
 
@@ -29,9 +29,8 @@
     (require 'init-shell)
     (require 'auto-save)
     (require 'init-fonts)              ; Set of fonts, especially Chinese and English fonts aligned
-    (require 'init-theme)
+    ;;(require 'init-theme)
     (require 'init-grep)
-    (require 'init-smex)
     (require 'init-editing)
     (require 'init-hippie-expand)
     (require 'init-visual-regexp)
@@ -48,7 +47,6 @@
      #'(lambda ()
 
          (require 'init-ivy)
-         ;;(require 'init-helm)
          (require 'init-undo-tree)
          (require 'init-org)
          (require 'init-org-toolkits)                     ; Customize useful functions
@@ -67,7 +65,7 @@
          (require 'init-dash)
 
          (require 'init-projectile)
-         (require 'init-git)
+         ;;(require 'init-git)
          (require 'init-paredit)
          (require 'init-mmm)
 
