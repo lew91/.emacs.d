@@ -96,7 +96,7 @@ locate PACKAGE."
      swiper
      switch-window
      solarized-theme
-     smex
+     ;;smex
      slime-company
      slime
      scratch
@@ -121,11 +121,11 @@ locate PACKAGE."
      move-dup
      mmm-mode
      markdown-mode
-     magit
+     ;;magit
      macrostep
-     lsp-python-ms
-     lsp-ui
-     lsp-mode
+     ;lsp-python-ms
+     ;;lsp-ui
+     ;;lsp-mode
      ivy-xref
      ivy
      ibuffer-vc
@@ -134,9 +134,9 @@ locate PACKAGE."
      hungry-delete
      htmlize
      hl-todo
-     helm-swoop
-     helm-projectile
-     helm-ag
+     ;;helm-swoop
+     ;;helm-projectile
+     ;;helm-ag
      grab-mac-link
      goto-line-preview
      format-all
@@ -155,18 +155,22 @@ locate PACKAGE."
      dash-at-point
      dash
      daemons
-     ;;company-quickhelp
+     company-quickhelp
+     company-tabnine
+     company-emoji 
      company-math
-     company-lsp
+     ;;company-lsp
      counsel
      color-theme-sanityinc-tomorrow
      cl-libify
+     cdlatex
      c-eldoc
      cal-china-x
      browse-kill-ring
      browse-at-remote
      ;;bind-key
      benchmark-init
+     auctex
      avy
      anzu
      ag
