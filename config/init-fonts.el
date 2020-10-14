@@ -9,6 +9,15 @@
     (set-frame-font (format "%s-%s" (eval emacs-font-name) (eval emacs-font-size)))
     (set-fontset-font (frame-parameter nil 'font) 'unicode (eval emacs-font-name))))
 
+;; Specify font for all unicode characters
+(cond
+ ((when (member "Apple color Emoji" (font-family-list)))
+  (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend))
+ ((when (member "Symbola" (font-family-list)))
+  (set-fontset-font 'unicode "Symbola" nil 'prepend)))
+
+
+
 (with-eval-after-load 'org
   (defun org-buffer-face-mode-variable()
     (interactive)
@@ -19,7 +28,7 @@
 
   (add-hook 'org-mode-hook 'org-buffer-face-mode-variable))
 
-  
+
 
 ;; (progn
 ;;   ;; set a default font

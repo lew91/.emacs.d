@@ -1,6 +1,7 @@
 (require 'company)
 ;;(require 'company-quickhelp)
 (require 'company-math)
+(require 'company-emoji)
 (require 'company-tabnine)
 
 
@@ -94,6 +95,10 @@
 ;; Company math
 (add-to-list 'company-backends 'company-math-symbols-unicode)
 (add-to-list 'company-backends 'company-math-symbols-latex)
+
+
+;; emoji
+(add-to-list 'company-backends 'company-emoji)
 
 
 (provide 'init-company)
