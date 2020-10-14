@@ -88,6 +88,13 @@
   (define-key global-map (kbd "C-c a") 'org-agenda))
 (global-set-key (kbd "C-c c") 'org-capture)
 
+;; ivy
+(ivy-mode 1)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+
+
 
 (with-eval-after-load 'ibuffer
   ;; Hydra mapping for ibuffer taken from https://github.com/abo-abo/hydra/wiki/Ibuffer
