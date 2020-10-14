@@ -13,7 +13,7 @@
 
 ;;(require 'auto-save)
 (require 'grep-dired)              ; Usage: M-x 'grep-dired', find file in dired-mode
-(require 'company-english-helper)  ; Usage: M-x 'toggle-company-english-helper'
+;;(require 'company-english-helper)  ; Usage: M-x 'toggle-company-english-helper'
 (require 'insert-translated-name)  ; Usage: M-x  'insert-translated-name'
 (require 'basic-edit-toolkit)
 
