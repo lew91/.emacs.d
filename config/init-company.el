@@ -2,7 +2,7 @@
 ;;(require 'company-quickhelp)
 (require 'company-math)
 (require 'company-emoji)
-(require 'company-tabnine)
+;;(require 'company-tabnine)
 
 
 ;; Config for company mode.
@@ -53,32 +53,32 @@
 
 ;;TabNine
 ;; push the TabNine to be the first company backend 
-(with-eval-after-load 'company
-  (push #'company-tabnine company-backends))
+;; (with-eval-after-load 'company
+;;   (push #'company-tabnine company-backends))
 
-;; workaround for company-transformers
-(setq company-tabnine--disable-next-transform nil)
-(defun jl-company--transform-candidates (func &rest args)
-  (if (not company-tabnine--disable-next-transform)
-      (apply func args)
-    (setq company-tabnine--disable-next-transform nil)
-    (car args)))
+;; ;; workaround for company-transformers
+;; (setq company-tabnine--disable-next-transform nil)
+;; (defun jl-company--transform-candidates (func &rest args)
+;;   (if (not company-tabnine--disable-next-transform)
+;;       (apply func args)
+;;     (setq company-tabnine--disable-next-transform nil)
+;;     (car args)))
 
-(defun jl-company-tabnine (func &rest args)
-  (when (eq (car args) 'candidates)
-    (setq company-tabnine--disable-next-transform t))
-  (apply func args))
+;; (defun jl-company-tabnine (func &rest args)
+;;   (when (eq (car args) 'candidates)
+;;     (setq company-tabnine--disable-next-transform t))
+;;   (apply func args))
 
-(advice-add #'company--transform-candidates :around #'jl-company--transform-candidates)
-(advice-add #'company-tabnine :around #'jl-company-tabnine)
+;; (advice-add #'company--transform-candidates :around #'jl-company--transform-candidates)
+;; (advice-add #'company-tabnine :around #'jl-company-tabnine)
 
-;;Do not always prompted me to purchase a paid version
-(defadvice company-echo-show (around disable-tabnine-upgrade-message activate)
-  (let ((company-message-func(ad-get-arg 0)))
-    (when (and company-message-func
-               (stringp (funcall company-message-func)))
-      (unless (string-match "The free version of TabNine only indexes up to" (funcall company-message-func))
-        ad-do-it))))
+;; ;;Do not always prompted me to purchase a paid version
+;; (defadvice company-echo-show (around disable-tabnine-upgrade-message activate)
+;;   (let ((company-message-func(ad-get-arg 0)))
+;;     (when (and company-message-func
+;;                (stringp (funcall company-message-func)))
+;;       (unless (string-match "The free version of TabNine only indexes up to" (funcall company-message-func))
+;;         ad-do-it))))
 
 ;; Add yasnippet support for all company backends.
 (defvar company-mode/enable-yas t
