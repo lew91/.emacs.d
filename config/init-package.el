@@ -3,9 +3,9 @@
 (setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
 
 (setq package-archives
-      '(;;("gnu" . "https://elpa.gnu.org/packages/")
-        ;;("melap" . "https://melpa.org/packages/")
-        ;;("melpa-stable" . "https://stable.melpa.org/packages/")
+      '(("gnu" . "https://elpa.gnu.org/packages/")
+        ("melap" . "https://melpa.org/packages/")
+        ("melpa-stable" . "https://stable.melpa.org/packages/")
 
         ;; Use either 163 or tsinghua mirror repository when official melpa is slow or shutdown.
 
@@ -15,9 +15,9 @@
          ;; ("melpa-stable" . "https://mirrors.163.com/elpa/melpa-stable/")
 
         ;; tsinghua mirror repository
-        ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-        ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-        ("melpa-stable" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa-stable/")
+        ;; ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+        ;; ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+        ;; ("melpa-stable" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa-stable/")
 
         ))
 
